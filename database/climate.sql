@@ -29,7 +29,7 @@ CREATE TABLE "personas"(
 
 CREATE TABLE "countries"(
     "name"  TEXT    PRIMARY KEY,
-    "code"  CHAR(3)
+    "code"  CHAR(3) UNIQUE
 );
 
 CREATE TABLE "cities"(
