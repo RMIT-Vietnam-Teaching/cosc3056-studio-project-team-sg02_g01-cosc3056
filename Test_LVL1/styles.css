@@ -89,9 +89,24 @@ header {
     font-size: 16px; 
   
   } 
+
+  /* ================ main ================ */ 
   
-   
+  .population
+  {
+    text-align: center;
+  }
+
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .years {
+    margin-right: 10px;
+  }
   
+
   /* ================ footer ================ */ 
   
   footer { 
