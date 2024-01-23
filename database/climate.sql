@@ -95,7 +95,7 @@ CREATE TABLE "worldTemp"(
 CREATE TABLE "population"(
     "year"          INTEGER,
     "countryCode"   CHAR(3),
-    "populationNum" INTEGER,
+    "populationNum" BIGINT,
     PRIMARY KEY ("year", "countryCode"),
     FOREIGN KEY ("countryCode") REFERENCES countries("code")
 );
