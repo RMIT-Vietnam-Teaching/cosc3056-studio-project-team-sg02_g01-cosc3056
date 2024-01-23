@@ -135,7 +135,7 @@ public class AddDataCountries {
             System.out.println("Executing: " + query);
             try {
                statement.execute(query);
-            } catch (Exception e) {
+            } catch (SQLException e) {
                continue; // Any Primary Key repeats is ignored
             }
          }
