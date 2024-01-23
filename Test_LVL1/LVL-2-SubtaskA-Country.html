@@ -1,50 +1,85 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lvl2A</title>
+  <link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
 
    <!-- header -->
-   <div class="fixed">
-    <header>
-      <div class="home">
-        <a href=""><img src="./img/logo.png" alt="logo" /></a>
-        <a href=""> Website name</a>
-      </div>
-      <nav>
-        <a href="./LVL-1-SubtaskB.html">About us</a>
-        <a href="">Advanced options</a>
-        <a href="">Get started</a>
-      </nav>
-    </header>
-    </div>
+   <header> 
+
+    <div class="nav"> 
+      <a class="logo" href=""><img src="../img/logo.jpg" alt="logo">Website name</a> 
+      <a class="aboutUs" href="">About us</a> 
+      <a href="">Advanced options</a> 
+      <button class="getStarted">Get started</button> 
+    </div> 
+    
+    </header> 
     <!--content-->
     <main>
-        <div class = "Option">
-            <p>Display result by:</p>
-            <p><u>Country</u></p>
-            <p> World </p>
+      <div class="year_range">
+        <div class="content">
+          <div>
+            Year range:
+          </div>
+          <label for="year_start">Year start:</label>
+          <select class="year_start" form="Lvl2A_form" name="year_start">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+
+          <label for="year_end">Year end:</label>
+          <select class="year_end" form="Lvl2A_form" name="year_end">
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="result_display_fields">
+        <div class = "option">
+          <span>Display result by:</span>
+          <a href="" style="pointer-events: none;">Country</a>
+          <a href="LVL-2-SubtaskA-World.html">World</a>
         </div>
         
         <div class ="FormOptions">
-            <form>
-                <div class = "DataOption">
-                    <label for = "Temperature">Temperature</label>
-                    <input type= "radio" id = "Temperature" name = "PopOrTemp" value = "Temperature">
-                    <label for = "Population">Population</label>
-                    <input type ="radio" id = "Population" name = "PopOrTemp" value = "Population">
-                </div>
+          <form id="Lvl2A_form">
+              <div class = "ViewBy">
+                <label for = "DropDownMenu"> View by </label>
+                <select id = "DropDownMenu" name = "ViewBy">
+                  <option>Temperature</option>
+                  <option>Population</option>
+                </select>
+                
+                <label for = "DropDownMenu"> Display Unit </label>
+                <select id = "DropDownMenu" name = "Unit">
+                  <option>Raw Data</option>
+                  <option>Percentage</option>
+                </select>
+              </div>
 
-                <div class = "DropDown">
-                    <label for = "DropDownMenu"> Order by </label>
-                    <select id = "DropDownMenu" name = "SortOrder">
-                      <option>Ascending</option>
-                      <option>Descending</option>
-                    </select>
-                </div>
+              <div class = "OrderBy">
+                  <label for = "DropDownMenu"> Order by </label>
+                  <select id = "DropDownMenu" name = "SortOrder">
+                    <option>Ascending</option>
+                    <option>Descending</option>
+                  </select>
+              </div>
+              <button type="submit"> Submit</button>
+          </form> 
+        </div>
+      </div>
+      
+    </main>
+</body>
+</html>
 
-            </form> 
        

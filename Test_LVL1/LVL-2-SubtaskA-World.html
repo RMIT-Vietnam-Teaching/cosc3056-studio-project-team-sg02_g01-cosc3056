@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lvl2A</title>
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <!-- header -->
+   <header> 
+
+    <div class="nav"> 
+      <a class="logo" href=""><img src="../img/logo.jpg" alt="logo">Website name</a> 
+      <a class="aboutUs" href="">About us</a> 
+      <a href="">Advanced options</a> 
+      <button class="getStarted">Get started</button> 
+    </div> 
+    
+    </header> 
+    <!--content-->
+    <main>
+      <div class="year_range">
+        <div>
+          Year range:
+        </div>
+        <label for="year_start">Year start:</label>
+        <select class="year_start" form="Lvl2A_form" name="year_start">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+
+        <label for="year_end">Year end:</label>
+        <select class="year_end" form="Lvl2A_form" name="year_end">
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select>
+      </div>
+
+      <div class = "Option">
+          <span>Display result by:</span>
+            <a href="LVL-2-SubtaskA-Country.html">Country</a>
+            <a href="LVL-2-SubtaskA-World.html" style="pointer-events: none;">World</a>
+      </div>
+        
+      <div class ="FormOptions">
+          <form id="Lvl2A_form">
+              <div class = "ViewBy">
+                <label for = "DropDownMenu"> View by </label>
+                <select id = "DropDownMenu" name = "ViewBy">
+                  <option>Land</option>
+                  <option>Land & Ocean</option>
+                </select>
+              </div>
+              <button type="submit"> Submit</button>
+          </form> 
+      </div>
+    </main>
+</body>
+</html>
+
+       
