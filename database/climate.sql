@@ -33,18 +33,20 @@ CREATE TABLE "countries"(
 );
 
 CREATE TABLE "cities"(
-    "id"            INTEGER     PRIMARY KEY,
+    "id"            INTEGER     UNIQUE    NOT NULL,
     "countryCode"   CHAR(3),
     "name"          TEXT,
     "latitude"      TEXT,
     "longitude"     TEXT,
+    PRIMARY KEY ("name", "countryCode")
     FOREIGN KEY ("countryCode") REFERENCES countries("code")
 );
 
 CREATE TABLE "states"(
-    "id"            INTEGER     PRIMARY KEY,
+    "id"            INTEGER     UNIQUE    NOT NULL,
     "countryCode"   CHAR(3),
     "name"          TEXT,
+    PRIMARY KEY ("name", "countryCode")
     FOREIGN KEY ("countryCode") REFERENCES countries("code")
 );
 
