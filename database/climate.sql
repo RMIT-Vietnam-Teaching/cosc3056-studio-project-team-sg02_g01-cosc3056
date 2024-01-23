@@ -82,15 +82,15 @@ CREATE TABLE "stateTemp"(
     FOREIGN KEY ("stateID") REFERENCES states("id")
 );
 
-CREATE TABLE "worldTemp"(
-    "year"  INTEGER PRIMARY KEY,
-    "landOceanAvgTemp"   REAL,
-    "landOceanMinTemp"   REAL,
-    "landOceanMaxTemp"   REAL,
-    "landAvgTemp"        REAL,
-    "landMinTemp"        REAL,
-    "landMaxTemp"        REAL
-);
+CREATE TABLE worldTemp (
+    year             INTEGER PRIMARY KEY,
+    landAvgTemp      REAL,
+    landMinTemp      REAL,
+    landMaxTemp      REAL,
+    landOceanAvgTemp REAL,
+    landOceanMinTemp REAL,
+    landOceanMaxTemp REAL
+)
 
 CREATE TABLE "population"(
     "year"          INTEGER,
