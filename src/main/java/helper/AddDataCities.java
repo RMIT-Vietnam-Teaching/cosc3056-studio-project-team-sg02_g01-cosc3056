@@ -37,7 +37,7 @@ public class AddDataCities {
 
    // MODIFY these to load/store to/from the correct locations
    private static final String DATABASE = "jdbc:sqlite:database/climate.db";
-   private static final String CSV_LAND_CITY = "database/GlobalYearlyLandTempByCity.csv";
+   private static final String CSV_FILE = "database/GlobalYearlyLandTempByCity.csv"; //RELEVANT CSV file ----------------
 
 
    public static void main (String[] args) {
@@ -49,7 +49,7 @@ public class AddDataCities {
       try {
          // Open A CSV File to process, one line at a time
          // CHANGE THIS to process a different file
-         Scanner lineScanner = new Scanner(new File(CSV_LAND_CITY), StandardCharsets.UTF_8.name()); //StandardCharset for scanning characters with Diacritics
+         Scanner lineScanner = new Scanner(new File(CSV_FILE), StandardCharsets.UTF_8.name()); //StandardCharset for scanning characters with Diacritics
 
          // Read the first line of "headings"
          String header = lineScanner.nextLine();
@@ -70,7 +70,7 @@ public class AddDataCities {
             // Prepare a new SQL Query & Set a timeout
             Statement statement = connection.createStatement();
 
-            // Create Insert Statement
+            // Create Insert Statement -------------------
             String query = "INSERT into cities (id, name, latitude, longitude, countryCode) VALUES ("
                            + row + ","
                            + String.format("'%s'", lineSeparate[headers.indexOf("City")]) + ","
@@ -83,7 +83,7 @@ public class AddDataCities {
             try {
                statement.execute(query);
                System.out.println("Executing: " + query);
-            } catch (Exception e) {
+            } catch (SQLException e) {
                continue; // Any Primary Key repeats is ignored
             }
             row++;

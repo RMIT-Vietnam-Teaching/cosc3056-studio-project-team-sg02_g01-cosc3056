@@ -13,7 +13,8 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE "teamMembers"(
     "id"      TEXT    PRIMARY KEY,
-    "name"    TEXT
+    "name"    TEXT,
+    "img_path"      TEXT
 );
 
 CREATE TABLE "personas"(
@@ -24,7 +25,8 @@ CREATE TABLE "personas"(
     "quotes"        TEXT,
     "needs"         TEXT,
     "goals"         TEXT,
-    "skills"        TEXT
+    "skills"        TEXT,
+    "img_path"      TEXT
 );
 
 CREATE TABLE "countries"(
