@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class JDBCConnection {
 
     // Name of database file (contained in database folder)
-    public static final String DATABASE = "jdbc:sqlite:database/vtp.db";
+    public static final String DATABASE = "jdbc:sqlite:database/climate.db";
 
     /**
      * This creates a JDBC Object so we can keep talking to the database
@@ -88,4 +88,14 @@ public class JDBCConnection {
     }
 
     // TODO: Add your required methods here
+    public void testMethod (){
+        try(Connection conn = DriverManager.getConnection(DATABASE)){
+            String sql ="""
+                    SELECT * FROM 
+                    """;
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
