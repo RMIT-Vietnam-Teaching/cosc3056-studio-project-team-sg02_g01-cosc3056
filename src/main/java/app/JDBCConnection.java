@@ -2,8 +2,11 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.WorldTempPop;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -88,15 +91,44 @@ public class JDBCConnection {
     }
 
     // TODO: Add your required methods here
-    public void testMethod (){
+
+    //Get data for Level 1A
+        // 1st element: Earliest data of temp
+        // 2nd element: Earliest data of population
+        // 3rd element: Latest data of population
+        // 4th element: Latest data of temp
+    public ArrayList<WorldTempPop> getData1A (){
+        ArrayList<WorldTempPop> earlyLateData = new ArrayList<WorldTempPop>();
+
+        String query ="""
+            SELECT w.year, w.landAvgTemp, p.populationNum
+            FROM worldTemp w LEFT JOIN population p ON w.year = p.year AND p.countryCode = 'WLD'
+            WHERE w.year = (SELECT MAX(year) FROM worldTemp)
+            OR w.year = (SELECT MIN(year) FROM worldTemp)
+            OR w.year = (SELECT MAX(year) FROM population WHERE p.countryCode = 'WLD')
+            OR w.year = (SELECT MIN(year) FROM population WHERE p.countryCode = 'WLD')
+            """;
+
         try(Connection conn = DriverManager.getConnection(DATABASE)){
-            String sql ="""
-                    SELECT * FROM 
-                    """;
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
+
+            ResultSet results = pstmt.executeQuery();
+
+            while (results.next()) {
+                WorldTempPop data = new WorldTempPop();
+                data.setYear(results.getInt("year"));
+                data.setTemp(results.getDouble("landAvgTemp"));
+                data.setPop(results.getLong("populationNum"));
+                earlyLateData.add(data);
+            }
+
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        return earlyLateData;
     }
 
 
