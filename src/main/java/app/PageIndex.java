@@ -69,9 +69,10 @@ public class PageIndex implements Handler {
                         <h2>
         """;
         // Add avg temp
+        html = html + "...";
 
         html = html + """
-                        °C</h2>
+                    </h2>
                     </div>
                     <img src="icon-increase.jpg" alt="increase" />
                     <div class="years">
@@ -79,18 +80,74 @@ public class PageIndex implements Handler {
                         <h3>
         """;
         // Add temp in year 1750
+        html = html + "...";
 
         html = html + """
-                        °C</h3>
+                        </h3>
                         <p>2015</p>
                         <h3>
         """;
         // Add temp in year 2015
+        html = html + "...";
 
         html = html + """
-                        °C</h3>
+                        </h3>
                     </div>
                     <img src="icon-temp.jpg" alt="temperature" />
+                </div>
+            </div>
+        """;
+
+        // option
+        html = html + """
+            <div class="option">
+                <img src="logo-web.jpg" alt="logo" />
+                <div class="content">
+                    <h3>Climate has changed</h3>
+                    <p>
+                      We provide recorded data of temperature changes around the world
+                      over the past 260 years. Want more detailed info?
+                    </p>
+                    <a class="getStarted" href="options.html">Get started</a>
+                </div>
+            </div>    
+        """;
+
+        // population
+        html = html + """
+            <div class="population">
+                <h1>GLOBAL POPULATION</h1>
+                <div class="info">
+                    <div class="rangeYr">
+                        <p>In 53 years</p>
+                        <h2>
+        """;
+        // Add total population
+        html = html + "...";
+
+        html = html + """
+                        </h2>
+                    </div>
+                    <img src="icon-increase.jpg" alt="increase" />
+                    <div class="years">
+                        <p>1960</p>
+                        <h3>
+        """;
+        // Add population in year 1960
+        html = html + "...";
+
+        html = html + """
+                        </h3>
+                        <p>2013</p>
+                        <h3>
+        """;
+        // Add population in year 2013
+        html = html + "...";
+
+        html = html + """
+                        </h3>
+                    </div>
+                    <img src="icon-population.jpg" alt="temperature" />
                 </div>
             </div>
         """;
@@ -101,7 +158,7 @@ public class PageIndex implements Handler {
         // Footer
         html = html + """
             <footer>
-                <a href=""><img src="/" alt="logo" /></a>
+                <a href="/"><img src="logo-web.jpg" alt="logo" /></a>
                 <div class="link">
                     <a href="">Link</a>
                     <a href="">Link</a>
