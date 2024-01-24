@@ -98,4 +98,127 @@ public class JDBCConnection {
             System.out.println(e.getMessage());
         }
     }
+
+
+    public ArrayList<TeamMember> getMember() {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<TeamMember> TeamMem = new ArrayList<TeamMember>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT * FROM teamMembers;";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String memberID  = results.getString("id");
+                String name  = results.getString("name");
+
+                
+                TeamMember Student = new TeamMember(memberID, name);
+
+                
+                TeamMem.add(Student)
+            }
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        
+        return TeamMem;
+    }
+
+    public ArrayList<Persona> getPersona() {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<Persona> People = new ArrayList<Persona>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT * FROM personas;";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String name  = results.getString("name");
+                int age  = results.getInt("age");
+                String location = results.getString("location");
+                String background = results.getString("background");
+                String quotes = results.getString("quotes");
+                String needs = results.getString("needs");
+                String goals = results.getString("goals");
+                String skills = results.getString("skills");
+                //String imagepath = results.getString("img_path") 
+                
+                
+
+
+                
+                Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills /*, imagepath */);
+
+                
+                People.add(Person)
+            }
+            
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return People;
+    }
+
 }
