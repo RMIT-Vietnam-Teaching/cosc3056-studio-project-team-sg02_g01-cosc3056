@@ -6,14 +6,14 @@
   <!-- style header/footer -->
   <link rel="stylesheet" href="./style.css">
   <title>Lvl2A</title>
-  <link href="styles.css" rel="stylesheet">
+  <link href="styleWorld.css" rel="stylesheet">
 </head>
 
 <body>
 
   <header>
     <div class="nav">
-      <a class="logo" href="/LVL1-html-css/html/SubtaskA.html"><img src="/LVL1-html-css/img/logo.jpg" alt="logo" /></a>
+      <a class="logo" href="/LVL1-html-css/html/SubtaskA.html"><img src="./img/logo.jpg" alt="logo" /></a>
       <p>Website name</p>
       <a class="aboutUs visited" href="/LVL1-html-css/html/SubtaskB.html">About us</a>
       <a class="visited" href="/LVL1-html-css/html/OptionsPage.html#Basic">Basic options</a>
@@ -43,24 +43,47 @@
         </select>
       </div>
 
-      <div class = "Option">
-          <span>Display result by:</span>
-            <a href="LVL-2-SubtaskA-Country.html">Country</a>
-            <a href="LVL-2-SubtaskA-World.html" style="pointer-events: none;">World</a>
-      </div>
+      <div class = "result_display_fields">
+        <div class = "Option">
+            <span>Display result by:</span>
+              <a href="LVL-2-SubtaskA-Country.html">Country</a>
+              <a href="LVL-2-SubtaskA-World.html" style="pointer-events: none;">World</a>
+        </div>
         
-      <div class ="FormOptions">
-          <form id="Lvl2A_form">
-              <div class = "ViewBy">
-                <label for = "DropDownMenu"> View by </label>
-                <select id = "DropDownMenu" name = "ViewBy">
-                  <option>Land</option>
-                  <option>Land & Ocean</option>
-                </select>
-              </div>
-              <button type="submit"> Submit</button>
-          </form> 
+        <div class ="FormOptions">
+            <form id="Lvl2A_form">
+                <div class = "ViewBy">
+                  <label for = "DropDownMenu"> View by </label>
+                  <select id = "DropDownMenu" name = "ViewBy">
+                    <option>Land</option>
+                    <option>Land & Ocean</option>
+                  </select>
+                </div>
+                <button type="submit"> Submit</button>
+            </form> 
+        </div>
       </div>
+
+      <div class = "Content">
+        <h2 class = "World"> World </h2>
+        <h1>Temperature Change</h1>
+        <div class = "Stats">
+          <div class = "Yearrange">
+            <p>In 40 years</p>
+            <h2>18 mil</h2>
+          </div>
+          <img src = "./img/icon-increase.jpg">
+          <div class = "Year">
+            <p>1970</p>
+            <h2>10 mil</h2>
+            <p>2000</p>
+            <h2>20 mil</h2>
+          </div>
+          <img src = "./img/icon-temp.jpg">
+      </div>
+      
+
+
     </main>
 
     <!-- footer -->

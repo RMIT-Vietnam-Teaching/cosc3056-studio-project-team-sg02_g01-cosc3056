@@ -1,0 +1,218 @@
+/* ================ header/nav ================ */ 
+header { 
+
+    position: sticky; 
+  
+    top: 0; 
+  
+    border-bottom: 1.5px solid black; 
+  
+    z-index: 1; 
+  
+  } 
+  .nav { 
+  
+    background-color: #fff; 
+  
+    position: sticky; 
+  
+    top: 0; 
+  
+    display: flex; 
+  
+    align-items: center; 
+  
+  }  
+      
+  
+    
+    
+    
+     
+    
+  .nav img { 
+    
+    width: 150px; 
+  
+    height: 50px; 
+  
+    object-fit: cover; 
+  
+  } 
+  
+   
+  
+  .nav p { 
+  
+    display: inline;
+  
+    font-size: 2.3rem; 
+  
+    margin: 0 15px; 
+  
+  } 
+  
+   
+  
+  .nav a { 
+  
+    text-decoration: none; 
+  
+    margin-right: 15px; 
+  
+    cursor: pointer; 
+  
+  } 
+  
+   
+  
+  .nav .aboutUs { 
+  
+    margin: 0 15px 0 auto; 
+  
+  } 
+    
+     
+    
+    .nav .getStarted { 
+    
+      color: white; 
+    
+      background-color: rgb(50, 88, 184); 
+    
+      padding: 9px; 
+    
+      cursor: pointer; 
+    
+      border-radius: 5px; 
+    
+      font-size: 16px; 
+    
+    } 
+  
+    /* ================ main ================ */ 
+    
+    .population
+    {
+      text-align: center;
+    }
+  
+    .info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .years {
+      margin-right: 10px;
+    }
+    
+  
+    /* ================ footer ================ */ 
+    
+    footer { 
+    
+      background-color: rgb(113, 126, 240); 
+    
+      padding: 40px; 
+    
+      display: flex; 
+    
+      justify-content: space-around; 
+    
+    } 
+    
+     
+    
+    footer img { 
+    
+      width: 150px; 
+    
+    } 
+    
+     
+    
+    footer .link { 
+    
+      display: flex; 
+    
+      flex-wrap: wrap; 
+    
+      align-content: space-around; 
+    
+    } 
+    
+     
+    
+    .link a { 
+    
+      width: 40%; 
+    
+    } 
+  
+    .year_range {
+      height: 100px;
+      border-bottom: 1.5px solid black;
+      margin-bottom: 20px;
+      padding: 0px 150px;
+      display: flex;
+      align-items: end;
+      justify-content: end;
+    }
+  
+    label[for="year_end"] {
+      margin-left: 50px;
+    }
+  
+    .result_display_fields {
+      padding: 0px 150px;
+      display: flex;
+      justify-content:space-between;
+      border-bottom: 1.5px solid black;
+      margin-bottom: 10px;
+    }
+    .World{
+      margin-left: 40px;
+      margin-top: 30px;
+    }
+  
+    h1{
+      text-align: center;
+    }
+   
+    .Stats{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .Yearrange{
+      margin-right: 35px;
+    }
+    .Yearrange p{
+      margin:0;
+    }
+    .Yearrange h2{
+      margin:0;
+    }
+  
+    img{
+      margin-right: 35px;
+    }
+  
+    .Year{
+      margin-right: 10px;
+    }
+    .Year p{
+      margin:0;
+    }
+  
+    .Year h2{
+      margin:0;
+      margin-bottom: 10px;
+    }
+  
+    .Content{
+      
+      border: 1.5px solid black;
+    }
+  
