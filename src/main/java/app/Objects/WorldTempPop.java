@@ -1,17 +1,18 @@
 package app.Objects;
 
-public class WorldTemp {
+public class WorldTempPop {
     private int year;
     private double temp;
     private long population;
     
     //intialize methods
-    public WorldTemp(){ 
+    public WorldTempPop(){ 
     }
-    public WorldTemp(int year){
+
+    public WorldTempPop(int year){
         this.year = year;
     }
-    public WorldTemp(int year, double temp, long population){
+    public WorldTempPop(int year, double temp, long population){
         this.year = year;
         this.temp = temp;
         this.population = population;
