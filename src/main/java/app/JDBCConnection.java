@@ -91,7 +91,9 @@ public class JDBCConnection {
     public void getWorldTemp (){
         try(Connection conn = DriverManager.getConnection(DATABASE)){
             String sql ="""
-                    SELECT * FROM 
+                    SELECT w.year, w.landAvgTemp 
+                    FROM worldTemp w
+
                     """;
         }
         catch (SQLException e){
