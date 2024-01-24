@@ -1,0 +1,79 @@
+/* ========== common ========== */
+main {
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 70px;
+}
+
+p {
+  width: 565px;
+  margin: 40px auto 20px;
+}
+
+.title {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.select {
+  background-color: #d9d9d9;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+main a:visited {
+  color: currentColor;
+}
+
+.after {
+  margin-bottom: 0;
+}
+
+hr {
+  color: #d9d9d9;
+}
+
+/* ========== Basic ========== */
+.option {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 100px;
+}
+
+.option .box {
+  background-color: #d9d9d9;
+  padding: 25px 35px 10px;
+  width: 270px;
+  height: 270px;
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.option img {
+  width: 150px;
+}
+
+.option h3 {
+  width: 180px;
+  margin: 15px auto;
+}
+
+.option a {
+  text-decoration: none;
+}
+
+.option a:link,
+.option a:visited {
+  color: currentColor;
+}
+
+.box:hover {
+  box-shadow: 0 18px 36px 0 rgba(0, 0, 0, 0.1);
+}

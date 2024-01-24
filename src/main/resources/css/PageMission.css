@@ -1,0 +1,174 @@
+/* ========== common ========== */
+.title {
+  font-size: 19px;
+  margin-left: 30px;
+  margin-top: 35px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.mem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main a:visited {
+  color: currentColor;
+}
+
+/* ========== usInfo/about us ========== */
+.usInfo {
+  padding: 45px 0;
+  border-bottom: 1.5px solid black;
+}
+
+.usInfo p {
+  width: 500px;
+  margin: 10px 55px;
+  text-align: justify;
+}
+
+.usInfo p:nth-child(3) {
+  margin-left: 80px;
+}
+
+.usInfo .right {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.usInfo .right .title {
+  text-align: right;
+  margin-right: 90px;
+}
+
+.usInfo a {
+  display: block;
+  margin-left: 65px;
+}
+
+.usInfo a:hover {
+  text-shadow: 0.4px 0 0 currentColor;
+}
+
+/* ========== Member ========== */
+.Member {
+  padding: 45px 0;
+  border-bottom: 1.5px solid black;
+}
+
+.Member .Info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 30px;
+  margin: 0 auto;
+}
+
+.Member .mem {
+  gap: 20px;
+}
+
+.Member img {
+  width: 120px;
+}
+
+.Member .details {
+  width: 150px;
+}
+
+/* ========== Personas ========== */
+.personas {
+  padding: 45px 0;
+  border-bottom: 1.5px solid black;
+}
+
+.personas .mem {
+  flex-shrink: 0;
+  overflow: hidden;
+  gap: 100px;
+  border: 2px solid black;
+  width: 860px;
+  margin: 10px auto;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.personas .left {
+  text-align: center;
+}
+
+.personas img {
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.personas .name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.personas .details {
+  width: 600px;
+}
+
+.personas span {
+  font-size: 20px;
+  font-style: italic;
+}
+
+/* ========== What now ========== */
+.whatnow {
+  padding: 45px 0;
+}
+
+.whatnow h1 {
+  text-align: right;
+  margin-right: 55px;
+  margin-bottom: 30px;
+}
+
+.whatnow .option {
+  display: flex;
+  justify-content: space-around;
+}
+
+.whatnow .box {
+  text-align: center;
+  background-color: #d9d9d9;
+  padding: 25px 35px 10px;
+  width: 270px;
+  height: 270px;
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.whatnow img {
+  width: 150px;
+}
+
+.whatnow h3 {
+  width: 180px;
+  text-align: center;
+  margin: 15px auto;
+}
+
+.whatnow a {
+  text-decoration: none;
+}
+
+.whatnow a:link,
+.whatnow a:visited {
+  color: currentColor;
+}
+
+.whatnow .box:hover {
+  box-shadow: 0 18px 36px 0 rgba(0, 0, 0, 0.1);
+}
