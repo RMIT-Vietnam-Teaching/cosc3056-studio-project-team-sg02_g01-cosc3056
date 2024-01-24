@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lvl2A</title>
-  <link href="styles.css" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- style header/footer -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Lvl2A</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- header/nav -->
+    <header>
+      <div class="nav">
+        <a class="logo" href="/LVL1-html-css/html/SubtaskA.html"
+          ><img src="/LVL1-html-css/img/logo.jpg" alt="logo"
+        /></a>
+        <p>Website name</p>
+        <a class="aboutUs visited" href="/LVL1-html-css/html/SubtaskB.html"
+          >About us</a
+        >
+        <a class="visited" href="/LVL1-html-css/html/OptionsPage.html#Basic"
+          >Basic options</a
+        >
+        <a class="visited" href="/LVL1-html-css/html/OptionsPage.html#Advanced"
+          >Advanced options</a
+        >
+        <a class="getStarted" href="/LVL1-html-css/html/OptionsPage.html"
+          >Get started</a
+        >
+      </div>
+    </header>
 
-    <!-- header/nav --> 
-    
-    <header> 
-    
-      <div class="nav"> 
-      
-      <a class="logo" href=""><img src="../img/logo.jpg" alt="logo"></a> 
-      
-      <p>Website name</p> 
-      
-      <a class="aboutUs" href="">About us</a> 
-      
-      <a href="">Advanced options</a> 
-      
-      <button class="getStarted">Get started</button> 
-      
-      </div> 
-      
-      </header> 
-
-       <!--content-->
+    <!--content-->
     <main>
-        <div class = "CountryAndYear">
-            <div class = "Country">
+      <img src="src/main/resources/images/logo.png" alt="logo" />
+      <div class="CountryAndYear">
+        <!--    <div class = "Country">
                 <label for = "SelectCountry"> Select Country </label>
                     <select id = "SelectCountry" name = "Country">
                         <option>1</option>
@@ -40,34 +44,69 @@
                         <option>4</option>
                     </select>
             </div>
-            <div class="year_range">
-                <div class="content">
-                <div>
-                    Year range:
-                </div>
-                <label for="year_start">Year start:</label>
-                <select class="year_start" form="Lvl2A_form" name="year_start">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-    
-                <label for="year_end">Year end:</label>
-                <select class="year_end" form="Lvl2B_form" name="year_end">
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                </select>
-                </div>
-            </div>
+        -->
+        <div class="year_range">
+          <label for="year_range">Year Range</label>
+          <input type="range" id="years" name="years" min="1700" max="2000" />
+          <p id="rangeValue">100</p>
         </div>
+      </div>
 
-        <div class = "DataOption">
-            <div class ="Result">
-                <label for = "ResultOption">Display result by</label>
-
-
-            </div></duiv>
+      <div class="result_display_fields">
+        <div class="option">
+          <span>Display result by:</span>
+          <a href=" " style="pointer-events: none">Country</a>
+          <a href=" ">World</a>
         </div>
+      </div>
 
+      <div class="sort_by_dropdown">
+        <label for="sort_by">Sort By:</label>
+        <select id="sort_by" name="sort_by">
+          <option>Temperature</option>
+          <option>Temperature</option>
+        </select>
+      </div>
 
+      <div class="order_by_dropdown">
+        <label for="order_by">Order By:</label>
+        <select id="order_by" name="order_by">
+          <option>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </div>
+
+      <div class="population">
+        <h1>GLOBAL POPULATION</h1>
+
+        <div class="info">
+          <div class="rangeYr">
+            <p>In 53 years</p>
+            <h2>4.198 BIL</h2>
+            <p>Or <strong>138.46%</strong></p>
+          </div>
+          <img src="LVL1-html-css/img/icon-increase.jpg" alt="increase" />
+
+          <div class="years">
+            <p>1960</p>
+            <h3>3.031 bil</h3>
+            <p>1750</p>
+            <h3>7.229 bil</h3>
+          </div>
+          <img src="LVL1-html-css/img/icon-population.jpg" alt="population" />
+        </div>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <footer>
+      <a href=""><img src="/LVL1-html-css/img/logo.jpg" alt="logo" /></a>
+      <div class="link">
+        <a href="">Link</a>
+        <a href="">Link</a>
+        <a href="">Link</a>
+        <a href="">Link</a>
+      </div>
+    </footer>
+  </body>
+</html>

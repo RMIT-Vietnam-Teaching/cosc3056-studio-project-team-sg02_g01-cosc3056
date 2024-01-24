@@ -1,91 +1,91 @@
-/* ================ header/nav ================ */ 
+/* ================ header/nav ================ */
+header {
+  position: sticky;
+  top: 0;
+  border-bottom: 1.5px solid black;
+  z-index: 1;
+}
 
-header { 
+.nav {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+}
 
-    position: sticky; 
-  
-    top: 0; 
-  
-    border-bottom: 1.5px solid black; 
-  
-    z-index: 1; 
-  
-  } 
-  
-   
-  
-  .nav { 
-  
-    background-color: #fff; 
-  
-    position: sticky; 
-  
-    top: 0; 
-  
-    display: flex; 
-  
-    align-items: center; 
-  
-  } 
-  
-   
-  
-  .nav img { 
-  
-    width: 150px; 
-  
-    height: 50px; 
-  
-    object-fit: cover; 
-  
-  } 
-  
-   
-  
-  .nav p { 
-  
-    display: inline; 
-  
-    font-size: 2.3rem; 
-  
-    margin: 0 15px; 
-  
-  } 
-  
-   
-  
-  .nav a { 
-  
-    text-decoration: none; 
-  
-    margin-right: 15px; 
-  
-    cursor: pointer; 
-  
-  } 
-  
-   
-  
-  .nav .aboutUs { 
-  
-    margin: 0 15px 0 auto; 
-  
-  } 
-  
-   
-  
-  .nav .getStarted { 
-  
-    color: white; 
-  
-    background-color: rgb(50, 88, 184); 
-  
-    padding: 9px; 
-  
-    cursor: pointer; 
-  
-    border-radius: 5px; 
-  
-    font-size: 16px; 
-  
-  } 
+.nav img {
+  width: 150px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.nav p {
+  display: inline;
+  font-size: 2.3rem;
+  margin: 0 15px;
+}
+
+.nav a {
+  text-decoration: none;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.nav .aboutUs {
+  margin: 0 15px 0 auto;
+}
+
+.getStarted {
+  color: white;
+  background-color: rgb(50, 88, 184);
+  padding: 9px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.getStarted:hover {
+  background-color: rgb(235, 235, 49);
+  color: black;
+}
+
+.nav .visited:visited, .nav .visited:link  {
+  color: currentColor;
+}
+
+.nav a:hover {
+  text-shadow: 0.4px 0 0 currentColor;
+}
+
+/* ================ footer ================ */
+footer {
+  background-color: rgb(113, 126, 240);
+  padding: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+footer img {
+  width: 150px;
+}
+
+footer .link {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+.link a {
+  width: 40%;
+}
+
+.link a:visited, .link a:link {
+  color: currentColor;
+}
+
+.link a:hover {
+  text-shadow: 0.4px 0 0 currentColor;
+}
