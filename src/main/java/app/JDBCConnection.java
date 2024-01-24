@@ -88,7 +88,7 @@ public class JDBCConnection {
     }
 
     // TODO: Add your required methods here
-    public void testMethod (){
+    public void getWorldTemp (){
         try(Connection conn = DriverManager.getConnection(DATABASE)){
             String sql ="""
                     SELECT * FROM 
