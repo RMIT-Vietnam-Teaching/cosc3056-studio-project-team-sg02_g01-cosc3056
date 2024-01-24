@@ -1,3 +1,5 @@
+package app;
+
 public class TeamMember {
     public String id;
     public String name;
