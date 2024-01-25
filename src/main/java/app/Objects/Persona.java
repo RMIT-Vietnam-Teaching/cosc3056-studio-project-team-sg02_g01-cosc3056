@@ -24,4 +24,41 @@ public class Persona {
         this.skills = skills;
         this.img_path = img_path;
     }
+
+    // Getters
+    public String getName () {
+        return name;
+    }
+
+    public int getAge () {
+        return age;
+    }
+
+    public String getLocation () {
+        return location;
+    }
+
+    public String getBackround () {
+        return background;
+    }
+
+    public String getQuote(){
+        return quotes;
+    }
+
+    public String getNeed(){
+        return needs;
+    }
+
+    public String getGoal(){
+        return goals;
+    }
+
+    public String getSkill(){
+        return skills;
+    }
+
+    public String getImg(){
+        return img_path;
+    }
 }

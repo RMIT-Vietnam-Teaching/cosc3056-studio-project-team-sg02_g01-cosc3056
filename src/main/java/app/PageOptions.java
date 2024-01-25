@@ -30,72 +30,106 @@ public class PageOptions implements Handler {
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
-        // Add some Head information
+        // Head information
         html = html + "<head>" + 
-               "<title>Our Mission</title>";
+               "<title>Get started</title>";
 
-        // Add some CSS (external file)
+        // CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
+        html = html + "<link rel='stylesheet' type='text/css' href='PageOptions.css' />";
         html = html + "</head>";
 
-        // Add the body
+        // Open the body
         html = html + "<body>";
 
-        // Add the topnav
-        // This uses a Java v15+ Text Block
+        // The topnav/header
         html = html + """
-            <div class='topnav'>
-                <a href='/'>Homepage</a>
-                <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
-                <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
-                <a href='page3B.html'>Sub Task 3.B</a>
+            <header>
+                <div class="nav">
+                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <p>Website name</p>
+                    <a class="aboutUs visited" href="mission.html">Our Mission</a>
+                    <a class="visited" href="options.html#Basic">Basic options</a>
+                    <a class="visited" href="options.html#Advanced">Advanced options</a>
+                    <a class="getStarted" href="options.html">Get started</a>
+                </div>
+            </header>
+        """;
+
+        // Open main
+        html = html + "<main>";
+
+        html = html + """
+            <p class="title">Options</p>
+            <h1 id="Basic">Temperature Time Machine</h1>
+
+            <!-- Basic -->
+            <p class="title after">Basic</p>
+            <hr>
+            <p>
+              Check out how temperature has changed throughout the years, whether in
+              your city, or around the world.
+            </p>
+            <p class="select">Select your preferred region type</p>
+            <div class="option">
+                <!-- box 1 -->
+                <a href="">
+                    <div class="box">
+                        <img src="logo-web.jpg" alt="" />
+                        <h3>World / Countries</h3>
+                    </div>
+                </a>
+
+                <!-- box 2 -->
+                <a href="">
+                    <div class="box">
+                        <img src="logo-web.jpg" alt="" />
+                        <h3 id="Advanced">Cities / States</h3>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Advanced -->
+            <p class="title after" >Advanced</p>
+            <hr>
+            <p>
+              See the difference between <strong>average temperatures</strong> of different time
+              periods or regions that shares trends in varying degrees of similarity
+            </p>
+            <p class="select">Select your preferred feature</p>
+            <div class="option">
+                <!-- box 3 -->
+                <a href="">
+                    <div class="box">
+                        <img src="logo-web.jpg" alt="">
+                        <h3>Compare changes of different time periods</h3>
+                    </div>
+                </a>
+
+                <!-- box 4 -->
+                <a href="">
+                    <div class="box">
+                        <img src="logo-web.jpg" alt="">
+                        <h3>See regions with similar trends</h3>
+                    </div>
+                </a>
             </div>
         """;
 
-        // Add header content block
-        html = html + """
-            <div class='header'>
-                <h1>Our Mission</h1>
-            </div>
-        """;
-
-        // Add Div for page Content
-        html = html + "<div class='content'>";
-
-        // Add HTML for the page content
-        html = html + """
-            <p>Mission page content</p>
-            """;
-
-        // This example uses JDBC to lookup the LGAs
-        JDBCConnection jdbc = new JDBCConnection();
-
-        // Next we will ask this *class* for the LGAs
-        ArrayList<LGA> lgas = jdbc.getLGAs2016();
-
-        // Add HTML for the LGA list
-        html = html + "<h1>All 2016 LGAs in the Voice to Parliament database (using JDBC Connection)</h1>" + "<ul>";
-
-        // Finally we can print out all of the LGAs
-        for (LGA lga : lgas) {
-            html = html + "<li>" + lga.getCode()
-                        + " - " + lga.getName() + "</li>";
-        }
-
-        // Finish the List HTML
-        html = html + "</ul>";
-
-
-        // Close Content div
-        html = html + "</div>";
+        // Close main
+        html = html + "</main>";
 
         // Footer
         html = html + """
-            <div class='footer'>
-                <p>COSC3056 - Studio Project Starter Code</p>
-            </div>
+            <footer>
+                <a href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                <div class="link">
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                </div>
+            </footer>
         """;
 
         // Finish the HTML webpage

@@ -2,6 +2,8 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.Persona;
+import app.Objects.TeamMember;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -30,72 +32,573 @@ public class PageMission implements Handler {
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
-        // Add some Head information
+        // Head information
         html = html + "<head>" + 
                "<title>Our Mission</title>";
 
-        // Add some CSS (external file)
+        // CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
+        html = html + "<link rel='stylesheet' type='text/css' href='PageMission.css' />";
         html = html + "</head>";
 
-        // Add the body
+        // Open the body
         html = html + "<body>";
 
-        // Add the topnav
-        // This uses a Java v15+ Text Block
+        // The topnav/header
         html = html + """
-            <div class='topnav'>
-                <a href='/'>Homepage</a>
-                <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
-                <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
-                <a href='page3B.html'>Sub Task 3.B</a>
-            </div>
+            <header>
+                <div class="nav">
+                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <p>Website name</p>
+                    <a class="aboutUs visited" href="mission.html">Our Mission</a>
+                    <a class="visited" href="options.html#Basic">Basic options</a>
+                    <a class="visited" href="options.html#Advanced">Advanced options</a>
+                    <a class="getStarted" href="options.html">Get started</a>
+                </div>
+            </header>
         """;
 
-        // Add header content block
+        // Open main
+        html = html + "<main>";
+
+        // About us
         html = html + """
-            <div class='header'>
-                <h1>Our Mission</h1>
-            </div>
+            <div class="usInfo">
+                <h1>ABOUT US</h1>
+                <p class="title">OUR VISION</p>
+                <p>
+                  Climate change and population are topics of increasing concern across
+                  all ages and professions. To capture that, we collected population and
+                  temperature information from many different countries over a period of
+                  more than 260 years. We have brought them together and made them more
+                  accessible and convenient for everyone.
+                </p>
+                <div class="right">
+                    <p class="title">OUR MISSION</p>
+                    <p>
+                      Our goal is not only to design a web application to help
+                      governments, scientists analyze temperature, population change
+                      patterns on land and oceans but also for people who are interested
+                      in these changes even if it is not in their expertise.
+                    </p>
+                </div>
+                <p class="title">SOURCES</p>
+                <a href="">html:/www.link.com</a>
+                <a href="">html:/www.link.com</a>
+            </div>    
         """;
 
-        // Add Div for page Content
-        html = html + "<div class='content'>";
-
-        // Add HTML for the page content
+        // Open team member
         html = html + """
-            <p>Mission page content</p>
+            <div class="Member">
+                <h1>TEAM MEMBERS</h1>
+                <div class="Info">
+        """;
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<TeamMember> team = new ArrayList<TeamMember>();
+        team = jdbc.getMember();
+
+        for (int i = 0; i < team.size(); i++) {
+            html = html + """
+                    <div class="mem">
+                        <img src="icon-rmit.png" alt="avatar" />
+                        <div class="details">
+                            <p>Name: 
+            """;
+            
+            html = html + team.get(i).getName();
+
+            html = html + """
+                </p>
+                <p>ID: 
             """;
 
-        // This example uses JDBC to lookup the LGAs
-        JDBCConnection jdbc = new JDBCConnection();
+            html = html + team.get(i).getID();
 
-        // Next we will ask this *class* for the LGAs
-        ArrayList<LGA> lgas = jdbc.getLGAs2016();
-
-        // Add HTML for the LGA list
-        html = html + "<h1>All 2016 LGAs in the Voice to Parliament database (using JDBC Connection)</h1>" + "<ul>";
-
-        // Finally we can print out all of the LGAs
-        for (LGA lga : lgas) {
-            html = html + "<li>" + lga.getCode()
-                        + " - " + lga.getName() + "</li>";
+            html = html + """
+                            </p>
+                        </div>
+                    </div>
+            """;
         }
 
-        // Finish the List HTML
-        html = html + "</ul>";
+        // Close team member
+        html = html + """
+                </div>
+            </div>
+        """;
 
+        // Open personas
+        html = html + """
+            <div class="personas">
+                <h1>PERSONAS</h1>
+        """;
+        ArrayList<Persona> personas = new ArrayList<Persona>();
+        personas = jdbc.getPersona();
 
-        // Close Content div
+        for (int i = 0; i < personas.size(); i++) {
+            html = html + """
+            <div class="mem">
+                <!-- avatar/left -->
+                <div class="left">
+            """;
+
+            html = html + personas.get(i).getImg();
+            
+            html = html + """
+                     alt="avatar" />
+                    <p class="name">
+            """;
+
+            html = html + personas.get(i).getName();
+
+            html = html + """
+                    </p>
+                    <p><strong>Location:</strong> 
+            """;
+
+            html = html + personas.get(i).getLocation();
+
+            html = html + """
+                    </p>
+                </div>
+  
+                <!-- details/right -->
+                <div class="details">
+                    <p><strong>Background:</strong></p>
+            """;
+
+            html = html + personas.get(i).getBackround();
+
+            html = html + "<p><strong>Relevant skills:</strong></p>";
+
+            html = html + personas.get(i).getSkill();
+
+            html = html + "<p><strong>Needs:</strong></p>";
+
+            html = html + personas.get(i).getNeed();
+            
+            html = html + "<p><strong>Goals:</strong></p>";
+
+            html = html + personas.get(i).getGoal();
+
+            html = html + """
+                    <p>
+                      <strong>Quotes:</strong>
+                      <span>
+            """;
+
+            html = html + personas.get(i).getQuote();
+
+            html = html + """
+                      </span>
+                    </p>
+                </div>
+            </div>
+            """;
+        }
+
+        // // persona 1
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona1.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
+        
+        // // persona 2
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona2.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + "<p><Strong>Pain point:</strong></p>";
+        //     // Add ul>li Pain point
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
+
+        // // persona 3
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona3.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
+
+        // // persona 4
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona4.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
+
+        // // persona 5
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona5.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + "<p><Strong>Pain point:</strong></p>";
+        //     // Add ul>li Pain point
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
+
+        // // persona 6
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona6.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
+
+        // Close personas
         html = html + "</div>";
 
+        // What now
+        html = html + """
+            <div class="whatnow">
+                <h1>WHAT NOW?</h1>
+                <div class="option">
+                    <!-- box 1 -->
+                    <a href="">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="" />
+                            <h3>World / Countries</h3>
+                        </div>
+                    </a>
+
+                    <!-- box 2 -->
+                    <a href="">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="" />
+                            <h3>Cities / States</h3>
+                        </div>
+                    </a>
+
+                    <!-- box 3 -->
+                    <a href="">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="" />
+                            <h3>Compare changes of different time periods</h3>
+                        </div>
+                    </a>
+
+                    <!-- box 4 -->
+                    <a href="">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="" />
+                            <h3>See regions with similar trends</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>        
+        """;
+
+        // Close main
+        html = html + "</main>";
+    
         // Footer
         html = html + """
-            <div class='footer'>
-                <p>COSC3056 - Studio Project Starter Code</p>
-            </div>
+            <footer>
+                <a href="/"><img src="logo-web.jpg" alt="logo"/></a>
+                <div class="link">
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                </div>
+            </footer>        
         """;
 
         // Finish the HTML webpage

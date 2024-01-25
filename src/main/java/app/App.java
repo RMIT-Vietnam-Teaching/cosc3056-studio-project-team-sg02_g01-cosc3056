@@ -40,6 +40,7 @@ public class App {
         // All webpages are listed here as GET pages
         app.get(PageIndex.URL, new PageIndex());
         app.get(PageMission.URL, new PageMission());
+        app.get(PageOptions.URL, new PageOptions());
         app.get(PageST2A.URL, new PageST2A());
         app.get(PageST2B.URL, new PageST2B());
         app.get(PageST3A.URL, new PageST3A());
