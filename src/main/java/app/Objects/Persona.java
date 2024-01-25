@@ -13,7 +13,7 @@ public class Persona {
 
     public Persona(){
     }
-    public Persona(String name, int age, String location, String background, String quotes, String needs, String goals, String skills, //String img_path){
+    public Persona(String name, int age, String location, String background, String quotes, String needs, String goals, String skills/*, String img_path*/){
         this.name = name;
         this.age = age;
         this.location = location;

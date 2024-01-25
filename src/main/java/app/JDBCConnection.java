@@ -2,6 +2,8 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.Persona;
+import app.Objects.TeamMember;
 import app.Objects.WorldTempPop;
 
 import java.sql.Connection;
@@ -163,7 +165,7 @@ public class JDBCConnection {
                 TeamMember Student = new TeamMember(memberID, name);
 
                 
-                TeamMem.add(Student)
+                TeamMem.add(Student);
             }
 
             // Close the statement because we are done with it
@@ -220,15 +222,10 @@ public class JDBCConnection {
                 String goals = results.getString("goals");
                 String skills = results.getString("skills");
                 //String imagepath = results.getString("img_path") 
-                
-                
 
-
-                
                 Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills /*, imagepath */);
-
                 
-                People.add(Person)
+                People.add(Person);
             }
             
 
@@ -249,7 +246,6 @@ public class JDBCConnection {
             }
         }
 
-      
         return People;
     }
 
