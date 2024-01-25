@@ -271,7 +271,7 @@ public class JDBCConnection {
                 ON p1.countryCode = p2.countryCode
                 WHERE p1.year = ? AND p2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                     """;
-            PreparedStatement statement = connection.prepareStatement(query)
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setQueryTimeout(30);
             statement.setInt(1, StartYear);
             statement.setInt(2, EndYear);
@@ -329,13 +329,11 @@ public class JDBCConnection {
         
             // The Query
             String query = """
-                SELECT p1.year AS year1, c.name AS Name, p1.populationNum AS population1, p2.year AS year2, p2.populationNum AS population2
-                FROM population p1 
-                JOIN countries c
-                ON p1.countryCode = c.code
-                JOIN population p2 
-                ON p1.countryCode = p2.countryCode
-                WHERE p1.year = ? AND p2.year = ?;
+                SELECT ct1.year AS year1, ct1.landAvgTemp AS avgTemp1, ct1.landMinTemp AS minTemp1, ct1.landMaxTemp AS maxTemp1, c.name as Name, ct2.year AS year2, ct2.landAvgTemp AS avgTemp2, ct2.landMinTemp AS minTemp2, ct2.landMaxTemp AS maxTemp2 
+FROM 
+countryTemp ct1 JOIN countries c ON ct1.countryCode = c.code
+JOIN countryTemp ct2 ON ct1.countryCode = ct2.countryCode
+WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                     """;
             PreparedStatement statement = connection.prepareStatement(query)
             statement.setQueryTimeout(30);
@@ -349,18 +347,23 @@ public class JDBCConnection {
             while (results.next()) {
                 // Lookup the columns we need
                 int year1 = results.getInt("year1");
+                float avgTemp1 = results.getFloat("avgTemp1");
+                float minTemp1 = results.getFloat("minTemp1");
+                float maxTemp1 = results.getFloat("maxTemp1");
                 String name = results.getString("Name");
-                int population1 = results.getInt("population1");
                 int year2 = results.getInt("year2");
-                int population2 = results.getInt("population2");
+                float avgTemp2 = results.getFloat("avgTemp2");
+                float minTemp2 = results.getFloat("minTemp2");
+                float maxTemp2 = results.getFloat("maxTemp2");
 
-                PopulationDataCountry Country = new PopulationDataCountry(year1, population1, year2, population2, name);
-                AllCountryPopulation.add(Country);
+
+                TemperatureDataCountry CountryData = new TemperatureDataCountry(year1, avgTemp1, minTemp1, maxTemp1, name, year2, avgTemp2, minTemp2, maxTemp2);
+                AllCountryTemperature.add(CountryData);
             }
             
 
             // Close the statement because we are done with it
-            statement.close();
+            //statement.close();
         } catch (SQLException e) {
             // If there is an error, lets just pring the error
             System.err.println(e.getMessage());
@@ -377,8 +380,12 @@ public class JDBCConnection {
         }
 
       
-        return AllCountryPopulation;
+        return AllCountryTemperature;
     }
+
+
+
+    
 }
 
 

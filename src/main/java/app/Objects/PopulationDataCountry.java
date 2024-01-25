@@ -19,8 +19,8 @@ public class PopulationDataCountry {
         this.year2 = year2;
         this.populationNumber2 = populationNumber2;
         this.name = name;
-        populationDiff = populationNumber2 - populationNumber1;
-        populationDiffPercent = (populationNumber2 - populationNumber1) / populationNumber1 * 100;
+        populationDiff = this.populationNumber2 - this.populationNumber1;
+        populationDiffPercent = (this.populationNumber2 - this.populationNumber1) / this.populationNumber1 * 100;
     }
 
 
