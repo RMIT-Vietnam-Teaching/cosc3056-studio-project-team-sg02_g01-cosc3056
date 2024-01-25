@@ -285,10 +285,10 @@ ORDER BY ? ?;
             while (results.next()) {
                 // Lookup the columns we need
                 String name = results.getString("name");
-                int StartYear = results.getInt("startYear");
+                int startYear = results.getInt("startYear");
                 Double StartTemp = results.getDouble("startTemp");
                 int StartPop = results.getInt("startPop");
-                int EndYear = results.getInt("endYear");
+                int endYear = results.getInt("endYear");
                 Double EndTemp = results.getDouble("endTemp");
                 int EndPop = results.getInt("endPop");
                 Double TemperatureChange = results.getDouble("Temperature change");
@@ -297,7 +297,7 @@ ORDER BY ? ?;
 
                 
 
-                PopulationDataCountry Country = new PopulationDataCountry(name, StartYear, StartTemp, StartPop, EndYear, EndTemp, EndPop, TemperatureChange, PopulationChange);
+                PopulationDataCountry Country = new PopulationDataCountry(name, startYear, StartTemp, StartPop, endYear, EndTemp, EndPop, TemperatureChange, PopulationChange);
                 AllCountryPopulation.add(Country);
             }
             
