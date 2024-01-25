@@ -145,7 +145,7 @@ public class PageMission implements Handler {
                     <img src="personas/persona1.png"
             """;
 
-            // html = html + "persona" + j;
+            // html = html + "persona" + j + "&#46;png&#34;";
             
             html = html + """
                      alt="avatar" />
