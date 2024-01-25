@@ -12,4 +12,22 @@ public class TeamMember {
         this.name = name;
     }
 
+    // getter
+    public String getName() {
+        return name;
+    }
+
+    public String getID(){
+        return id;
+    }
+
+    // Setter
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
 }

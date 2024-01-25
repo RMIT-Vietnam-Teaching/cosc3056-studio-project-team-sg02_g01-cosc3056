@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.WorldTempPop;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -58,6 +59,9 @@ public class PageIndex implements Handler {
 
         // Open main
         html = html + "<main>";
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<WorldTempPop> worldTempPop = new ArrayList<WorldTempPop>();
+        worldTempPop = jdbc.getData1A();
 
         // Temperature
         html = html + """
@@ -65,30 +69,52 @@ public class PageIndex implements Handler {
                 <h1>GLOBAL AVERAGE TEMPERATURE</h1>
                 <div class="info">
                     <div class="rangeYr">
-                        <p>In 265 years</p>
-                        <h2>
+                        <p>
         """;
+        
+        int yearRange = worldTempPop.get(1).getYear() - worldTempPop.get(0).getYear();
+        html = html + "In " + yearRange + " years";
+
+        html = html + """
+                        </p>
+                        <h2>
+                """;
         // Add avg temp
-        html = html + "...";
+        double tempAvg = worldTempPop.get(1).getTemp() - worldTempPop.get(0).getTemp();
+
+        html = html + tempAvg + "&deg;C";
 
         html = html + """
                     </h2>
                     </div>
                     <img src="icon-increase.jpg" alt="increase" />
                     <div class="years">
-                        <p>1750</p>
-                        <h3>
+                        <p>
         """;
+        html = html + worldTempPop.get(0).getYear();
+
+        html = html + """
+                        </p>
+                        <h3>
+                """;
+
         // Add temp in year 1750
-        html = html + "...";
+        html = html + worldTempPop.get(0).getTemp() + "&deg;C";
 
         html = html + """
                         </h3>
-                        <p>2015</p>
-                        <h3>
+                        <p>
         """;
+
+        html = html + worldTempPop.get(1).getYear();
+
+        html = html + """
+                        </p>
+                        <h3>
+                """;
+
         // Add temp in year 2015
-        html = html + "...";
+        html = html + worldTempPop.get(1).getTemp() + "&deg;C";
 
         html = html + """
                         </h3>
@@ -119,30 +145,79 @@ public class PageIndex implements Handler {
                 <h1>GLOBAL POPULATION</h1>
                 <div class="info">
                     <div class="rangeYr">
-                        <p>In 53 years</p>
-                        <h2>
+                        <p>
         """;
+
+        yearRange = worldTempPop.get(3).getYear() - worldTempPop.get(2).getYear();
+        html = html + "In " + yearRange + " years";
+
+        html = html + """
+                        </p>
+                        <h2>
+                """;
+
         // Add total population
-        html = html + "...";
+        long totalPop = worldTempPop.get(3).getPop() - worldTempPop.get(2).getPop();
+
+        if (totalPop > 999999999) {
+            html = html + (Math.ceil((totalPop/1000000000.0) * 1000) / 1000) + " BIL";
+        }
+        else if (totalPop > 999999) {
+            html = html + (Math.ceil((totalPop/1000000.0) * 1000) / 1000) + " MIL";
+        }
+        else
+            html = html + totalPop;        
 
         html = html + """
                         </h2>
                     </div>
                     <img src="icon-increase.jpg" alt="increase" />
                     <div class="years">
-                        <p>1960</p>
-                        <h3>
+                        <p>
         """;
+
+        html = html + worldTempPop.get(2).getYear();
+
+        html = html + """
+                        </p>
+                        <h3>
+                """;
+
         // Add population in year 1960
-        html = html + "...";
+        long popYear = worldTempPop.get(2).getPop();
+
+        if (popYear > 999999999) {
+            html = html + (Math.ceil((popYear/1000000000.0) * 1000) / 1000) + " bil";
+        }
+        else if (popYear > 999999) {
+            html = html + (Math.ceil((popYear/1000000.0) * 1000) / 1000) + " mil";
+        }
+        else
+            html = html + popYear; 
 
         html = html + """
                         </h3>
-                        <p>2013</p>
-                        <h3>
+                        <p>
         """;
+
+        html = html + worldTempPop.get(3).getYear();
+
+        html = html + """
+                        </p>
+                        <h3>
+                """;
+
         // Add population in year 2013
-        html = html + "...";
+        popYear = worldTempPop.get(3).getPop();
+
+        if (popYear > 999999999) {
+            html = html + (Math.ceil((popYear/1000000000.0) * 1000) / 1000) + " bil";
+        }
+        else if (popYear > 999999) {
+            html = html + (Math.ceil((popYear/1000000.0) * 1000) / 1000) + " mil";
+        }
+        else
+            html = html + popYear;
 
         html = html + """
                         </h3>

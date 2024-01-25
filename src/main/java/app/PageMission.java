@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.TeamMember;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -92,121 +93,33 @@ public class PageMission implements Handler {
                 <h1>TEAM MEMBERS</h1>
                 <div class="Info">
         """;
-        
-        // Member 1: An
-        html = html + """
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<TeamMember> team = new ArrayList<TeamMember>();
+        team = jdbc.getMember();
+
+        for (int i = 0; i < team.size(); i++) {
+            html = html + """
                     <div class="mem">
                         <img src="icon-rmit.png" alt="avatar" />
                         <div class="details">
                             <p>Name: 
-        """;
-        // Add name
-        html = html + "...";
+            """;
+            
+            html = html + team.get(i).getName();
 
-        html = html + """
-                            </p>
-                            <p>ID: 
-        """;
-        // Add ID
-        html = html + "...";
+            html = html + """
+                </p>
+                <p>ID: 
+            """;
 
-        html = html + """
-                            </p>
-                        </div>
-                    </div>
-        """;
+            html = html + team.get(i).getID();
 
-        // Member 2: Dang
-        html = html + """
-                    <div class="mem">
-                        <img src="icon-rmit.png" alt="avatar" />
-                        <div class="details">
-                            <p>Name: 
-        """;
-        // Add name
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                            <p>ID: 
-        """;
-        // Add ID
-        html = html + "...";
-
-        html = html + """
+            html = html + """
                             </p>
                         </div>
                     </div>
-        """;   
-                
-        // Member 3: Hung
-        html = html + """
-                    <div class="mem">
-                        <img src="icon-rmit.png" alt="avatar" />
-                        <div class="details">
-                            <p>Name: 
-        """;
-        // Add name
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                            <p>ID: 
-        """;
-        // Add ID
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                        </div>
-                    </div>
-        """;        
-
-        // Member 4: Toan
-        html = html + """
-                    <div class="mem">
-                        <img src="icon-rmit.png" alt="avatar" />
-                        <div class="details">
-                            <p>Name: 
-        """;
-        // Add name
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                            <p>ID: 
-        """;
-        // Add ID
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                        </div>
-                    </div>
-        """;
-
-        // Member 5: Quyen
-        html = html + """
-                    <div class="mem">
-                        <img src="icon-rmit.png" alt="avatar" />
-                        <div class="details">
-                            <p>Name: 
-        """;
-        // Add name
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                            <p>ID: 
-        """;
-        // Add ID
-        html = html + "...";
-
-        html = html + """
-                            </p>
-                        </div>
-                    </div>
-        """;
+            """;
+        }
 
         // Close team member
         html = html + """
