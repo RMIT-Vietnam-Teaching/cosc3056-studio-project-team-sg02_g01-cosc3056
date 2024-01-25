@@ -187,10 +187,10 @@ public class PageIndex implements Handler {
         long popYear = worldTempPop.get(2).getPop();
 
         if (popYear > 999999999) {
-            html = html + (Math.ceil((popYear/1000000000.0) * 1000) / 1000) + " BIL";
+            html = html + (Math.ceil((popYear/1000000000.0) * 1000) / 1000) + " bil";
         }
         else if (popYear > 999999) {
-            html = html + (Math.ceil((popYear/1000000.0) * 1000) / 1000) + " MIL";
+            html = html + (Math.ceil((popYear/1000000.0) * 1000) / 1000) + " mil";
         }
         else
             html = html + popYear; 
@@ -211,10 +211,10 @@ public class PageIndex implements Handler {
         popYear = worldTempPop.get(3).getPop();
 
         if (popYear > 999999999) {
-            html = html + (Math.ceil((popYear/1000000000.0) * 1000) / 1000) + " BIL";
+            html = html + (Math.ceil((popYear/1000000000.0) * 1000) / 1000) + " bil";
         }
         else if (popYear > 999999) {
-            html = html + (Math.ceil((popYear/1000000.0) * 1000) / 1000) + " MIL";
+            html = html + (Math.ceil((popYear/1000000.0) * 1000) / 1000) + " mil";
         }
         else
             html = html + popYear;
