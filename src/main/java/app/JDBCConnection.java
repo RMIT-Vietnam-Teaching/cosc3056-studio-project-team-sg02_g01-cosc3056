@@ -250,7 +250,7 @@ public class JDBCConnection {
     }
 
 
-    public ArrayList<PopulationDataCountry> getPopulationCountry(int StartYear, int EndYear) {
+    public ArrayList<PopulationDataCountry> getPopulationCountry(int StartYear, int EndYear, String Order, String SortBy) {
         // Create the ArrayList of LGA objects to return
         ArrayList<PopulationDataCountry> AllCountryPopulation = new ArrayList<PopulationDataCountry>();
 
@@ -263,18 +263,20 @@ public class JDBCConnection {
         
             // The Query
             String query = """
-                SELECT p1.year AS year1, c.name AS Name, p1.populationNum AS population1, p2.year AS year2, p2.populationNum AS population2
-                FROM population p1 
-                JOIN countries c
-                ON p1.countryCode = c.code
-                JOIN population p2 
-                ON p1.countryCode = p2.countryCode
-                WHERE p1.year = ? AND p2.year = ? AND c.code NOT IN ('WLD', 'SAS');
+                SELECT c1.name, c1.year AS 'startYear', c1.landAvgTemp AS 'startTemp', c1.populationNum AS 'startPop', c2.year AS 'endYear', c2.landAvgTemp AS 'endTemp', c2.populationNum AS 'endPop',
+(c2.landAvgTemp - c1.landAvgTemp) AS "Temperature change",
+(c2.populationNum - c1.populationNum) AS "Population change"
+FROM countryTempPop c1 JOIN countryTempPop c2 ON c1.name = c2.name
+WHERE c1.code NOT IN ('WLD', 'SAS')
+AND c1.year = ? AND c2.year = ?
+ORDER BY ? ?;
                     """;
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setQueryTimeout(30);
             statement.setInt(1, StartYear);
             statement.setInt(2, EndYear);
+            statement.setString(3,SortBy);
+            statement.setString(4, Order);
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -282,13 +284,20 @@ public class JDBCConnection {
             // Process all of the results
             while (results.next()) {
                 // Lookup the columns we need
-                int year1 = results.getInt("year1");
-                String name = results.getString("Name");
-                int population1 = results.getInt("population1");
-                int year2 = results.getInt("year2");
-                int population2 = results.getInt("population2");
+                String name = results.getString("name");
+                int StartYear = results.getInt("startYear");
+                Double StartTemp = results.getDouble("startTemp");
+                int StartPop = results.getInt("startPop");
+                int EndYear = results.getInt("endYear");
+                Double EndTemp = results.getDouble("endTemp");
+                int EndPop = results.getInt("endPop");
+                Double TemperatureChange = results.getDouble("Temperature change");
+                int PopulationChange = results.getInt("Population change");
 
-                PopulationDataCountry Country = new PopulationDataCountry(year1, population1, year2, population2, name);
+
+                
+
+                PopulationDataCountry Country = new PopulationDataCountry(name, StartYear, StartTemp, StartPop, EndYear, EndTemp, EndPop, TemperatureChange, PopulationChange);
                 AllCountryPopulation.add(Country);
             }
             
@@ -458,121 +467,13 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
         return WorldTemperature;
     }
 
-    public void getData2B (int firstYear, int lastYear, String cmd){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
-        ArrayList<TempDifference> tempDifferences = new ArrayList<TempDifference>();
-        //for city
-        String query1 ="""
-            SELECT c.ID, c.name, ct.year, ct.landAvgTemp, ct.landMinTemp, ct.landMaxTemp 
-            FROM cityTemp ct LEFT JOIN cities c ON ct.cityID = c.id 
-            WHERE YEAR = ? OR YEAR = ? 
-            ORDER BY ct.cityID; 
-            """;
-        //for state
-        String query2 ="""
-            SELECT s.id, s.name, st.year, st.landAvgTemp, st.landMinTemp, st.landMaxTemp
-            FROM stateTemp st LEFT JOIN  states s ON st.stateID = s.id
-            WHERE s.id IN (
-            
-            SELECT s.id
-            FROM stateTemp st LEFT JOIN  states s ON st.stateID = s.id
-            WHERE YEAR IN (?, ?)
-            GROUP BY s.id
-            HAVING COUNT(*) = 2
-            ORDER BY s.id
-            
-            )
-            AND YEAR IN(?, ?)
-            ORDER BY s.id;
-            """;
-        //control here 
-        String query = null;
-        String temp = null;
-        switch (cmd){
-            case "cityAvg": 
-                query = query1;
-                temp = "landAvgTemp";
-                break;
-            case "cityMax": 
-                query = query1;
-                temp = "landMaxTemp";
-                break;
-            case "cityMin": 
-                query = query1;
-                temp = "landMinTemp";
-                break;
-            case "stateAvg": 
-                query = query2;
-                temp = "landAvgTemp";
-                break;
-            case "stateMax": 
-                query = query2;
-                temp = "landMaxTemp";
-                break;
-            case "stateMin": 
-                query = query2;
-                temp = "landMinTemp";
-                break;
-            
-        }
 
-        //start getting data
-        try(Connection conn = DriverManager.getConnection(DATABASE)){
-
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setQueryTimeout(30);
-            pstmt.setInt(1, firstYear);
-            pstmt.setInt(2, lastYear);
-            if(query.equals(query2)){
-                pstmt.setInt(3, firstYear);
-                pstmt.setInt(4, lastYear);
-            }
-
-            ResultSet results = pstmt.executeQuery();
-            int count = 0;
-            double firstYearTemp = 0;
-            //get data
-            while (results.next()) {
-                if(count == 0){
-                    firstYearTemp = results.getDouble(temp); //get first year temperature
-                    count++;
-                }
-                else{
-                    TempDifference data = new TempDifference();
-                    data.setID(results.getInt("ID"));
-                    data.setName(results.getString("name"));
-                    data.setDifference(firstYearTemp, results.getDouble(temp)); //get all else and difference
-                    tempDifferences.add(data);
-                    count =0;
-                }
-            }
-            count = 0;
-            
+    
 
 
-            //done getting data
-            //sorting now
-                for (int i = 0; i < 3; i++) {
-                    for(int j = i + 1; j < tempDifferences.size(); j++){
-                        if(tempDifferences.get(j).getDifference() > tempDifferences.get(i).getDifference()){
-                            Collections.swap(tempDifferences, j, i);
-                        };
-                    }
-                }
-                for (TempDifference difference : tempDifferences) {
-                System.out.print(difference.getDifference());
-                System.out.println(difference.getName());                     //test part
-                count++;
-                if (count ==5){
-                    break;
-                } 
-            }
 
-               
-        }
-        catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
+
+    
 }
 
 
