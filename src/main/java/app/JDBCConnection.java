@@ -388,7 +388,7 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
 
     public ArrayList<TemperatureDataWorld> getTemperatureWorld(int StartYear, int EndYear) {
         // Create the ArrayList of LGA objects to return
-        ArrayList<TemperatureDataWorld> WordTemperature = new ArrayList<TemperatureDataWorld>();
+        ArrayList<TemperatureDataWorld> WorldTemperature = new ArrayList<TemperatureDataWorld>();
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -404,7 +404,7 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                 worldTemp w2
                 WHERE w1.year = ? AND w2.year = ?;
                     """;
-            PreparedStatement statement = connection.prepareStatement(query)
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setQueryTimeout(30);
             statement.setInt(1, StartYear);
             statement.setInt(2, EndYear);
@@ -432,8 +432,8 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
 
 
 
-                TemperatureDataCountry CountryData = new TemperatureDataCountry(year1, avgTemp1, minTemp1, maxTemp1, name, year2, avgTemp2, minTemp2, maxTemp2);
-                AllCountryTemperature.add(CountryData);
+                TemperatureDataWorld WorldData = new TemperatureDataWorld(year1, landAvgTemp, landMinTemp, landMaxTemp, landOceanAvgTemp, landOceanMinTemp, landOceanMaxTemp, year2, landAvgTemp2, landMinTemp2, landMaxTemp2, landOceanAvgTemp2, landOceanMinTemp2, landOceanMaxTemp2);
+                WorldTemperature.add(WorldData);
             }
             
 
@@ -455,7 +455,7 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
         }
 
       
-        return AllCountryTemperature;
+        return WorldTemperature;
     }
 
 
