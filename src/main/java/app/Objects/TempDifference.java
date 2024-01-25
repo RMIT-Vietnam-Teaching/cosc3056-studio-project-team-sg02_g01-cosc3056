@@ -10,11 +10,21 @@ public class TempDifference {
     public void setID(int ID){
         this.ID = ID;
     }
-    public void setname(String name){
+    public void setName(String name){
         this.name = name;
     }
-    public void setDifference(double firstYear, double lastYear){
-        this.difference = lastYear - firstYear;
+    public void setDifference(double tFirstYear, double tLastYear){
+        this.difference = tLastYear - tFirstYear; //temp
     }
 
+
+    public double getDifference(){
+        return difference;
+    }
+    public int getID(){
+        return ID;
+    }
+    public String getName(){
+        return name;
+    }
 }
