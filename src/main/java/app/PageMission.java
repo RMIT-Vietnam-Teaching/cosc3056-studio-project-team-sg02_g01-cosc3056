@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.Persona;
 import app.Objects.TeamMember;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -132,350 +133,424 @@ public class PageMission implements Handler {
             <div class="personas">
                 <h1>PERSONAS</h1>
         """;
+        ArrayList<Persona> personas = new ArrayList<Persona>();
+        personas = jdbc.getPersona();
 
-        // persona 1
-        html = html + """
+        for (int i = 0; i < personas.size(); i++) {
+            // int j = i + 1;
+            html = html + """
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="personas/persona1.jpg" alt="avatar" />
-                    <p class="name">
-        """;
-            // Add Name-age
-        html = html + "Name Age";
+                    <img src="personas/persona1.png"
+            """;
 
-        html = html + """
+            // html = html + "persona" + j;
+            
+            html = html + """
+                     alt="avatar" />
+                    <p class="name">
+            """;
+
+            html = html + personas.get(i).getName();
+
+            html = html + """
                     </p>
                     <p><strong>Location:</strong> 
-        """;
-            // Add location
-        html = html + "...";
+            """;
 
-        html = html + """
+            html = html + personas.get(i).getLocation();
+
+            html = html + """
                     </p>
                 </div>
   
                 <!-- details/right -->
                 <div class="details">
                     <p><strong>Background:</strong></p>
-        """;
-            // Add ul>li Background
-        html = html + "...";
+            """;
 
-        html = html + "<p><strong>Relevant skills:</strong></p>";
-            // Add ul>li Relevant skills
-        html = html + "...";
+            html = html + personas.get(i).getBackround();
 
-        html = html + "<p><strong>Needs:</strong></p>";
-            // Add ul>li Needs
-        html = html + "...";
+            html = html + "</ul>";
 
-        html = html + "<p><strong>Goals:</strong></p>";
-            // Add ul>li Goals
-        html = html + "...";
+            html = html + "<p><strong>Relevant skills:</strong></p>";
 
-        html = html + """
+            html = html + personas.get(i).getSkill();
+
+            html = html + "</ul>";
+
+            html = html + "<p><strong>Needs:</strong></p>";
+
+            html = html + personas.get(i).getNeed();
+            
+            html = html + "</ul>";
+
+            html = html + "<p><strong>Goals:</strong></p>";
+
+            html = html + personas.get(i).getGoal();
+
+            html = html + "</ul>";
+
+            html = html + """
                     <p>
                       <strong>Quotes:</strong>
                       <span>
-        """;
-            // Add Quotes
-        html = html + "...";
+            """;
 
-        html = html + """
+            html = html + personas.get(i).getQuote();
+
+            html = html + """
                       </span>
                     </p>
                 </div>
             </div>
-        """;
+            """;
+        }
+
+        // // persona 1
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona1.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
+
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
+
+        // html = html + """
+        //             </p>
+        //         </div>
+  
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
+
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
+
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
+
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
+
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
+
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
         
-        // persona 2
-        html = html + """
-            <div class="mem">
-                <!-- avatar/left -->
-                <div class="left">
-                    <img src="personas/persona2.png" alt="avatar" />
-                    <p class="name">
-        """;
-            // Add Name-age
-        html = html + "Name Age";
+        // // persona 2
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona2.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
 
-        html = html + """
-                    </p>
-                    <p><strong>Location:</strong> 
-        """;
-            // Add location
-        html = html + "...";
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
 
-        html = html + """
-                    </p>
-                </div>
+        // html = html + """
+        //             </p>
+        //         </div>
   
-                <!-- details/right -->
-                <div class="details">
-                    <p><strong>Background:</strong></p>
-        """;
-            // Add ul>li Background
-        html = html + "...";
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
 
-        html = html + "<p><strong>Relevant skills:</strong></p>";
-            // Add ul>li Relevant skills
-        html = html + "...";
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
 
-        html = html + "<p><strong>Needs:</strong></p>";
-            // Add ul>li Needs
-        html = html + "...";
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
 
-        html = html + "<p><strong>Goals:</strong></p>";
-            // Add ul>li Goals
-        html = html + "...";
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
 
-        html = html + "<p><Strong>Pain point:</strong></p>";
-            // Add ul>li Pain point
-        html = html + "...";
+        // html = html + "<p><Strong>Pain point:</strong></p>";
+        //     // Add ul>li Pain point
+        // html = html + "...";
 
-        html = html + """
-                    <p>
-                      <strong>Quotes:</strong>
-                      <span>
-        """;
-            // Add Quotes
-        html = html + "...";
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
 
-        html = html + """
-                      </span>
-                    </p>
-                </div>
-            </div>
-        """;
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
 
-        // persona 3
-        html = html + """
-            <div class="mem">
-                <!-- avatar/left -->
-                <div class="left">
-                    <img src="personas/persona3.png" alt="avatar" />
-                    <p class="name">
-        """;
-            // Add Name-age
-        html = html + "Name Age";
+        // // persona 3
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona3.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
 
-        html = html + """
-                    </p>
-                    <p><strong>Location:</strong> 
-        """;
-            // Add location
-        html = html + "...";
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
 
-        html = html + """
-                    </p>
-                </div>
+        // html = html + """
+        //             </p>
+        //         </div>
   
-                <!-- details/right -->
-                <div class="details">
-                    <p><strong>Background:</strong></p>
-        """;
-            // Add ul>li Background
-        html = html + "...";
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
 
-        html = html + "<p><strong>Relevant skills:</strong></p>";
-            // Add ul>li Relevant skills
-        html = html + "...";
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
 
-        html = html + "<p><strong>Needs:</strong></p>";
-            // Add ul>li Needs
-        html = html + "...";
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
 
-        html = html + "<p><strong>Goals:</strong></p>";
-            // Add ul>li Goals
-        html = html + "...";
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
 
-        html = html + """
-                    <p>
-                      <strong>Quotes:</strong>
-                      <span>
-        """;
-            // Add Quotes
-        html = html + "...";
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
 
-        html = html + """
-                      </span>
-                    </p>
-                </div>
-            </div>
-        """;
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
 
-        // persona 4
-        html = html + """
-            <div class="mem">
-                <!-- avatar/left -->
-                <div class="left">
-                    <img src="personas/persona4.png" alt="avatar" />
-                    <p class="name">
-        """;
-            // Add Name-age
-        html = html + "Name Age";
+        // // persona 4
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona4.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
 
-        html = html + """
-                    </p>
-                    <p><strong>Location:</strong> 
-        """;
-            // Add location
-        html = html + "...";
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
 
-        html = html + """
-                    </p>
-                </div>
+        // html = html + """
+        //             </p>
+        //         </div>
   
-                <!-- details/right -->
-                <div class="details">
-                    <p><strong>Background:</strong></p>
-        """;
-            // Add ul>li Background
-        html = html + "...";
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
 
-        html = html + "<p><strong>Relevant skills:</strong></p>";
-            // Add ul>li Relevant skills
-        html = html + "...";
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
 
-        html = html + "<p><strong>Needs:</strong></p>";
-            // Add ul>li Needs
-        html = html + "...";
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
 
-        html = html + "<p><strong>Goals:</strong></p>";
-            // Add ul>li Goals
-        html = html + "...";
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
 
-        html = html + """
-                    <p>
-                      <strong>Quotes:</strong>
-                      <span>
-        """;
-            // Add Quotes
-        html = html + "...";
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
 
-        html = html + """
-                      </span>
-                    </p>
-                </div>
-            </div>
-        """;
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
 
-        // persona 5
-        html = html + """
-            <div class="mem">
-                <!-- avatar/left -->
-                <div class="left">
-                    <img src="personas/persona5.png" alt="avatar" />
-                    <p class="name">
-        """;
-            // Add Name-age
-        html = html + "Name Age";
+        // // persona 5
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona5.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
 
-        html = html + """
-                    </p>
-                    <p><strong>Location:</strong> 
-        """;
-            // Add location
-        html = html + "...";
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
 
-        html = html + """
-                    </p>
-                </div>
+        // html = html + """
+        //             </p>
+        //         </div>
   
-                <!-- details/right -->
-                <div class="details">
-                    <p><strong>Background:</strong></p>
-        """;
-            // Add ul>li Background
-        html = html + "...";
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
 
-        html = html + "<p><strong>Relevant skills:</strong></p>";
-            // Add ul>li Relevant skills
-        html = html + "...";
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
 
-        html = html + "<p><strong>Needs:</strong></p>";
-            // Add ul>li Needs
-        html = html + "...";
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
 
-        html = html + "<p><strong>Goals:</strong></p>";
-            // Add ul>li Goals
-        html = html + "...";
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
 
-        html = html + "<p><Strong>Pain point:</strong></p>";
-            // Add ul>li Pain point
-        html = html + "...";
+        // html = html + "<p><Strong>Pain point:</strong></p>";
+        //     // Add ul>li Pain point
+        // html = html + "...";
 
-        html = html + """
-                    <p>
-                      <strong>Quotes:</strong>
-                      <span>
-        """;
-            // Add Quotes
-        html = html + "...";
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
 
-        html = html + """
-                      </span>
-                    </p>
-                </div>
-            </div>
-        """;
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
 
-        // persona 6
-        html = html + """
-            <div class="mem">
-                <!-- avatar/left -->
-                <div class="left">
-                    <img src="personas/persona6.png" alt="avatar" />
-                    <p class="name">
-        """;
-            // Add Name-age
-        html = html + "Name Age";
+        // // persona 6
+        // html = html + """
+        //     <div class="mem">
+        //         <!-- avatar/left -->
+        //         <div class="left">
+        //             <img src="personas/persona6.png" alt="avatar" />
+        //             <p class="name">
+        // """;
+        //     // Add Name-age
+        // html = html + "Name Age";
 
-        html = html + """
-                    </p>
-                    <p><strong>Location:</strong> 
-        """;
-            // Add location
-        html = html + "...";
+        // html = html + """
+        //             </p>
+        //             <p><strong>Location:</strong> 
+        // """;
+        //     // Add location
+        // html = html + "...";
 
-        html = html + """
-                    </p>
-                </div>
+        // html = html + """
+        //             </p>
+        //         </div>
   
-                <!-- details/right -->
-                <div class="details">
-                    <p><strong>Background:</strong></p>
-        """;
-            // Add ul>li Background
-        html = html + "...";
+        //         <!-- details/right -->
+        //         <div class="details">
+        //             <p><strong>Background:</strong></p>
+        // """;
+        //     // Add ul>li Background
+        // html = html + "...";
 
-        html = html + "<p><strong>Relevant skills:</strong></p>";
-            // Add ul>li Relevant skills
-        html = html + "...";
+        // html = html + "<p><strong>Relevant skills:</strong></p>";
+        //     // Add ul>li Relevant skills
+        // html = html + "...";
 
-        html = html + "<p><strong>Needs:</strong></p>";
-            // Add ul>li Needs
-        html = html + "...";
+        // html = html + "<p><strong>Needs:</strong></p>";
+        //     // Add ul>li Needs
+        // html = html + "...";
 
-        html = html + "<p><strong>Goals:</strong></p>";
-            // Add ul>li Goals
-        html = html + "...";
+        // html = html + "<p><strong>Goals:</strong></p>";
+        //     // Add ul>li Goals
+        // html = html + "...";
 
-        html = html + """
-                    <p>
-                      <strong>Quotes:</strong>
-                      <span>
-        """;
-            // Add Quotes
-        html = html + "...";
+        // html = html + """
+        //             <p>
+        //               <strong>Quotes:</strong>
+        //               <span>
+        // """;
+        //     // Add Quotes
+        // html = html + "...";
 
-        html = html + """
-                      </span>
-                    </p>
-                </div>
-            </div>
-        """;
+        // html = html + """
+        //               </span>
+        //             </p>
+        //         </div>
+        //     </div>
+        // """;
 
         // Close personas
         html = html + "</div>";
