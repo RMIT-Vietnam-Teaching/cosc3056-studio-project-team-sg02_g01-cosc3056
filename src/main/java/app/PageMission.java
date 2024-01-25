@@ -137,15 +137,13 @@ public class PageMission implements Handler {
         personas = jdbc.getPersona();
 
         for (int i = 0; i < personas.size(); i++) {
-            // int j = i + 1;
             html = html + """
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="personas/persona1.png"
             """;
 
-            // html = html + "persona" + j + "&#46;png&#34;";
+            html = html + personas.get(i).getImg();
             
             html = html + """
                      alt="avatar" />
@@ -172,25 +170,17 @@ public class PageMission implements Handler {
 
             html = html + personas.get(i).getBackround();
 
-            html = html + "</ul>";
-
             html = html + "<p><strong>Relevant skills:</strong></p>";
 
             html = html + personas.get(i).getSkill();
-
-            html = html + "</ul>";
 
             html = html + "<p><strong>Needs:</strong></p>";
 
             html = html + personas.get(i).getNeed();
             
-            html = html + "</ul>";
-
             html = html + "<p><strong>Goals:</strong></p>";
 
             html = html + personas.get(i).getGoal();
-
-            html = html + "</ul>";
 
             html = html + """
                     <p>

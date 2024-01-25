@@ -221,9 +221,9 @@ public class JDBCConnection {
                 String needs = results.getString("needs");
                 String goals = results.getString("goals");
                 String skills = results.getString("skills");
-                //String imagepath = results.getString("img_path") 
+                String imagepath = results.getString("img_path") ;
 
-                Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills /*, imagepath */);
+                Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills , imagepath);
                 
                 People.add(Person);
             }
@@ -335,7 +335,7 @@ countryTemp ct1 JOIN countries c ON ct1.countryCode = c.code
 JOIN countryTemp ct2 ON ct1.countryCode = ct2.countryCode
 WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                     """;
-            PreparedStatement statement = connection.prepareStatement(query)
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setQueryTimeout(30);
             statement.setInt(1, StartYear);
             statement.setInt(2, EndYear);
