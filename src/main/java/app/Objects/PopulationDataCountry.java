@@ -1,26 +1,30 @@
 package app.Objects;
 
 public class PopulationDataCountry {
-    public int year1;
-    public int year2;
-    public String name;
-    public int populationNumber1;
-    public int populationNumber2;
-    public int populationDiff;
-    public int populationDiffPercent;
+    public String countryName;
+    public int StartYear;
+    public Double StartTemp;
+    public int StartPop;
+    public int EndYear;
+    public Double EndTemp;
+    public int EndPop;
+    public Double TempDifference;
+    public int PopDifference;
 
 
     public PopulationDataCountry(){
     }
 
-    public PopulationDataCountry(int year1, int populationNumber1, int year2, int populationNumber2, String name){
-        this.year1 = year1;
-        this.populationNumber1 = populationNumber1;
-        this.year2 = year2;
-        this.populationNumber2 = populationNumber2;
-        this.name = name;
-        populationDiff = this.populationNumber2 - this.populationNumber1;
-        populationDiffPercent = (this.populationNumber2 - this.populationNumber1) / this.populationNumber1 * 100;
+    public PopulationDataCountry(String countryName, int StartYear, Double StartYearTemp, int StartYearPop, int EndYear, Double EndYearTemp, int EndYearPop, Double TempDifference, int PopDifference){
+        this.countryName = countryName;
+        this.StartYear = StartYear;
+        this.StartTemp = StartYearTemp;
+        this.StartPop = StartYearPop;
+        this.EndYear = EndYear;
+        this.EndTemp = EndYearTemp;
+        this.EndPop = EndYearPop;
+        this.TempDifference = TempDifference;
+        this.PopDifference = PopDifference;
     }
 
 

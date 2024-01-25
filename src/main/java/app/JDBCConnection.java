@@ -250,7 +250,7 @@ public class JDBCConnection {
     }
 
 
-    public ArrayList<PopulationDataCountry> getPopulationCountry(int StartYear, int EndYear) {
+    public ArrayList<PopulationDataCountry> getPopulationCountry(int StartYear, int EndYear, String Order, String SortBy) {
         // Create the ArrayList of LGA objects to return
         ArrayList<PopulationDataCountry> AllCountryPopulation = new ArrayList<PopulationDataCountry>();
 
@@ -263,18 +263,20 @@ public class JDBCConnection {
         
             // The Query
             String query = """
-                SELECT p1.year AS year1, c.name AS Name, p1.populationNum AS population1, p2.year AS year2, p2.populationNum AS population2
-                FROM population p1 
-                JOIN countries c
-                ON p1.countryCode = c.code
-                JOIN population p2 
-                ON p1.countryCode = p2.countryCode
-                WHERE p1.year = ? AND p2.year = ? AND c.code NOT IN ('WLD', 'SAS');
+                SELECT c1.name, c1.year AS 'startYear', c1.landAvgTemp AS 'startTemp', c1.populationNum AS 'startPop', c2.year AS 'endYear', c2.landAvgTemp AS 'endTemp', c2.populationNum AS 'endPop',
+(c2.landAvgTemp - c1.landAvgTemp) AS "Temperature change",
+(c2.populationNum - c1.populationNum) AS "Population change"
+FROM countryTempPop c1 JOIN countryTempPop c2 ON c1.name = c2.name
+WHERE c1.code NOT IN ('WLD', 'SAS')
+AND c1.year = ? AND c2.year = ?
+ORDER BY ? ?;
                     """;
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setQueryTimeout(30);
             statement.setInt(1, StartYear);
             statement.setInt(2, EndYear);
+            statement.setString(3,SortBy);
+            statement.setString(4, Order);
             
             // Get Result
             ResultSet results = statement.executeQuery(query);
@@ -282,13 +284,20 @@ public class JDBCConnection {
             // Process all of the results
             while (results.next()) {
                 // Lookup the columns we need
-                int year1 = results.getInt("year1");
-                String name = results.getString("Name");
-                int population1 = results.getInt("population1");
-                int year2 = results.getInt("year2");
-                int population2 = results.getInt("population2");
+                String name = results.getString("name");
+                int StartYear = results.getInt("startYear");
+                Double StartTemp = results.getDouble("startTemp");
+                int StartPop = results.getInt("startPop");
+                int EndYear = results.getInt("endYear");
+                Double EndTemp = results.getDouble("endTemp");
+                int EndPop = results.getInt("endPop");
+                Double TemperatureChange = results.getDouble("Temperature change");
+                int PopulationChange = results.getInt("Population change");
 
-                PopulationDataCountry Country = new PopulationDataCountry(year1, population1, year2, population2, name);
+
+                
+
+                PopulationDataCountry Country = new PopulationDataCountry(name, StartYear, StartTemp, StartPop, EndYear, EndTemp, EndPop, TemperatureChange, PopulationChange);
                 AllCountryPopulation.add(Country);
             }
             
@@ -457,6 +466,62 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
       
         return WorldTemperature;
     }
+
+
+
+    public ArrayList<Integer> getYear() {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<Integer> AllYears = new ArrayList<Integer>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            // The Query
+            String query = "SELECT DISTINCT year FROM countryTemp;";
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                int Year = results.getInt("year");
+
+                
+                AllYears.add(Year);
+            }
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+        
+        return AllYears;
+    }
+
+
+    
 
 
     
