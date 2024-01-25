@@ -19,13 +19,11 @@ public class PopulationDataCountry {
         this.year2 = year2;
         this.populationNumber2 = populationNumber2;
         this.name = name;
-    }
-
-
-    public CalculateDifference(){
         populationDiff = populationNumber2 - populationNumber1;
         populationDiffPercent = (populationNumber2 - populationNumber1) / populationNumber1 * 100;
     }
+
+
 
 
 }
