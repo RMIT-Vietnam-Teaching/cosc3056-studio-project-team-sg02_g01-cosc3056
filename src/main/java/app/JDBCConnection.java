@@ -335,7 +335,7 @@ countryTemp ct1 JOIN countries c ON ct1.countryCode = c.code
 JOIN countryTemp ct2 ON ct1.countryCode = ct2.countryCode
 WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                     """;
-            PreparedStatement statement = connection.prepareStatement(query)
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setQueryTimeout(30);
             statement.setInt(1, StartYear);
             statement.setInt(2, EndYear);
