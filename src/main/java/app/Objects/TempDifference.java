@@ -14,7 +14,7 @@ public class TempDifference {
         this.name = name;
     }
     public void setDifference(double firstYear, double lastYear){
-        this.difference = lastYear = firstYear;
+        this.difference = lastYear - firstYear;
     }
 
 }
