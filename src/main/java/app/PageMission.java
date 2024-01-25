@@ -225,7 +225,7 @@ public class PageMission implements Handler {
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="persona1.jpg" alt="avatar" />
+                    <img src="personas/persona1.jpg" alt="avatar" />
                     <p class="name">
         """;
             // Add Name-age
@@ -281,7 +281,7 @@ public class PageMission implements Handler {
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="persona2.jpg" alt="avatar" />
+                    <img src="personas/persona2.png" alt="avatar" />
                     <p class="name">
         """;
             // Add Name-age
@@ -341,7 +341,7 @@ public class PageMission implements Handler {
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="persona3.jpg" alt="avatar" />
+                    <img src="personas/persona3.png" alt="avatar" />
                     <p class="name">
         """;
             // Add Name-age
@@ -397,7 +397,7 @@ public class PageMission implements Handler {
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="persona4.jpg" alt="avatar" />
+                    <img src="personas/persona4.png" alt="avatar" />
                     <p class="name">
         """;
             // Add Name-age
@@ -448,12 +448,12 @@ public class PageMission implements Handler {
             </div>
         """;
 
-        // persona 6
+        // persona 5
         html = html + """
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="persona6.jpg" alt="avatar" />
+                    <img src="personas/persona5.png" alt="avatar" />
                     <p class="name">
         """;
             // Add Name-age
@@ -508,12 +508,12 @@ public class PageMission implements Handler {
             </div>
         """;
 
-        // persona 4
+        // persona 6
         html = html + """
             <div class="mem">
                 <!-- avatar/left -->
                 <div class="left">
-                    <img src="persona4.jpg" alt="avatar" />
+                    <img src="personas/persona6.png" alt="avatar" />
                     <p class="name">
         """;
             // Add Name-age

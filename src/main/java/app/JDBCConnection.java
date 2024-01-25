@@ -109,6 +109,7 @@ public class JDBCConnection {
             OR w.year = (SELECT MIN(year) FROM worldTemp)
             OR w.year = (SELECT MAX(year) FROM population WHERE p.countryCode = 'WLD')
             OR w.year = (SELECT MIN(year) FROM population WHERE p.countryCode = 'WLD')
+            ORDER BY p.populationNum
             """;
 
         try(Connection conn = DriverManager.getConnection(DATABASE)){
