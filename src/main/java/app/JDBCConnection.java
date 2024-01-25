@@ -2,6 +2,9 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.Persona;
+import app.Objects.PopulationDataCountry;
+import app.Objects.TeamMember;
 import app.Objects.WorldTempPop;
 
 import java.sql.Connection;
@@ -253,4 +256,137 @@ public class JDBCConnection {
         return People;
     }
 
+
+    public ArrayList<PopulationDataCountry> getPopulationCountry(int StartYear, int EndYear) {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<PopulationDataCountry> AllCountryPopulation = new ArrayList<PopulationDataCountry>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            String query = """
+                SELECT p1.year AS year1, c.name AS Name, p1.populationNum AS population1, p2.year AS year2, p2.populationNum AS population2
+                FROM population p1 
+                JOIN countries c
+                ON p1.countryCode = c.code
+                JOIN population p2 
+                ON p1.countryCode = p2.countryCode
+                WHERE p1.year = ? AND p2.year = ?;
+                    """;
+            PreparedStatement statement = connection.prepareStatement(query)
+            statement.setQueryTimeout(30);
+            statement.setInt(1, StartYear);
+            statement.setInt(2, EndYear);
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                int year1 = results.getInt("year1");
+                String name = results.getString("Name");
+                int population1 = results.getInt("population1");
+                int year2 = results.getInt("year2");
+                int population2 = results.getInt("population2");
+
+                PopulationDataCountry Country = new PopulationDataCountry(year1, population1, year2, population2, name);
+                AllCountryPopulation.add(Country);
+            }
+            
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllCountryPopulation;
+    }
+
+
+
+    public ArrayList<TemperatureDataCountry> getTemperatureCountry(int StartYear, int EndYear) {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<TemperatureDataCountry> AllCountryTemperature = new ArrayList<TemperatureDataCountry>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            String query = """
+                SELECT p1.year AS year1, c.name AS Name, p1.populationNum AS population1, p2.year AS year2, p2.populationNum AS population2
+                FROM population p1 
+                JOIN countries c
+                ON p1.countryCode = c.code
+                JOIN population p2 
+                ON p1.countryCode = p2.countryCode
+                WHERE p1.year = ? AND p2.year = ?;
+                    """;
+            PreparedStatement statement = connection.prepareStatement(query)
+            statement.setQueryTimeout(30);
+            statement.setInt(1, StartYear);
+            statement.setInt(2, EndYear);
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                int year1 = results.getInt("year1");
+                String name = results.getString("Name");
+                int population1 = results.getInt("population1");
+                int year2 = results.getInt("year2");
+                int population2 = results.getInt("population2");
+
+                PopulationDataCountry Country = new PopulationDataCountry(year1, population1, year2, population2, name);
+                AllCountryPopulation.add(Country);
+            }
+            
+
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllCountryPopulation;
+    }
 }
+
+
+
