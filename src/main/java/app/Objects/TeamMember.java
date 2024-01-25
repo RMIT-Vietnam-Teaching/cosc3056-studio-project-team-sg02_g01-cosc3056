@@ -4,8 +4,6 @@ public class TeamMember {
     public String id;
     public String name;
     
-    
-    
     public TeamMember(){
     }
 

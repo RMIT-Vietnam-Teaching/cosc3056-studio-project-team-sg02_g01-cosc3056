@@ -2,10 +2,8 @@ package app;
 
 import java.util.ArrayList;
 
-import app.Objects.Persona;
-import app.Objects.PopulationDataCountry;
-import app.Objects.TeamMember;
-import app.Objects.WorldTempPop;
+import app.Objects.*;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -110,6 +108,7 @@ public class JDBCConnection {
             OR w.year = (SELECT MIN(year) FROM worldTemp)
             OR w.year = (SELECT MAX(year) FROM population WHERE p.countryCode = 'WLD')
             OR w.year = (SELECT MIN(year) FROM population WHERE p.countryCode = 'WLD')
+            ORDER BY p.populationNum
             """;
 
         try(Connection conn = DriverManager.getConnection(DATABASE)){
@@ -166,7 +165,7 @@ public class JDBCConnection {
                 TeamMember Student = new TeamMember(memberID, name);
 
                 
-                TeamMem.add(Student)
+                TeamMem.add(Student);
             }
 
             // Close the statement because we are done with it
@@ -223,15 +222,10 @@ public class JDBCConnection {
                 String goals = results.getString("goals");
                 String skills = results.getString("skills");
                 //String imagepath = results.getString("img_path") 
-                
-                
 
-
-                
                 Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills /*, imagepath */);
-
                 
-                People.add(Person)
+                People.add(Person);
             }
             
 
@@ -252,7 +246,6 @@ public class JDBCConnection {
             }
         }
 
-      
         return People;
     }
 
@@ -276,7 +269,7 @@ public class JDBCConnection {
                 ON p1.countryCode = c.code
                 JOIN population p2 
                 ON p1.countryCode = p2.countryCode
-                WHERE p1.year = ? AND p2.year = ?;
+                WHERE p1.year = ? AND p2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                     """;
             PreparedStatement statement = connection.prepareStatement(query)
             statement.setQueryTimeout(30);
@@ -301,7 +294,7 @@ public class JDBCConnection {
             
 
             // Close the statement because we are done with it
-            statement.close();
+            //statement.close();
         } catch (SQLException e) {
             // If there is an error, lets just pring the error
             System.err.println(e.getMessage());
