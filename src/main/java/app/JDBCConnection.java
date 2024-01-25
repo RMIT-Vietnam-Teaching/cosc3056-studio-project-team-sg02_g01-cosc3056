@@ -385,6 +385,85 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
 
 
 
+
+    public ArrayList<TemperatureDataWorld> getTemperatureWorld(int StartYear, int EndYear) {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<TemperatureDataWorld> WordTemperature = new ArrayList<TemperatureDataWorld>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            String query = """
+                SELECT * FROM 
+                worldTemp w1 JOIN
+                worldTemp w2
+                WHERE w1.year = ? AND w2.year = ?;
+                    """;
+            PreparedStatement statement = connection.prepareStatement(query)
+            statement.setQueryTimeout(30);
+            statement.setInt(1, StartYear);
+            statement.setInt(2, EndYear);
+            
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                int year1 = results.getInt("year");
+                float landAvgTemp = results.getFloat("landAvgTemp");
+                float landMinTemp = results.getFloat("landMinTemp");
+                float landMaxTemp = results.getFloat("landMaxTemp");
+                float landOceanAvgTemp = results.getFloat("landOceanAvgTemp");
+                float landOceanMinTemp = results.getFloat("landOceanMinTemp");
+                float landOceanMaxTemp = results.getFloat("landOceanMaxTemp");
+                int year2 = results.getInt("year:1");
+                float landAvgTemp2 = results.getFloat("landAvgTemp:1");
+                float landMinTemp2 = results.getFloat("landMinTemp:1");
+                float landMaxTemp2 = results.getFloat("landMaxTemp:1");
+                float landOceanAvgTemp2 = results.getFloat("landOceanAvgTemp:1");
+                float landOceanMinTemp2 = results.getFloat("landOceanMinTemp:1");
+                float landOceanMaxTemp2 = results.getFloat("landOceanMaxTemp:1");
+
+
+
+                TemperatureDataCountry CountryData = new TemperatureDataCountry(year1, avgTemp1, minTemp1, maxTemp1, name, year2, avgTemp2, minTemp2, maxTemp2);
+                AllCountryTemperature.add(CountryData);
+            }
+            
+
+            // Close the statement because we are done with it
+            //statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllCountryTemperature;
+    }
+
+
+
+
+
+
+
     
 }
 
