@@ -9,11 +9,11 @@ public class Persona {
     public String needs;
     public String goals;
     public String skills;
-    //public String img_path;
+    public String img_path;
 
     public Persona(){
     }
-    public Persona(String name, int age, String location, String background, String quotes, String needs, String goals, String skills/*, String img_path*/){
+    public Persona(String name, int age, String location, String background, String quotes, String needs, String goals, String skills, String img_path){
         this.name = name;
         this.age = age;
         this.location = location;
@@ -22,7 +22,7 @@ public class Persona {
         this.needs = needs;
         this.goals = goals;
         this.skills = skills;
-        //this.img_path = img_path;
+        this.img_path = img_path;
     }
 
     // Getters
@@ -56,5 +56,9 @@ public class Persona {
 
     public String getSkill(){
         return skills;
+    }
+
+    public String getImg(){
+        return img_path;
     }
 }

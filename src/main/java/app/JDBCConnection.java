@@ -221,9 +221,9 @@ public class JDBCConnection {
                 String needs = results.getString("needs");
                 String goals = results.getString("goals");
                 String skills = results.getString("skills");
-                //String imagepath = results.getString("img_path") 
+                String imagepath = results.getString("img_path") ;
 
-                Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills /*, imagepath */);
+                Persona Person= new Persona(name, age, location, background, quotes, needs, goals, skills , imagepath);
                 
                 People.add(Person);
             }
