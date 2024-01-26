@@ -1,7 +1,8 @@
-package app;
+package app.Page2B;
 
 import java.util.ArrayList;
 
+import app.JDBCConnection;
 import app.Objects.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -26,7 +27,7 @@ import java.sql.Statement;
 public class PageST2B implements Handler {
 
     // URL of this page relative to http://localhost:7001/
-    public static final String URL = "/page2B.html";
+    public static final String URL = "/page2B";
 
     @Override
     public void handle(Context context) throws Exception {
@@ -109,7 +110,7 @@ public class PageST2B implements Handler {
                     <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
                     </div>
-                    <form id='lvl2B' action='/page2B.html' method='post'>
+                    <form id='lvl2B' action='/page2B_cities' method='post'>
                         <div class='dropdown_container'>
                             <div class='year_option'>
                                 <label for='year_start'>Start year: </label>
@@ -150,16 +151,18 @@ public class PageST2B implements Handler {
                 
         //Open Main_bottom 
         html += "<div class='main_section' id='main_section_bottom'>";
-        //Bottom options
+        
         html += """
-            <div id='bottom_options'>
-                <div style='display: flex; justify-content: space-between;'>
-                    <div id='display_by'>
-                        <span style='visibility: hidden;'>Blank</span>
-                        <span><b>Display results by: </b></span>
-                        <a href='' style='pointer-events: none;'>Cities</a>
-                        <a href=''>States</a>
-                    </div>
+        <div id='bottom_options'>
+            <div style='display: flex; justify-content: space-between;'>
+                <div id='display_by'>
+                    <span style='visibility: hidden;'>Blank</span>
+                    <span><b>Display results by: </b></span>
+                    <a href='/page2B_cities'>Cities</a>
+                    <a href='/page2B_states'>States</a>
+                    </div>"""//display by end here
+                            +
+                   """
                     <div id='sort_options'>
                         <div class='dropdown_container'>
                             <div class='sort_by_options'>
@@ -169,6 +172,9 @@ public class PageST2B implements Handler {
                                     <option value="Population change">Population change</option>
                                 </select>
                             </div>
+                            """//sort by options end here
+                            +        
+                            """
                             <div class='order_by_options' style='margin-top: 5px;'>
                                 <label for='order_by'>Order by: </label>
                                 <select id='order_by' name='order_by' form='lvl2B'>
@@ -181,7 +187,7 @@ public class PageST2B implements Handler {
                 </div>
                 <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
             </div>
-                """;
+                """;//end of all divs
 
         //Results
         String year_start = context.formParam("year_start");

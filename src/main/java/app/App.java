@@ -3,7 +3,7 @@ package app;
 import java.util.ArrayList;
 
 import app.Objects.*;
-
+import app.Page2B.*;
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
 
@@ -50,13 +50,19 @@ public class App {
 
     public static void configureRoutes(Javalin app) {
         // All webpages are listed here as GET pages
+        //level 1
         app.get(PageIndex.URL, new PageIndex());
         app.get(PageMission.URL, new PageMission());
         app.get(PageOptions.URL, new PageOptions());
+        //level 2A
         app.get(PageST2A_country.URL, new PageST2A_country());
         app.get(PageST2A_world.URL, new PageST2A_world());
         app.get(PageST2A.URL, new PageST2A());
+        ///level 2B
         app.get(PageST2B.URL, new PageST2B());
+        app.get(PageST2B_cities.URL, new PageST2B_cities());
+        app.get(PageST2B_states.URL, new PageST2B_states());
+        //level 3
         app.get(PageST3A.URL, new PageST3A());
         app.get(PageST3B.URL, new PageST3B());
 
@@ -65,8 +71,8 @@ public class App {
         // app.post(PageMission.URL, new PageMission());
         app.post(PageST2A_country.URL, new PageST2A_country());
         app.post(PageST2A_world.URL, new PageST2A_world());
-        app.post(PageST2B.URL, new PageST2B());
-        // app.post(PageST2B.URL, new PageST2B());
+        app.post(PageST2B_cities.URL, new PageST2B_cities());
+        app.post(PageST2B_states.URL, new PageST2B_states());
         // app.post(PageST3A.URL, new PageST3A());
         // app.post(PageST3B.URL, new PageST3B());
     }
