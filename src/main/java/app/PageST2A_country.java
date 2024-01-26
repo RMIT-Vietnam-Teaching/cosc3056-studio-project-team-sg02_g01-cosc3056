@@ -104,7 +104,7 @@ public class PageST2A_country implements Handler {
         html += """
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
-                <img src='logo.jpg' height='100px'>
+                <img src='logo-web.jpg' height='100px'>
                 <div class='options'>
                     <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
@@ -162,8 +162,8 @@ public class PageST2A_country implements Handler {
                             <div class='sort_by_options'>
                                 <label for='sort_by'>Sort by: </label>
                                 <select id='sort_by' name='sort_by' form='lvl2A'>
-                                    <option value='Temperature change'>Temperature change</option>
-                                    <option value='Population change'>Population change</option>
+                                    <option value="Temperature change">Temperature change</option>
+                                    <option value="Population change">Population change</option>
                                 </select>
                             </div>
                             <div class='order_by_options' style='margin-top: 5px;'>
@@ -221,7 +221,8 @@ public class PageST2A_country implements Handler {
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
         ArrayList<TempPopDataCountry2A> results = jdbc.getTempPopCountry2A(year_start, year_end, sort_by, order);
-        //ArrayList<> results = jdbc.
+        
+        boolean sortPop = (sort_by.toLowerCase().contains("population"));
 
         //Open result display area
         html += "<div id='results_display'>";
@@ -250,9 +251,8 @@ public class PageST2A_country implements Handler {
             <div class='carousel-inner'>
                 <div class='temp_slide carousel-item
                 """
-                    + (sort_by == "Temperature change"?" active":"") + "'" +
+                    + (sortPop?"":" active") + "'>" +
                 """
-                            >
                     <div class='result_row_1'>
                         <div class='name'>
                         """
@@ -321,9 +321,8 @@ public class PageST2A_country implements Handler {
                 </div>
                 <div class='pop_slide carousel-item
                 """
-                    + (sort_by=="Temperature change"?"":" active") + "'" +
+                    + (sortPop?" active":"") + "'>" +
                 """
-                            >
                     <div class='result_row_1'>
                         <div class='name'>
                         """
