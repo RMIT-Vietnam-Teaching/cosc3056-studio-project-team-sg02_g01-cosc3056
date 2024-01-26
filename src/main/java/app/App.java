@@ -38,6 +38,13 @@ public class App {
 
         // Configure Web Routes
         configureRoutes(app);
+        // JDBCConnection jdbc = new JDBCConnection();
+        // ArrayList<TempDifference> test = new ArrayList<TempDifference>();
+        // test = jdbc.getData2B(1950,2013, "cityMin");                         //testing
+        // for (TempDifference test1 : test) {
+        //     System.out.print(test1.getDifference()+ " ");
+        //     System.out.println(test1.getName());
+        // }
 
     }
 
