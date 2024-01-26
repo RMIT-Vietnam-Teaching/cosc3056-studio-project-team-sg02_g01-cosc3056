@@ -54,6 +54,7 @@ public class App {
         app.get(PageMission.URL, new PageMission());
         app.get(PageOptions.URL, new PageOptions());
         app.get(PageST2A_country.URL, new PageST2A_country());
+        app.get(PageST2A_world.URL, new PageST2A_world());
         app.get(PageST2A.URL, new PageST2A());
         app.get(PageST2B.URL, new PageST2B());
         app.get(PageST3A.URL, new PageST3A());
@@ -63,6 +64,7 @@ public class App {
         // app.post(PageIndex.URL, new PageIndex());
         // app.post(PageMission.URL, new PageMission());
         app.post(PageST2A_country.URL, new PageST2A_country());
+        app.post(PageST2A_world.URL, new PageST2A_world());
         app.post(PageST2B.URL, new PageST2B());
         // app.post(PageST2B.URL, new PageST2B());
         // app.post(PageST3A.URL, new PageST3A());

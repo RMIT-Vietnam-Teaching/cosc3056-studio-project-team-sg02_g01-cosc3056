@@ -454,9 +454,9 @@ public class JDBCConnection {
 
 
 
-    public ArrayList<TemperaturePopDataWorld2A> getWorld2A(int StartYear, int EndYear) {
-        // Create the ArrayList of LGA objects to return
-        ArrayList<TemperaturePopDataWorld2A> AllWorldData = new ArrayList<TemperaturePopDataWorld2A>();
+    public TemperaturePopDataWorld2A getWorld2A(int StartYear, int EndYear) {
+    
+        TemperaturePopDataWorld2A World = null;
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -493,8 +493,7 @@ public class JDBCConnection {
                 Double EndTempLandOcean = results.getDouble("endTempLandOcean");
                 long EndPop = results.getLong("endPop");
 
-                TemperaturePopDataWorld2A World = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
-                AllWorldData.add(World);
+                World = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
                 
             }
             
@@ -517,7 +516,7 @@ public class JDBCConnection {
         }
 
       
-        return AllWorldData;
+        return World;
     }
 
 

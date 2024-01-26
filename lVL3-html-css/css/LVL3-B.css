@@ -4,7 +4,7 @@ main {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 40px;
 }
 
@@ -33,26 +33,30 @@ legend {
   text-shadow: 1px 1px #fff;
   margin-left: 20px;
   font-size: 21px;
+  margin-bottom: 8px;
 }
 
 .radio_option {
-  width: 70%;
-  margin: 8px auto 30px;
-  font-size: 19px;
-}
-
-.radio_option label {
   margin-right: 50px;
+  font-size: 19px;
+} 
+
+#country:checked ~ .area .state_dropdown,
+#country:checked ~ .area .city_dropdown,
+#state:checked ~ .area .city_dropdown,
+#city:checked ~ .area .state_dropdown{
+  display: none;
 }
 
 .area {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
+  display: grid;
+  margin: 30px 0 10px;
+  grid-template-columns: repeat(3, 3fr);
+  gap: 20px;
 }
 
 .area div {
-  width: 30%;
+  width: 100%;
 }
 
 .area select {

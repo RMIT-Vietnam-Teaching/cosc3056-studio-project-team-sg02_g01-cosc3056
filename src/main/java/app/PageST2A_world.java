@@ -23,10 +23,10 @@ import java.sql.Statement;
  * @author Timothy Wiley, 2023. email: timothy.wiley@rmit.edu.au
  * @author Santha Sumanasekara, 2021. email: santha.sumanasekara@rmit.edu.au
  */
-public class PageST2A_country implements Handler {
+public class PageST2A_world implements Handler {
 
     // URL of this page relative to http://localhost:7001/
-    public static final String URL = "/page2A_country.html";
+    public static final String URL = "/page2A_world.html";
 
     @Override
     public void handle(Context context) throws Exception {
@@ -109,7 +109,7 @@ public class PageST2A_country implements Handler {
                     <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
                     </div>
-                    <form id='lvl2A' action='/page2A_country.html' method='post'>
+                    <form id='lvl2A' action='/page2A_world.html' method='post'>
                         <div class='dropdown_container'>
                             <div class='year_option'>
                                 <label for='year_start'>Start year: </label>
@@ -154,28 +154,10 @@ public class PageST2A_country implements Handler {
                     <div id='display_by'>
                         <span style='visibility: hidden;'>Blank</span>
                         <span><b>Display results by: </b></span>
-                        <a href='' style='pointer-events: none;'>Country</a>
-                        <a href='page2A_world.html'>World</a>
+                        <a href='page2A_country.html' >Country</a>
+                        <a href=''style='pointer-events: none;'>World</a>
                     </div>
-                    <div id='sort_options'>
-                        <div class='dropdown_container'>
-                            <div class='sort_by_options'>
-                                <label for='sort_by'>Sort by: </label>
-                                <select id='sort_by' name='sort_by' form='lvl2A'>
-                                    <option value="Temperature change">Temperature change</option>
-                                    <option value="Population change">Population change</option>
-                                </select>
-                            </div>
-                            <div class='order_by_options' style='margin-top: 5px;'>
-                                <label for='order_by'>Order by: </label>
-                                <select id='order_by' name='order_by' form='lvl2A'>
-                                    <option value='asc'>Ascending</option>
-                                    <option value='desc'>Descending</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    
                 <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
             </div>
                 """;
@@ -183,15 +165,13 @@ public class PageST2A_country implements Handler {
         //Results
         String year_start = context.formParam("year_start");
         String year_end = context.formParam("year_end");
-        String sort_by = context.formParam("sort_by");
-        String order_by = context.formParam("order_by");
 
         if (year_start == null) {
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
         }
         else {
-            html += outputCountries(year_start, year_end, sort_by, order_by);
+            html += outputWorldData(year_start, year_end);
         }
             
         // Close main_bottom
@@ -217,12 +197,11 @@ public class PageST2A_country implements Handler {
         context.html(html);
     }
 
-    public String outputCountries(String year_start, String year_end, String sort_by, String order) {
+    public String outputWorldData(String year_start, String year_end) {
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
-        ArrayList<TempPopDataCountry2A> results = jdbc.getTempPopCountry2A(year_start, year_end, sort_by, order);
+        TemperaturePopDataWorld2A result = jdbc.getWorld2A(Integer.parseInt(year_start), Integer.parseInt(year_end));
         
-        boolean sortPop = (sort_by.toLowerCase().contains("population"));
 
         //Open result display area
         html += "<div id='results_display'>";
@@ -238,28 +217,15 @@ public class PageST2A_country implements Handler {
                 <label for='flexSwitchCheckDefault'><img src='percent_sign.png' style='max-height: 80%;'></label>
             </div>
                 """;
-
         //Display results
-        for (TempPopDataCountry2A result : results) {
 
         html += """
-            <div class='result_container carousel carousel-dark slide' style='border: solid' id=
-            """
-                + "'" + result.id + "'" +
-            """
-                 data-bs-ride='carousel' data-bs-interval='false'>
+            <div class='result_container carousel carousel-dark slide' style='border: solid' id='world' data-bs-ride='carousel' data-bs-interval='false'>
             <div class='carousel-inner'>
-                <div class='temp_slide carousel-item
-                """
-                    + (sortPop?"":" active") + "'>" +
-                """
+                <div class='tempLand_slide carousel-item active>
                     <div class='result_row_1'>
-                        <div class='name'>
-                        """
-                            + result.countryName +
-                        """
-                            </div>
-                        <div class='topic'>Average <b>Temperature</b> change</div>
+                        <div class='name'>World</div>
+                        <div class='topic'>Average <b>Land Temperature</b> change</div>
                         <div style='visibility: hidden;'>Blank</div>
                     </div>
                     <div class='result_row_2'>
@@ -272,21 +238,21 @@ public class PageST2A_country implements Handler {
                             <div class='data_num uncheck'>
                                 <div class='change_value'>
                                 """
-                                    + String.format("%.2f", result.TempDifference) +
+                                    + String.format("%.2f", result.tempDifferenceLand) +
                                 """
                                     <span class='change_unit'>°C</span></div>
                             </div>
                             <div class='data_percent uncheck'>
                                 <div class='change_value'>
                                 """
-                                    + String.format("%.2f", result.TempDifferencePercent) +
+                                    + String.format("%.2f", result.tempDifferenceLandPercent) +
                                 """
                                     <span class='change_unit'>%</span></div>
                             </div>
                         </div>
                         <img src=
                         """
-                            + (result.TempDifference > 0?"icon-increase.jpg":"icon-decrease.jpg") +
+                            + (result.tempDifferenceLand > 0?"icon-increase.jpg":"icon-decrease.jpg") +
                         """
                             class='trend'>
                         <div class='year_data'>
@@ -298,7 +264,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTemp +
+                                    + result.EndTempLand +
                                 """
                                     °C</div>
                             </div>
@@ -311,7 +277,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTemp +
+                                    + result.StartTempLand +
                                 """
                                     °C</div>
                             </div>
@@ -319,16 +285,9 @@ public class PageST2A_country implements Handler {
                         <img src='icon-temp.jpg' height='100px'>
                     </div>
                 </div>
-                <div class='pop_slide carousel-item
-                """
-                    + (sortPop?" active":"") + "'>" +
-                """
+                <div class='pop_slide carousel-item'>
                     <div class='result_row_1'>
-                        <div class='name'>
-                        """
-                            + result.countryName +
-                        """
-                            </div>
+                        <div class='name'>World</div>
                         <div class='topic'><b>Population</b> change</div>
                         <div style='visibility: hidden;'>Blank</div>
                     </div>
@@ -392,26 +351,17 @@ public class PageST2A_country implements Handler {
                         <img src='icon-population.jpg' height='100px'>
                     </div>
                 </div>
-                <button class='carousel-control-prev' type='button' data-bs-target=
-                """
-                    + "'#" + result.id + "'" +
-                """
-                    data-bs-slide='prev'>
+                <button class='carousel-control-prev' type='button' data-bs-target='world' data-bs-slide='prev'>
                     <span class='carousel-control-prev-icon' aria-hidden='true'></span>
                     <span class='visually-hidden'>Previous</span>
                 </button>
-                <button class='carousel-control-next' type='button' data-bs-target=
-                """
-                    + "'#" + result.id + "'" +
-                """
-                    data-bs-slide='next'>
+                <button class='carousel-control-next' type='button' data-bs-target='world' data-bs-slide='next'>
                     <span class='carousel-control-next-icon' aria-hidden='true'></span>
                     <span class='visually-hidden'>Next</span>
                 </button>
             </div>
         </div>
                 """;
-        }
         
         //Close result display area
         html += "</div>";
