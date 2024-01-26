@@ -279,23 +279,22 @@ public class JDBCConnection {
         ArrayList<TempDifference> Ranking = new ArrayList<TempDifference>();
         //for city
         String query1 ="""
-            SELECT c.ID, c.name, ct.year, ct.landAvgTemp, ct.landMinTemp, ct.landMaxTemp 
-            FROM cityTemp ct LEFT JOIN cities c ON ct.cityID = c.id 
+            SELECT c.ID, c.name, ct.year, ct.landAvgTemp, ct.landMinTemp, ct.landMaxTemp, co.code AS country_code, co.name AS country_name
+            FROM cityTemp ct LEFT JOIN cities c ON ct.cityID = c.id JOIN countries co ON c.countryCode = co.code
             WHERE c.id IN (
                 SELECT c.id
                 FROM cityTemp ct LEFT JOIN  cities c ON ct.cityID = c.id
                 WHERE YEAR IN (?, ?)
                 GROUP BY c.id
                 HAVING COUNT(*) = 2
-                ORDER BY c.id
-            )
+                ORDER BY c.id)
             AND YEAR IN(?, ?)
-            ORDER BY ct.cityID; 
+            ORDER BY ct.cityID;
             """;
         //for state
         String query2 ="""
-            SELECT s.id, s.name, st.year, st.landAvgTemp, st.landMinTemp, st.landMaxTemp
-            FROM stateTemp st LEFT JOIN  states s ON st.stateID = s.id
+            SELECT s.id, s.name, st.year, st.landAvgTemp, st.landMinTemp, st.landMaxTemp, co.code AS country_code, co.name AS country_name
+            FROM stateTemp st LEFT JOIN  states s ON st.stateID = s.id JOIN countries co ON s.countryCode = co.code
             WHERE s.id IN (
             
             SELECT s.id
@@ -304,7 +303,6 @@ public class JDBCConnection {
             GROUP BY s.id
             HAVING COUNT(*) = 2
             ORDER BY s.id
-            
             )
             AND YEAR IN(?, ?)
             ORDER BY s.id;
@@ -378,7 +376,7 @@ public class JDBCConnection {
 
             //done getting data
             //sorting now
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 10; i++) {
                     for(int j = i + 1; j < tempDifferences.size(); j++){
                         if(tempDifferences.get(j).getDifference() > tempDifferences.get(i).getDifference()){
                             Collections.swap(tempDifferences, j, i);
@@ -388,7 +386,7 @@ public class JDBCConnection {
                 for (TempDifference difference : tempDifferences) {
                 Ranking.add(difference);                     //test part
                 count++;
-                if (count == 3){
+                if (count == 10){
                     break;
                 } 
             }
