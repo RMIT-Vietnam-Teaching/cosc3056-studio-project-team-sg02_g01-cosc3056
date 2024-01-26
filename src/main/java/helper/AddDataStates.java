@@ -72,8 +72,8 @@ public class AddDataStates {
             // Create Insert Statement
             String query = "INSERT into states (id, name, countryCode) VALUES ("
                            + row + ","
-                           + String.format("'%s'", lineSeparate[headers.indexOf("State")]) + ","
-                           + String.format("(SELECT code FROM countries WHERE name = '%s')", lineSeparate[headers.indexOf("Country")])
+                           + String.format("\"%s\"", lineSeparate[headers.indexOf("State")]) + ","
+                           + String.format("(SELECT code FROM countries WHERE name = "%s")", lineSeparate[headers.indexOf("Country")])
                            + ")";
 
             // Execute the INSERT
