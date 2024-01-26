@@ -1,7 +1,8 @@
-package app;
+package app.Page2B;
 
 import java.util.ArrayList;
 
+import app.JDBCConnection;
 import app.Objects.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -26,7 +27,7 @@ import java.sql.Statement;
 public class PageST2B implements Handler {
 
     // URL of this page relative to http://localhost:7001/
-    public static final String URL = "/page2B.html";
+    public static final String URL = "/page2B";
 
     @Override
     public void handle(Context context) throws Exception {
