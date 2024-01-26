@@ -40,39 +40,42 @@
           <fieldset>
             <legend><h3>Region level</h3></legend>
             <!-- radio options -->
-            <div class="radio_option">
-              <input type="radio" name="region_options" id="country" checked />
-              <label for="country">Country</label>
+            <!-- <div class="radio_option"> -->
+              <input style="margin-left: 150px;" type="radio" name="region_options" id="country" checked />
+              <label class="radio_option" for="country">Country</label>
               <input type="radio" name="region_options" id="state" />
-              <label for="state">State</label>
+              <label class="radio_option" for="state">State</label>
               <input type="radio" name="region_options" id="city" />
-              <label for="city">City</label>
-            </div>
+              <label class="region_options" for="city">City</label>
+            <!-- </div> -->
 
             <!-- drop-down options -->
             <div class="area">
               <!-- country -->
               <div class="country_dropdown">
                 <label for="countrySubmit"><h4>Country</h4></label>
-                <select name="countrySubmit" id="countrySubmit">
+                <select name="countrySubmit" id="countrySubmit" required>
+                  <option value="">-Select country-</option>
                   <option value="vn">Viet Nam</option>
                   <option value="aus">Australia</option>
                 </select>
               </div>
 
               <!-- state -->
-              <div class="state_dropdown">
+              <div class="state_dropdown" >
                 <label for="stateSubmit"><h4>State</h4></label>
-                <select name="stateSubmit" id="stateSubmit">
+                <select name="stateSubmit" id="stateSubmit" required>
+                  <option value="">-Select state-</option>
                   <option value="vn">Viet Nam</option>
                   <option value="aus">Australia</option>
                 </select>
               </div>
 
               <!-- city -->
-              <div class="city_dropdown">
+              <div class="city_dropdown" >
                 <label for="citySubmit"><h4>City</h4></label>
-                <select name="citySubmit" id="citySubmit">
+                <select name="citySubmit" id="citySubmit" required>
+                  <option value="">-Select city-</option>
                   <option value="vn">Viet Nam</option>
                   <option value="aus">Australia</option>
                 </select>
@@ -84,11 +87,11 @@
           <div class="select_year">
             <label>
               <h4>Start year:</h4>
-              <input type="number" name="startYear" id="startYear" />
+              <input type="number" name="startYear" id="startYear" min="1750" max="2015" required/>
             </label>
             <label>
               <h4>Time period:</h4>
-              <input type="number" name="rangeYear" id="rangeYear"
+              <input type="number" name="rangeYear" id="rangeYear" min="0" max="265" required
             /></label>
           </div>
 
@@ -97,6 +100,8 @@
         </form>
       </div>
       <hr>
+
+      <!--  -->
     </main>
 
     <!-- footer -->
