@@ -413,13 +413,22 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
         return WorldTemperature;
     }
     
-    public void getData2B (int firstYear, int lastYear, String cmd){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
+    public ArrayList<TempDifference> getData2B (int firstYear, int lastYear, String cmd){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
         ArrayList<TempDifference> tempDifferences = new ArrayList<TempDifference>();
+        ArrayList<TempDifference> Ranking = new ArrayList<TempDifference>();
         //for city
         String query1 ="""
             SELECT c.ID, c.name, ct.year, ct.landAvgTemp, ct.landMinTemp, ct.landMaxTemp 
             FROM cityTemp ct LEFT JOIN cities c ON ct.cityID = c.id 
-            WHERE YEAR = ? OR YEAR = ? 
+            WHERE c.id IN (
+                SELECT c.id
+                FROM cityTemp ct LEFT JOIN  cities c ON ct.cityID = c.id
+                WHERE YEAR IN (?, ?)
+                GROUP BY c.id
+                HAVING COUNT(*) = 2
+                ORDER BY c.id
+            )
+            AND YEAR IN(?, ?)
             ORDER BY ct.cityID; 
             """;
         //for state
@@ -467,6 +476,9 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                 query = query2;
                 temp = "landMinTemp";
                 break;
+            default:
+                System.out.println("Wrong input!");
+                return Ranking;
             
         }
 
@@ -477,31 +489,30 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
             pstmt.setQueryTimeout(30);
             pstmt.setInt(1, firstYear);
             pstmt.setInt(2, lastYear);
-            if(query.equals(query2)){
-                pstmt.setInt(3, firstYear);
-                pstmt.setInt(4, lastYear);
-            }
-
-            ResultSet results = pstmt.executeQuery();
+            pstmt.setInt(3, firstYear);
+            pstmt.setInt(4, lastYear);
+            
             int count = 0;
             double firstYearTemp = 0;
+            try(ResultSet results = pstmt.executeQuery()){
+                while (results.next()){
             //get data
-            while (results.next()) {
-                if(count == 0){
+                if(count == 0 && results.getInt("year") == firstYear){
                     firstYearTemp = results.getDouble(temp); //get first year temperature
                     count++;
                 }
-                else{
+                else if (results.getInt("year") == lastYear){
                     TempDifference data = new TempDifference();
                     data.setID(results.getInt("ID"));
                     data.setName(results.getString("name"));
                     data.setDifference(firstYearTemp, results.getDouble(temp)); //get all else and difference
                     tempDifferences.add(data);
-                    count =0;
+                    count = 0;
                 }
             }
+        }
             count = 0;
-            
+            System.out.println(tempDifferences.size());
 
 
             //done getting data
@@ -514,19 +525,17 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
                     }
                 }
                 for (TempDifference difference : tempDifferences) {
-                System.out.print(difference.getDifference());
-                System.out.println(difference.getName());                     //test part
+                Ranking.add(difference);                     //test part
                 count++;
-                if (count ==5){
+                if (count == 3){
                     break;
                 } 
             }
-
-               
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        return Ranking;
     }
 
     
