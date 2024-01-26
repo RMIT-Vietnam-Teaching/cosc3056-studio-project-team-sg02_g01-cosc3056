@@ -36,7 +36,13 @@ public class PageST2A_country implements Handler {
 
         // Create a simple HTML webpage in a String
         String html = "<html>";
-
+        
+        // HTML form submitted inputs' values
+        String year_start = context.formParam("year_start");
+        String year_end = context.formParam("year_end");
+        String sort_by = context.formParam("sort_by");
+        String order_by = context.formParam("order_by");
+        
         // Add some Head information
         html = html + "<head>" + 
                """
@@ -48,10 +54,10 @@ public class PageST2A_country implements Handler {
         // Add some CSS (external file)
         html = html + 
         """
-            <link href='common.css' rel='stylesheet'>
-            <link href='LVL2-A.css' rel='stylesheet'>
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
+            <link href='LVL2-A.css' rel='stylesheet'>
+            <link href='common.css' rel='stylesheet'>
             <script>
                 document.addEventListener('DOMContentLoaded', function(){
                     var toggle = document.getElementById("percent_toggle");
@@ -119,7 +125,13 @@ public class PageST2A_country implements Handler {
                 //Start year options (ADD ME)
                 ArrayList<Integer> startYears = jdbc.getYear();
                 for (int year : startYears) {
-                    html += String.format("<option>%d</option>", year);
+                    if (year_start != null && year == Integer.parseInt(year_start)) {
+                        //Let the previously chosen option as the default selected option
+                        html += String.format("<option selected>%d</option>", year);
+                    }
+                    else {
+                        html += String.format("<option>%d</option>", year);
+                    }
                 }
         html += """
             </select>
@@ -131,7 +143,13 @@ public class PageST2A_country implements Handler {
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
-                    html += String.format("<option>%d</option>", year);
+                    if (year_end != null && year == Integer.parseInt(year_end)) {
+                        //Let the previously chosen option as the default selected option
+                        html += String.format("<option selected>%d</option>", year);
+                    }
+                    else {
+                        html += String.format("<option>%d</option>", year);
+                    }
                 }
 
         html += """
@@ -154,23 +172,46 @@ public class PageST2A_country implements Handler {
                     <div id='display_by'>
                         <span style='visibility: hidden;'>Blank</span>
                         <span><b>Display results by: </b></span>
-                        <a href='' style='pointer-events: none;'>Country</a>
-                        <a href='page2A_world.html'>World</a>
+                        <a href='page2A_country.html' class='display_current'>Country</a>
+                        <a href='page2A_world.html' class='display_other'>World</a>
                     </div>
                     <div id='sort_options'>
                         <div class='dropdown_container'>
                             <div class='sort_by_options'>
                                 <label for='sort_by'>Sort by: </label>
                                 <select id='sort_by' name='sort_by' form='lvl2A'>
-                                    <option value="Temperature change">Temperature change</option>
-                                    <option value="Population change">Population change</option>
+                                """;
+        //sort_by options
+        String[] sortOptions = {"Temperature change", "Population change"};
+        for (String option: sortOptions) {
+            html += "<option";
+            //Let the previously chosen option as the default selected option
+            if (sort_by != null && sort_by.equals(option)) {
+                html += " selected";
+            }
+            html += String.format(">%s</option>", option);
+        }
+
+        html += """
                                 </select>
                             </div>
                             <div class='order_by_options' style='margin-top: 5px;'>
                                 <label for='order_by'>Order by: </label>
                                 <select id='order_by' name='order_by' form='lvl2A'>
-                                    <option value='asc'>Ascending</option>
-                                    <option value='desc'>Descending</option>
+                                    """;
+
+        //order_by options
+        html += """
+                <option value='asc'>Ascending</option>
+                <option value='desc'
+                """;
+        //Let the previously chosen option as the default selected option
+        if (order_by != null && order_by.equals("desc")) {
+            html += " selected";
+        }                
+        html += ">Descending</option>";
+
+        html += """
                                 </select>
                             </div>
                         </div>
@@ -180,11 +221,6 @@ public class PageST2A_country implements Handler {
             </div>
                 """;
 
-        //Results
-        String year_start = context.formParam("year_start");
-        String year_end = context.formParam("year_end");
-        String sort_by = context.formParam("sort_by");
-        String order_by = context.formParam("order_by");
 
         if (year_start == null) {
             //No inputs, no result list

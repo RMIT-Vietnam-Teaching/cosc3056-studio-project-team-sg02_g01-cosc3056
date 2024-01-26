@@ -37,6 +37,9 @@ public class PageST2A_world implements Handler {
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
+        // HTML form submitted inputs' values
+        String year_start = context.formParam("year_start");
+        String year_end   = context.formParam("year_end");
         // Add some Head information
         html = html + "<head>" + 
                """
@@ -116,10 +119,16 @@ public class PageST2A_world implements Handler {
                                 <select id='year_start' name='year_start' form='lvl2A'>
                 """;
 
-                //Start year options (ADD ME)
+                //Start year options
                 ArrayList<Integer> startYears = jdbc.getYear();
                 for (int year : startYears) {
-                    html += String.format("<option>%d</option>", year);
+                    if (year_start != null && year == Integer.parseInt(year_start)) {
+                        //Let the previously chosen option as the default option
+                        html += String.format("<option selected>%d</option>", year);
+                    }
+                    else {
+                        html += String.format("<option>%d</option>", year);
+                    }
                 }
         html += """
             </select>
@@ -128,10 +137,17 @@ public class PageST2A_world implements Handler {
                 <label for='year_end'>End year: </label>
                 <select id='year_end' name='year_end' form='lvl2A'>
                 """;
-                //End year options (ADD ME)
+
+                //End year options
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
-                    html += String.format("<option>%d</option>", year);
+                    if (year_end != null && year == Integer.parseInt(year_end)) {
+                        //Let the previously chosen option as the default option
+                        html += String.format("<option selected>%d</option>", year);
+                    }
+                    else {
+                        html += String.format("<option>%d</option>", year);
+                    }
                 }
 
         html += """
@@ -154,17 +170,14 @@ public class PageST2A_world implements Handler {
                     <div id='display_by'>
                         <span style='visibility: hidden;'>Blank</span>
                         <span><b>Display results by: </b></span>
-                        <a href='/page2A_country.html'>Country</a>
-                        <a href='/page2A_world.html' style='pointer-events: none;'>World</a>
+                        <a href='/page2A_country.html' class="display_other">Country</a>
+                        <a href='/page2A_world.html' class="display_current">World</a>
                     </div>
                 </div>
                 <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
             </div>
                 """;
 
-        //Results
-        String year_start = context.formParam("year_start");
-        String year_end   = context.formParam("year_end");
 
         if (year_start == null) {
             //No inputs, no result list

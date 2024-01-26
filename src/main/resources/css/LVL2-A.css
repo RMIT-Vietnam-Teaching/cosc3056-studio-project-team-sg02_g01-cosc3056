@@ -31,6 +31,22 @@
     height: 120px;
 }
 
+.display_current {
+    pointer-events: none;
+    color: #518CFF
+}
+
+.display_other {
+    color: black;
+    text-decoration:none;
+}
+
+.display_other:hover {
+    color: #518CFF;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 #bottom_options #display_by {
     display: flex;
     justify-content: space-between;
