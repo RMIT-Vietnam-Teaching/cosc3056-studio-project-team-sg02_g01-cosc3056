@@ -131,6 +131,8 @@ public class PageST2B_cities implements Handler {
                 </datalist>
             </div>
         """; 
+        String year_start = context.formParam("year_start"); //get year start into java
+
         //search for year end
         html += """
 
@@ -142,6 +144,7 @@ public class PageST2B_cities implements Handler {
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
+                    if(year > Integer.parseInt(year_start))
                     html += String.format("<option value = \"%d\"></option>", year);
                 }
 
@@ -192,7 +195,7 @@ public class PageST2B_cities implements Handler {
                     """;//end of all divs
 
         //Results
-        String year_start = context.formParam("year_start");
+        
         String year_end = context.formParam("year_end");
         String sort_by = context.formParam("sort_by");
       //  String search = context.formParam("countrySearch");//TODO
@@ -232,7 +235,18 @@ public class PageST2B_cities implements Handler {
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
         ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), sort_by);
-        
+        String sort_option = null;
+        switch (sort_by) {
+            case "cityAvg": 
+                sort_option = "Average";
+                break;
+            case "cityMax":
+                sort_option ="Maximum";
+                break;
+            case "cityMin":
+                sort_option = "Minimum";
+                break;
+        }
         boolean sortPop = (sort_by.toLowerCase().contains("population"));
 
         //Open result display area
@@ -270,7 +284,11 @@ public class PageST2B_cities implements Handler {
                             + result.getName() +
                         """
                             </div>
-                        <div class='topic'>Average <b>Temperature</b> change</div>
+                        <div class='topic'>
+                        """
+                        +  sort_option +      //min or max or avg temperature change
+                                """ 
+                                    <b>Temperature</b> change</div>
                         <div style='visibility: hidden;'>Blank</div>
                     </div>
                     <div class='result_row_2'>
