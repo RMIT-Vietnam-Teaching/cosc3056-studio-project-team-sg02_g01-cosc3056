@@ -271,147 +271,8 @@ public class JDBCConnection {
 
 
 
-    public ArrayList<TemperatureDataCountry> getTemperatureCountry(int StartYear, int EndYear) {
-        // Create the ArrayList of LGA objects to return
-        ArrayList<TemperatureDataCountry> AllCountryTemperature = new ArrayList<TemperatureDataCountry>();
 
-        // Setup the variable for the JDBC connection
-        Connection connection = null;
-
-        try {
-            // Connect to JDBC data base
-            connection = DriverManager.getConnection(DATABASE);
-        
-            // The Query
-            String query = """
-                SELECT ct1.year AS year1, ct1.landAvgTemp AS avgTemp1, ct1.landMinTemp AS minTemp1, ct1.landMaxTemp AS maxTemp1, c.name as Name, ct2.year AS year2, ct2.landAvgTemp AS avgTemp2, ct2.landMinTemp AS minTemp2, ct2.landMaxTemp AS maxTemp2 
-FROM 
-countryTemp ct1 JOIN countries c ON ct1.countryCode = c.code
-JOIN countryTemp ct2 ON ct1.countryCode = ct2.countryCode
-WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
-                    """;
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setQueryTimeout(30);
-            statement.setInt(1, StartYear);
-            statement.setInt(2, EndYear);
-            
-            // Get Result
-            ResultSet results = statement.executeQuery(query);
-
-            // Process all of the results
-            while (results.next()) {
-                // Lookup the columns we need
-                int year1 = results.getInt("year1");
-                float avgTemp1 = results.getFloat("avgTemp1");
-                float minTemp1 = results.getFloat("minTemp1");
-                float maxTemp1 = results.getFloat("maxTemp1");
-                String name = results.getString("Name");
-                int year2 = results.getInt("year2");
-                float avgTemp2 = results.getFloat("avgTemp2");
-                float minTemp2 = results.getFloat("minTemp2");
-                float maxTemp2 = results.getFloat("maxTemp2");
-
-
-                TemperatureDataCountry CountryData = new TemperatureDataCountry(year1, avgTemp1, minTemp1, maxTemp1, name, year2, avgTemp2, minTemp2, maxTemp2);
-                AllCountryTemperature.add(CountryData);
-            }
-            
-
-            // Close the statement because we are done with it
-            //statement.close();
-        } catch (SQLException e) {
-            // If there is an error, lets just pring the error
-            System.err.println(e.getMessage());
-        } finally {
-            // Safety code to cleanup
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e.getMessage());
-            }
-        }
-
-      
-        return AllCountryTemperature;
-    }
-
-
-
-
-    public ArrayList<TemperatureDataWorld> getTemperatureWorld(int StartYear, int EndYear) {
-        // Create the ArrayList of LGA objects to return
-        ArrayList<TemperatureDataWorld> WorldTemperature = new ArrayList<TemperatureDataWorld>();
-
-        // Setup the variable for the JDBC connection
-        Connection connection = null;
-
-        try {
-            // Connect to JDBC data base
-            connection = DriverManager.getConnection(DATABASE);
-        
-            // The Query
-            String query = """
-                SELECT * FROM 
-                worldTemp w1 JOIN
-                worldTemp w2
-                WHERE w1.year = ? AND w2.year = ?;
-                    """;
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setQueryTimeout(30);
-            statement.setInt(1, StartYear);
-            statement.setInt(2, EndYear);
-            
-            // Get Result
-            ResultSet results = statement.executeQuery(query);
-
-            // Process all of the results
-            while (results.next()) {
-                // Lookup the columns we need
-                int year1 = results.getInt("year");
-                float landAvgTemp = results.getFloat("landAvgTemp");
-                float landMinTemp = results.getFloat("landMinTemp");
-                float landMaxTemp = results.getFloat("landMaxTemp");
-                float landOceanAvgTemp = results.getFloat("landOceanAvgTemp");
-                float landOceanMinTemp = results.getFloat("landOceanMinTemp");
-                float landOceanMaxTemp = results.getFloat("landOceanMaxTemp");
-                int year2 = results.getInt("year:1");
-                float landAvgTemp2 = results.getFloat("landAvgTemp:1");
-                float landMinTemp2 = results.getFloat("landMinTemp:1");
-                float landMaxTemp2 = results.getFloat("landMaxTemp:1");
-                float landOceanAvgTemp2 = results.getFloat("landOceanAvgTemp:1");
-                float landOceanMinTemp2 = results.getFloat("landOceanMinTemp:1");
-                float landOceanMaxTemp2 = results.getFloat("landOceanMaxTemp:1");
-
-
-
-                TemperatureDataWorld WorldData = new TemperatureDataWorld(year1, landAvgTemp, landMinTemp, landMaxTemp, landOceanAvgTemp, landOceanMinTemp, landOceanMaxTemp, year2, landAvgTemp2, landMinTemp2, landMaxTemp2, landOceanAvgTemp2, landOceanMinTemp2, landOceanMaxTemp2);
-                WorldTemperature.add(WorldData);
-            }
-            
-
-            // Close the statement because we are done with it
-            //statement.close();
-        } catch (SQLException e) {
-            // If there is an error, lets just pring the error
-            System.err.println(e.getMessage());
-        } finally {
-            // Safety code to cleanup
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e.getMessage());
-            }
-        }
-
-      
-        return WorldTemperature;
-    }
+    
     
     public ArrayList<TempDifference> getData2B (int firstYear, int lastYear, String cmd){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
         ArrayList<TempDifference> tempDifferences = new ArrayList<TempDifference>();
@@ -588,6 +449,77 @@ WHERE ct1.year = ? AND ct2.year = ? AND c.code NOT IN ('WLD', 'SAS');
  
        
         return AllYears;
+    }
+
+
+
+
+
+
+    public ArrayList<TemperaturePopDataWorld2A> getWorld2A(int StartYear, int EndYear) {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<TemperaturePopDataWorld2A> AllWorldData = new ArrayList<TemperaturePopDataWorld2A>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        String query = String.format("""
+            SELECT wtp1.year AS "startYear", wtp1.tempLand AS "startTempLand", wtp1.tempLandOcean AS "startTempLandOcean", wtp1.pop AS "startPop",
+            wtp2.year AS "endYear", wtp2.tempLand AS "endTempLand", wtp2.tempLandOcean AS "endTempLandOcean", wtp2.pop AS "endPop"
+     FROM worldTempPop wtp1 FULL JOIN worldTempPop wtp2 ON wtp1.CountryCode = wtp2.CountryCode
+     WHERE "startYear" = %d
+     AND "endYear" = %d;
+                    """, StartYear, EndYear);
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
+            
+            // Get Result
+            ResultSet results = pstmt.executeQuery();
+            
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                int startYear = results.getInt("startYear");
+                Double StartTempLand = results.getDouble("startTempLand");
+                Double StartTempLandOcean = results.getDouble("startTempLandOcean");
+                long StartPop = results.getLong("startPop");
+                int endYear = results.getInt("endYear");
+                Double EndTempLand = results.getDouble("endTempLand");
+                Double EndTempLandOcean = results.getDouble("endTempLandOcean");
+                long EndPop = results.getLong("endPop");
+
+                TemperaturePopDataWorld2A World = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
+                AllWorldData.add(World);
+                
+            }
+            
+
+            // Close the statement because we are done with it
+            //statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllWorldData;
     }
 
 
