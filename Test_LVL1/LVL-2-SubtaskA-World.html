@@ -24,63 +24,80 @@
 
     <!--content-->
     <main>
-      <div class="year_range">
-        <div>
-          Year range:
-        </div>
-        <label for="year_start">Year start:</label>
-        <select class="year_start" form="Lvl2A_form" name="year_start">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
-
-        <label for="year_end">Year end:</label>
-        <select class="year_end" form="Lvl2A_form" name="year_end">
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-        </select>
-      </div>
-
-      <div class = "result_display_fields">
-        <div class = "Option">
-            <span>Display result by:</span>
-              <a href="LVL-2-SubtaskA-Country.html">Country</a>
-              <a href="LVL-2-SubtaskA-World.html" style="pointer-events: none;">World</a>
-        </div>
-        
-        <div class ="FormOptions">
-            <form id="Lvl2A_form">
-                <div class = "ViewBy">
-                  <label for = "DropDownMenu"> View by </label>
-                  <select id = "DropDownMenu" name = "ViewBy">
-                    <option>Land</option>
-                    <option>Land & Ocean</option>
-                  </select>
+      <div class='main_section' id='main_section_top'>
+        <div id='top_options'>
+            <img src='img/logo.jpg' height='100px'>
+            <div class='options'>
+                <div style='padding-bottom: 10px;'>
+                    <b>Year range:</b>
                 </div>
-                <button type="submit"> Submit</button>
-            </form> 
+                <form id='lvl2A' action='/page2A_country.html' method='post'>
+                    <div class='dropdown_container'>
+                        <div class='year_option'>
+                            <label for='year_start'>Start year: </label>
+                            <select id='year_start' name='year_start' form='lvl2A'>
+                              <option> 1970 </option>
+                              <option> 1980 </option>
+                            </select>
+                        </div>
+                        <div class='year_option'>
+                            <label for='year_end'>End year: </label>
+                            <select id='year_end' name='year_end' form='lvl2A'>
+                              <option> 1970 </option>
+                              <option> 1980 </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
       </div>
 
-      <div class = "Content">
-        <h2 class = "World"> World </h2>
-        <h1>Temperature Change</h1>
-        <div class = "Stats">
-          <div class = "Yearrange">
-            <p>In 40 years</p>
-            <h2>18 mil</h2>
-          </div>
-          <img src = "./img/icon-increase.jpg">
-          <div class = "Year">
-            <p>1970</p>
-            <h2>10 mil</h2>
-            <p>2000</p>
-            <h2>20 mil</h2>
-          </div>
-          <img src = "./img/icon-temp.jpg">
+      <div class='main_section' id='main_section_bottom'>
+        <div id='bottom_options'>
+              <div id='display_by'>
+                  <span style='visibility: hidden;'>Blank</span>
+                  <span><b>Display results by: </b></span>
+                  <a href='' style='pointer-events: none;'>Country</a>
+                  <a href=''>World</a>
+              </div>
+          <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
+        </div>
       </div>
+
+
+      <div id='results_display'>
+        <div class='toggle_raw_percent'>
+          <span>Raw Data - Percentage change toggle: </span>
+          <label for='flexSwitchCheckDefault'><img src='img/number_sign.png' style='max-height: 80%;'></label>
+          <div class='form-check form-switch'>
+              <input class='form-check-input' type='checkbox' id='percent_toggle'>
+          </div>
+          <label for='flexSwitchCheckDefault'><img src='img/percent_sign.png' style='max-height: 80%;'></label>
+      </div>
+      </div>
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
 
