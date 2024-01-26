@@ -1,5 +1,9 @@
 package app;
 
+import java.util.ArrayList;
+
+import app.Objects.*;
+
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
 
@@ -34,6 +38,7 @@ public class App {
 
         // Configure Web Routes
         configureRoutes(app);
+
     }
 
     public static void configureRoutes(Javalin app) {

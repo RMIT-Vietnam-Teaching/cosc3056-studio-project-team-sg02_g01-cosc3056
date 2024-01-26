@@ -198,37 +198,37 @@ public class JDBCConnection {
     }
 
 
-    public ArrayList<PopulationDataCountry> getPopulationCountry(int StartYear, int EndYear, String Order, String SortBy) {
+    public ArrayList<TempPopDataCountry2A> getTempPopCountry2A(String StartYear, String EndYear, String SortBy, String Order) {
         // Create the ArrayList of LGA objects to return
-        ArrayList<PopulationDataCountry> AllCountryPopulation = new ArrayList<PopulationDataCountry>();
+        ArrayList<TempPopDataCountry2A> AllCountryPopulation = new ArrayList<TempPopDataCountry2A>();
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
+
+        String query = String.format("""
+                SELECT c1.name, 
+                c1.year AS 'startYear', c1.landAvgTemp AS 'startTemp', c1.populationNum AS 'startPop', 
+                c2.year AS 'endYear', c2.landAvgTemp AS 'endTemp', c2.populationNum AS 'endPop',
+                (c2.landAvgTemp - c1.landAvgTemp) AS "Temperature change",
+                (c2.populationNum - c1.populationNum) AS "Population change"
+                FROM countryTempPop c1 JOIN countryTempPop c2 ON c1.name = c2.name
+                WHERE c1.code NOT IN ('WLD', 'SAS')
+                AND c1.year = %s AND c2.year = %s
+                ORDER BY "%s" %s;
+                    """, StartYear, EndYear, SortBy, Order);
 
         try {
             // Connect to JDBC data base
             connection = DriverManager.getConnection(DATABASE);
         
             // The Query
-            String query = """
-                SELECT c1.name, c1.year AS 'startYear', c1.landAvgTemp AS 'startTemp', c1.populationNum AS 'startPop', c2.year AS 'endYear', c2.landAvgTemp AS 'endTemp', c2.populationNum AS 'endPop',
-(c2.landAvgTemp - c1.landAvgTemp) AS "Temperature change",
-(c2.populationNum - c1.populationNum) AS "Population change"
-FROM countryTempPop c1 JOIN countryTempPop c2 ON c1.name = c2.name
-WHERE c1.code NOT IN ('WLD', 'SAS')
-AND c1.year = ? AND c2.year = ?
-ORDER BY ? ?;
-                    """;
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setQueryTimeout(30);
-            statement.setInt(1, StartYear);
-            statement.setInt(2, EndYear);
-            statement.setString(3,SortBy);
-            statement.setString(4, Order);
+            
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
             
             // Get Result
-            ResultSet results = statement.executeQuery(query);
-
+            ResultSet results = pstmt.executeQuery();
+            int row = 1;
             // Process all of the results
             while (results.next()) {
                 // Lookup the columns we need
@@ -242,11 +242,9 @@ ORDER BY ? ?;
                 Double TemperatureChange = results.getDouble("Temperature change");
                 int PopulationChange = results.getInt("Population change");
 
-
-                
-
-                PopulationDataCountry Country = new PopulationDataCountry(name, startYear, StartTemp, StartPop, endYear, EndTemp, EndPop, TemperatureChange, PopulationChange);
+                TempPopDataCountry2A Country = new TempPopDataCountry2A(String.format("resultNum%d", row), name, startYear, StartTemp, StartPop, endYear, EndTemp, EndPop, TemperatureChange, PopulationChange);
                 AllCountryPopulation.add(Country);
+                row++;
             }
             
 
