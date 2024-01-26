@@ -165,7 +165,7 @@ public class PageST2B implements Handler {
                             <div class='sort_by_options'>
                                 <label for='sort_by'>Sort by: </label>
                                 <select id='sort_by' name='sort_by' form='lvl2B'>
-                                    <option value="Temperature change">Temperature change</option>
+                                    <option value="Temperatur">Temperature change</option>
                                     <option value="Population change">Population change</option>
                                 </select>
                             </div>
