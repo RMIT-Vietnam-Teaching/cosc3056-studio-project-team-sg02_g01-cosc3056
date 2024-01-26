@@ -13,6 +13,11 @@ h4 {
   margin-bottom: 10px;
 }
 
+h3{
+  display: inline-block;
+  margin: 0;
+}
+
 input, select{
     font-size: 16px;
 }
@@ -33,7 +38,6 @@ legend {
   text-shadow: 1px 1px #fff;
   margin-left: 20px;
   font-size: 21px;
-  margin-bottom: 8px;
 }
 
 .radio_option {
@@ -83,7 +87,7 @@ legend {
 button {
   border: none;
   display: block;
-  margin: 60px auto 30px;
+  margin: 40px auto 30px;
   color: white;
   background-color: rgb(50, 88, 184);
   padding: 15px 22px;
@@ -98,4 +102,25 @@ button {
 button:hover {
   background-color: rgb(235, 235, 49);
   color: black;
+}
+
+/* ============== select display ============== */
+hr{
+  margin-bottom: 30px;
+}
+
+.display{
+  margin-right: 150px;
+  cursor: pointer;
+}
+
+#temp:checked + label h3,
+#pop:checked + label h3,
+#both:checked + label h3{
+  text-decoration: underline;
+  text-shadow: 0.4px 0 0 currentColor;
+}
+
+label h3:hover{
+  transform: translateY(-3px);
 }
