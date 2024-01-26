@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.*;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -10,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+
 
 /**
  * Example Index HTML class using Javalin
@@ -49,7 +52,28 @@ public class PageST2A_country implements Handler {
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
-            <script src='lvl2.js'></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function(){
+                    var toggle = document.getElementById("percent_toggle");
+                    var dataNum = document.getElementsByClassName('data_num');
+                    var j = dataNum.length;
+                    var dataPercent = document.getElementsByClassName('data_percent');
+                
+                    toggle.addEventListener("change", function (event) {
+                        if (event.target.checked) {
+                            for(var i = 0; i < j; i++){
+                                dataNum[i].className = "data_num check";
+                                dataPercent[i].className = "data_percent check";
+                            }
+                        } else {
+                            for(var i = 0; i < j; i++){
+                                dataNum[i].className = "data_num uncheck";
+                                dataPercent[i].className = "data_percent uncheck";
+                            }
+                        }
+                    });
+                })
+            </script>
                 """;
         html = html + "</head>";
 
@@ -80,7 +104,7 @@ public class PageST2A_country implements Handler {
         html += """
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
-                <img src='img/logo.jpg' height='100px'>
+                <img src='logo-web.jpg' height='100px'>
                 <div class='options'>
                     <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
@@ -138,8 +162,8 @@ public class PageST2A_country implements Handler {
                             <div class='sort_by_options'>
                                 <label for='sort_by'>Sort by: </label>
                                 <select id='sort_by' name='sort_by' form='lvl2A'>
-                                    <option value='temp'>Temperature change</option>
-                                    <option value='pop'>Population change</option>
+                                    <option value="Temperature change">Temperature change</option>
+                                    <option value="Population change">Population change</option>
                                 </select>
                             </div>
                             <div class='order_by_options' style='margin-top: 5px;'>
@@ -193,10 +217,12 @@ public class PageST2A_country implements Handler {
         context.html(html);
     }
 
-    public String outputCountries(String year_start, String year_end, String sort_by, String order_by) {
+    public String outputCountries(String year_start, String year_end, String sort_by, String order) {
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
-        //ArrayList<> results = jdbc.
+        ArrayList<TempPopDataCountry2A> results = jdbc.getTempPopCountry2A(year_start, year_end, sort_by, order);
+        
+        boolean sortPop = (sort_by.toLowerCase().contains("population"));
 
         //Open result display area
         html += "<div id='results_display'>";
@@ -205,17 +231,188 @@ public class PageST2A_country implements Handler {
         html += """
             <div class='toggle_raw_percent'>
                 <span>Raw Data - Percentage change toggle: </span>
-                <label for='flexSwitchCheckDefault'><img src='img/number_sign.png' style='max-height: 80%;'></label>
+                <label for='flexSwitchCheckDefault'><img src='number_sign.png' style='max-height: 80%;'></label>
                 <div class='form-check form-switch'>
                     <input class='form-check-input' type='checkbox' id='percent_toggle'>
                 </div>
-                <label for='flexSwitchCheckDefault'><img src='img/percent_sign.png' style='max-height: 80%;'></label>
+                <label for='flexSwitchCheckDefault'><img src='percent_sign.png' style='max-height: 80%;'></label>
             </div>
                 """;
 
         //Display results
+        for (TempPopDataCountry2A result : results) {
 
-        html +=
+        html += """
+            <div class='result_container carousel carousel-dark slide' style='border: solid' id=
+            """
+                + "'" + result.id + "'" +
+            """
+                 data-bs-ride='carousel' data-bs-interval='false'>
+            <div class='carousel-inner'>
+                <div class='temp_slide carousel-item
+                """
+                    + (sortPop?"":" active") + "'>" +
+                """
+                    <div class='result_row_1'>
+                        <div class='name'>
+                        """
+                            + result.countryName +
+                        """
+                            </div>
+                        <div class='topic'>Average <b>Temperature</b> change</div>
+                        <div style='visibility: hidden;'>Blank</div>
+                    </div>
+                    <div class='result_row_2'>
+                        <div class='num_difference'>
+                            <div>In
+                            """
+                                + " " + (result.EndYear - result.StartYear) + " " +
+                            """
+                                years</div>
+                            <div class='data_num uncheck'>
+                                <div class='change_value'>
+                                """
+                                    + String.format("%.2f", result.TempDifference) +
+                                """
+                                    <span class='change_unit'>°C</span></div>
+                            </div>
+                            <div class='data_percent uncheck'>
+                                <div class='change_value'>
+                                """
+                                    + String.format("%.2f", result.TempDifferencePercent) +
+                                """
+                                    <span class='change_unit'>%</span></div>
+                            </div>
+                        </div>
+                        <img src=
+                        """
+                            + (result.TempDifference > 0?"icon-increase.jpg":"icon-decrease.jpg") +
+                        """
+                            class='trend'>
+                        <div class='year_data'>
+                            <div class='end_year'>
+                                <div class='year'>
+                                """
+                                    + result.EndYear +
+                                """
+                                    </div>
+                                <div class='data'>
+                                """
+                                    + result.EndTemp +
+                                """
+                                    °C</div>
+                            </div>
+                            <p></p>
+                            <div class='start_year'>
+                                <div class='year'>
+                                """
+                                    + result.StartYear +
+                                """
+                                    </div>
+                                <div class='data'>
+                                """
+                                    + result.StartTemp +
+                                """
+                                    °C</div>
+                            </div>
+                        </div>
+                        <img src='icon-temp.jpg' height='100px'>
+                    </div>
+                </div>
+                <div class='pop_slide carousel-item
+                """
+                    + (sortPop?" active":"") + "'>" +
+                """
+                    <div class='result_row_1'>
+                        <div class='name'>
+                        """
+                            + result.countryName +
+                        """
+                            </div>
+                        <div class='topic'><b>Population</b> change</div>
+                        <div style='visibility: hidden;'>Blank</div>
+                    </div>
+                    <div class='result_row_2'>
+                        <div class='num_difference'>
+                            <div>In
+                            """
+                                + " " + (result.EndYear - result.StartYear) + " " +
+                            """
+                                years</div>
+                            <div class='data_num uncheck'>
+                                <div class='change_value'>
+                                """
+                                    + String.format("%,d", result.PopDifference) +
+                                """
+                                    </div>
+                                <div class='change_unit'>people</div>
+                            </div>
+                            <div class='data_percent uncheck'>
+                                <div class='change_value'>
+                                """
+                                    + String.format("%.2f", result.PopDifferencePercent) +
+                                """
+                                    <span class='change_unit'>%</span></div>
+                            </div>
+                        </div>
+                        <img src=
+                        """
+                            + (result.PopDifference > 0?"icon-increase.jpg":"icon-decrease.jpg") +
+                        """
+                            class='trend'>
+                        <div class='year_data'>
+                            <div class='end_year'>
+                                <div class='year'>
+                                """
+                                    + result.EndYear +
+                                """
+                                    </div>
+                                <div class='data'>
+                                """
+                                    + String.format("%,d", result.EndPop) +
+                                """
+                                    </div>
+                                <div class='unit'>people</div>
+                            </div>
+                            <p></p>
+                            <div class='start_year'>
+                                <div class='year'>
+                                """
+                                    + result.StartYear +
+                                """
+                                    </div>
+                                <div class='data'>
+                                """
+                                    + String.format("%,d", result.StartPop) +
+                                """
+                                    </div>
+                                <div class='unit'>people</div>
+                            </div>
+                        </div>
+                        <img src='icon-population.jpg' height='100px'>
+                    </div>
+                </div>
+                <button class='carousel-control-prev' type='button' data-bs-target=
+                """
+                    + "'#" + result.id + "'" +
+                """
+                    data-bs-slide='prev'>
+                    <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+                    <span class='visually-hidden'>Previous</span>
+                </button>
+                <button class='carousel-control-next' type='button' data-bs-target=
+                """
+                    + "'#" + result.id + "'" +
+                """
+                    data-bs-slide='next'>
+                    <span class='carousel-control-next-icon' aria-hidden='true'></span>
+                    <span class='visually-hidden'>Next</span>
+                </button>
+            </div>
+        </div>
+                """;
+        }
+        
         //Close result display area
         html += "</div>";
         return html;
