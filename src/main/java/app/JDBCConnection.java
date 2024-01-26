@@ -454,9 +454,9 @@ public class JDBCConnection {
 
 
 
-    public TemperaturePopDataWorld2A getWorld2A(int StartYear, int EndYear) {
+    public ArrayList<TemperaturePopDataWorld2A> getWorld2A(String StartYear, String EndYear) {
     
-        TemperaturePopDataWorld2A World = null;
+        ArrayList<TemperaturePopDataWorld2A> worlds = new ArrayList<TemperaturePopDataWorld2A>();
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -464,9 +464,9 @@ public class JDBCConnection {
         String query = String.format("""
             SELECT wtp1.year AS "startYear", wtp1.tempLand AS "startTempLand", wtp1.tempLandOcean AS "startTempLandOcean", wtp1.pop AS "startPop",
             wtp2.year AS "endYear", wtp2.tempLand AS "endTempLand", wtp2.tempLandOcean AS "endTempLandOcean", wtp2.pop AS "endPop"
-     FROM worldTempPop wtp1 FULL JOIN worldTempPop wtp2 ON wtp1.CountryCode = wtp2.CountryCode
-     WHERE "startYear" = %d
-     AND "endYear" = %d;
+            FROM worldTempPop wtp1 FULL JOIN worldTempPop wtp2 ON wtp1.CountryCode = wtp2.CountryCode
+            WHERE "startYear" = %s
+            AND "endYear" = %s;
                     """, StartYear, EndYear);
 
         try {
@@ -493,8 +493,8 @@ public class JDBCConnection {
                 Double EndTempLandOcean = results.getDouble("endTempLandOcean");
                 long EndPop = results.getLong("endPop");
 
-                World = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
-                
+                TemperaturePopDataWorld2A world = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
+                worlds.add(world);
             }
             
 
@@ -516,7 +516,7 @@ public class JDBCConnection {
         }
 
       
-        return World;
+        return worlds;
     }
 
 

@@ -154,24 +154,24 @@ public class PageST2A_world implements Handler {
                     <div id='display_by'>
                         <span style='visibility: hidden;'>Blank</span>
                         <span><b>Display results by: </b></span>
-                        <a href='page2A_country.html' >Country</a>
-                        <a href=''style='pointer-events: none;'>World</a>
+                        <a href='/page2A_country.html'>Country</a>
+                        <a href='/page2A_world.html' style='pointer-events: none;'>World</a>
                     </div>
-                    
+                </div>
                 <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
             </div>
                 """;
 
         //Results
         String year_start = context.formParam("year_start");
-        String year_end = context.formParam("year_end");
+        String year_end   = context.formParam("year_end");
 
         if (year_start == null) {
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
         }
         else {
-            html += outputWorldData(year_start, year_end);
+            html += outputWorld(year_start, year_end);
         }
             
         // Close main_bottom
@@ -197,11 +197,10 @@ public class PageST2A_world implements Handler {
         context.html(html);
     }
 
-    public String outputWorldData(String year_start, String year_end) {
+    public String outputWorld(String year_start, String year_end) {
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
-        TemperaturePopDataWorld2A result = jdbc.getWorld2A(Integer.parseInt(year_start), Integer.parseInt(year_end));
-        
+        ArrayList<TemperaturePopDataWorld2A> results = jdbc.getWorld2A(year_start, year_end);
 
         //Open result display area
         html += "<div id='results_display'>";
@@ -217,15 +216,35 @@ public class PageST2A_world implements Handler {
                 <label for='flexSwitchCheckDefault'><img src='percent_sign.png' style='max-height: 80%;'></label>
             </div>
                 """;
+
         //Display results
+        for (TemperaturePopDataWorld2A result : results) {
 
         html += """
-            <div class='result_container carousel carousel-dark slide' style='border: solid' id='world' data-bs-ride='carousel' data-bs-interval='false'>
+            <div class='result_container carousel carousel-dark slide' style='border: solid' id=
+            """
+                + "'world2A'" +
+            """
+                data-bs-ride='carousel' data-bs-interval='false'>
             <div class='carousel-inner'>
-                <div class='tempLand_slide carousel-item active>
+
+            <!-- ----Slide 1---- -->
+                <div class='tempLand_slide carousel-item
+                """
+                    + " active'>" +
+                """
                     <div class='result_row_1'>
-                        <div class='name'>World</div>
-                        <div class='topic'>Average <b>Land Temperature</b> change</div>
+                        <div class='name'>
+                        """
+                            + "World / Global" +
+                        """
+                            </div>
+                        <div class='topic'>
+                            
+                            Average <b>Land Temperature</b> change
+                            
+                        </div>
+
                         <div style='visibility: hidden;'>Blank</div>
                     </div>
                     <div class='result_row_2'>
@@ -285,9 +304,95 @@ public class PageST2A_world implements Handler {
                         <img src='icon-temp.jpg' height='100px'>
                     </div>
                 </div>
-                <div class='pop_slide carousel-item'>
+
+            <!-- ----Slide 2---- -->
+                <div class='tempLandOcean_slide carousel-item
+                """
+                    + "'>" +
+                """
                     <div class='result_row_1'>
-                        <div class='name'>World</div>
+                        <div class='name'>
+                        """
+                            + "World / Global" +
+                        """
+                            </div>
+                        <div class='topic'>
+                            
+                            Average <b>Land and Ocean Temperature</b> change
+                            
+                        </div>
+
+                        <div style='visibility: hidden;'>Blank</div>
+                    </div>
+                    <div class='result_row_2'>
+                        <div class='num_difference'>
+                            <div>In
+                            """
+                                + " " + (result.EndYear - result.StartYear) + " " +
+                            """
+                                years</div>
+                            <div class='data_num uncheck'>
+                                <div class='change_value'>
+                                """
+                                    + String.format("%.2f", result.tempDifferenceLandOcean) +
+                                """
+                                    <span class='change_unit'>°C</span></div>
+                            </div>
+                            <div class='data_percent uncheck'>
+                                <div class='change_value'>
+                                """
+                                    + String.format("%.2f", result.tempDifferenceLandOceanPercent) +
+                                """
+                                    <span class='change_unit'>%</span></div>
+                            </div>
+                        </div>
+                        <img src=
+                        """
+                            + (result.tempDifferenceLandOcean > 0?"icon-increase.jpg":"icon-decrease.jpg") +
+                        """
+                            class='trend'>
+                        <div class='year_data'>
+                            <div class='end_year'>
+                                <div class='year'>
+                                """
+                                    + result.EndYear +
+                                """
+                                    </div>
+                                <div class='data'>
+                                """
+                                    + result.EndTempLandOcean +
+                                """
+                                    °C</div>
+                            </div>
+                            <p></p>
+                            <div class='start_year'>
+                                <div class='year'>
+                                """
+                                    + result.StartYear +
+                                """
+                                    </div>
+                                <div class='data'>
+                                """
+                                    + result.StartTempLandOcean +
+                                """
+                                    °C</div>
+                            </div>
+                        </div>
+                        <img src='icon-temp.jpg' height='100px'>
+                    </div>
+                </div>
+
+            <!-- ----Slide 3---- -->
+                <div class='pop_slide carousel-item
+                """
+                    + "'>" +
+                """
+                    <div class='result_row_1'>
+                        <div class='name'>
+                        """
+                            + "World / Global" +
+                        """
+                            </div>
                         <div class='topic'><b>Population</b> change</div>
                         <div style='visibility: hidden;'>Blank</div>
                     </div>
@@ -351,17 +456,26 @@ public class PageST2A_world implements Handler {
                         <img src='icon-population.jpg' height='100px'>
                     </div>
                 </div>
-                <button class='carousel-control-prev' type='button' data-bs-target='world' data-bs-slide='prev'>
+                <button class='carousel-control-prev' type='button' data-bs-target=
+                """
+                    + "'#world2A' " +
+                """
+                    data-bs-slide='prev'>
                     <span class='carousel-control-prev-icon' aria-hidden='true'></span>
                     <span class='visually-hidden'>Previous</span>
                 </button>
-                <button class='carousel-control-next' type='button' data-bs-target='world' data-bs-slide='next'>
+                <button class='carousel-control-next' type='button' data-bs-target=
+                """
+                    + "'#world2A' " +
+                """
+                    data-bs-slide='next'>
                     <span class='carousel-control-next-icon' aria-hidden='true'></span>
                     <span class='visually-hidden'>Next</span>
                 </button>
             </div>
         </div>
                 """;
+        }
         
         //Close result display area
         html += "</div>";
