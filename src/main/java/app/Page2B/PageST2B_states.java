@@ -24,10 +24,10 @@ import java.sql.Statement;
  * @author Timothy Wiley, 2023. email: timothy.wiley@rmit.edu.au
  * @author Santha Sumanasekara, 2021. email: santha.sumanasekara@rmit.edu.au
  */
-public class PageST2B implements Handler {
+public class PageST2B_states implements Handler {
 
     // URL of this page relative to http://localhost:7001/
-    public static final String URL = "/page2B";
+    public static final String URL = "/page2B_states";
 
     @Override
     public void handle(Context context) throws Exception {
@@ -43,7 +43,7 @@ public class PageST2B implements Handler {
                """
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>lvl2B</title>
+                <title>lvl2B States</title>
                        """;
 
         // Add some CSS (external file)
@@ -110,7 +110,7 @@ public class PageST2B implements Handler {
                     <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
                     </div>
-                    <form id='lvl2B' action='/page2B_cities' method='post'>
+                    <form id='lvl2B' action='/page2B_states' method='post'>
                         <div class='dropdown_container'>
                             <div class='year_option'>
                                 <label for='year_start'>Start year: </label>
@@ -151,15 +151,16 @@ public class PageST2B implements Handler {
                 
         //Open Main_bottom 
         html += "<div class='main_section' id='main_section_bottom'>";
-        
-        html += """
+       //Bottom options select by cities or states 
+
+       html += """
         <div id='bottom_options'>
             <div style='display: flex; justify-content: space-between;'>
                 <div id='display_by'>
                     <span style='visibility: hidden;'>Blank</span>
                     <span><b>Display results by: </b></span>
-                    <a href='/page2B_cities'>Cities</a>
-                    <a href='/page2B_states'>States</a>
+                    <a href='/page2B_cities' class='select1or2'>Cities</a>
+                    <a href='/page2B_states' style='pointer-events: none;' id='selected' class='select1or2'>States</a>
                     </div>"""//display by end here
                             +
                    """

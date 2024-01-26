@@ -24,10 +24,10 @@ import java.sql.Statement;
  * @author Timothy Wiley, 2023. email: timothy.wiley@rmit.edu.au
  * @author Santha Sumanasekara, 2021. email: santha.sumanasekara@rmit.edu.au
  */
-public class PageST2B implements Handler {
+public class PageST2B_cities implements Handler {
 
     // URL of this page relative to http://localhost:7001/
-    public static final String URL = "/page2B";
+    public static final String URL = "/page2B_cities";
 
     @Override
     public void handle(Context context) throws Exception {
@@ -43,7 +43,7 @@ public class PageST2B implements Handler {
                """
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>lvl2B</title>
+                <title>lvl2B Cities</title>
                        """;
 
         // Add some CSS (external file)
@@ -110,6 +110,9 @@ public class PageST2B implements Handler {
                     <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
                     </div>
+                    """   //search bar for country
+                            +
+                    """
                     <form id='lvl2B' action='/page2B_cities' method='post'>
                         <div class='dropdown_container'>
                             <div class='year_option'>
@@ -151,56 +154,49 @@ public class PageST2B implements Handler {
                 
         //Open Main_bottom 
         html += "<div class='main_section' id='main_section_bottom'>";
-        
         html += """
-        <div id='bottom_options'>
-            <div style='display: flex; justify-content: space-between;'>
-                <div id='display_by'>
-                    <span style='visibility: hidden;'>Blank</span>
-                    <span><b>Display results by: </b></span>
-                    <a href='/page2B_cities'>Cities</a>
-                    <a href='/page2B_states'>States</a>
-                    </div>"""//display by end here
-                            +
-                   """
-                    <div id='sort_options'>
-                        <div class='dropdown_container'>
-                            <div class='sort_by_options'>
-                                <label for='sort_by'>Sort by: </label>
-                                <select id='sort_by' name='sort_by' form='lvl2B'>
-                                    <option value="Temperatur">Temperature change</option>
-                                    <option value="Population change">Population change</option>
-                                </select>
-                            </div>
-                            """//sort by options end here
-                            +        
+            <div id='bottom_options'>
+                <div style='display: flex; justify-content: space-between;'>
+                    <div id='display_by'>
+                        <span style='visibility: hidden;'>Blank</span>
+                        <span><b>Display results by: </b></span>
+                        <a href='/page2B_cities' style='pointer-events: none;' id = 'selected' class='select1or2'>Cities</a>
+                        <a href='/page2B_states' class='select1or2'>States</a>
+                        </div>"""//display by end here
+                                +
+                       """
+                        <div id='sort_options'>
+                            <div class='dropdown_container'>
+                                <div class='sort_by_options'>
+                                    <label for='sort_by'>Sort by: </label>
+                                    <select id='sort_by' name='sort_by' form='lvl2B'>
+                                        <option value ="cityAvg"> Average temperature difference</option>
+                                        <option value="citymin">Minimum temperature difference</option>
+                                        <option value="cityMax">Maximum temperature difference</option>
+                                    </select>
+                                </div>
+                                """//sort by options end here
+                                +        
                             """
-                            <div class='order_by_options' style='margin-top: 5px;'>
-                                <label for='order_by'>Order by: </label>
-                                <select id='order_by' name='order_by' form='lvl2B'>
-                                    <option value='asc'>Ascending</option>
-                                    <option value='desc'>Descending</option>
-                                </select>
                             </div>
                         </div>
                     </div>
+                    <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
                 </div>
-                <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
-            </div>
-                """;//end of all divs
+                    """;//end of all divs
 
         //Results
         String year_start = context.formParam("year_start");
         String year_end = context.formParam("year_end");
         String sort_by = context.formParam("sort_by");
-        String order_by = context.formParam("order_by");
-        System.out.println(year_start + year_end + sort_by + order_by);
+        String search = context.formParam("countrySearch");
+        System.out.println(year_start + year_end + sort_by);
         if (year_start == null || year_end == null) {
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
         }
         else {
-            html += outputCountries(year_start, year_end, sort_by, order_by);
+            html += outputCountries(year_start, year_end, sort_by);
         }
             
         // Close main_bottom
@@ -226,10 +222,10 @@ public class PageST2B implements Handler {
         context.html(html);
     }
 
-    public String outputCountries(String year_start, String year_end, String sort_by, String order) {
+    public String outputCountries(String year_start, String year_end, String sort_by) {
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
-        ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), "cityMax");
+        ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), sort_by);
         
         boolean sortPop = (sort_by.toLowerCase().contains("population"));
 

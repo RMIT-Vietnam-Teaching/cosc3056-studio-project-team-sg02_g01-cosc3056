@@ -151,3 +151,23 @@ button[type="submit"] {
     display: block;
     visibility: visible;
 }
+
+#selected {
+    border-radius: 20px;
+    background: rgb(114, 114, 114);
+    padding: 10px;
+    text-decoration:none;
+    color: black;
+}
+.select1or2 {
+    text-decoration: none;
+    color: grey;
+    padding: 10px;
+}
+.select1or2:hover {
+    border-radius: 20px;
+    background: rgb(221, 221, 221);
+    padding: 10px;
+    text-decoration:none;
+    color: black;
+}
