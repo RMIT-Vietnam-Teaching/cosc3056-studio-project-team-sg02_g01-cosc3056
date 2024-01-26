@@ -77,9 +77,9 @@ public class PageOptions implements Handler {
                 </a>
 
                 <!-- box 2 -->
-                <a href="">
+                <a href="page2B.html">
                     <div class="box">
-                        <img src="logo-web.jpg" alt="" />
+                        <img src="logo-web.jpg" alt="logo" />
                         <h3 id="Advanced">Cities / States</h3>
                     </div>
                 </a>
