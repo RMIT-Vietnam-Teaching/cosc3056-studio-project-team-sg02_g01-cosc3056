@@ -58,28 +58,7 @@ public class PageST2A_country implements Handler {
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='common.css' rel='stylesheet'>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    var toggle = document.getElementById("percent_toggle");
-                    var dataNum = document.getElementsByClassName('data_num');
-                    var j = dataNum.length;
-                    var dataPercent = document.getElementsByClassName('data_percent');
-                
-                    toggle.addEventListener("change", function (event) {
-                        if (event.target.checked) {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num check";
-                                dataPercent[i].className = "data_percent check";
-                            }
-                        } else {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num uncheck";
-                                dataPercent[i].className = "data_percent uncheck";
-                            }
-                        }
-                    });
-                })
-            </script>
+            <script src='lvl2.js'></script>
                 """;
         html = html + "</head>";
 
