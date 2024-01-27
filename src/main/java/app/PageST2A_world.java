@@ -210,8 +210,7 @@ public class PageST2A_world implements Handler {
                 """;
 
         //Display results
-        for (TemperaturePopDataWorld2A result : results) {
-
+        for (TemperaturePopDataWorld2A result : results) {              
         html += """
             <div class='result_container carousel carousel-dark slide' style='border: solid' id=
             """
@@ -275,7 +274,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTempLand +
+                                    + (result.EndTempLand == 0 ? "No data" : result.EndTempLand) +
                                 """
                                     °C</div>
                             </div>
@@ -288,7 +287,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTempLand +
+                                    + (result.StartTempLand == 0 ? "No data" : result.StartTempLand) + 
                                 """
                                     °C</div>
                             </div>
@@ -352,7 +351,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTempLandOcean +
+                                    + (result.EndTempLandOcean == 0 ? "No data" : result.EndTempLandOcean) +
                                 """
                                     °C</div>
                             </div>
@@ -365,7 +364,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTempLandOcean +
+                                    + (result.StartTempLandOcean == 0 ? "No data" : result.StartTempLandOcean) +
                                 """
                                     °C</div>
                             </div>
@@ -425,7 +424,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.EndPop) +
+                                    + (result.EndPop == 0 ? "No Data" : String.format("%,d", result.EndPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
@@ -439,7 +438,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.StartPop) +
+                                    + (result.StartPop == 0 ? "No Data" : String.format("%,d", result.StartPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
