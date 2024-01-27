@@ -34,7 +34,11 @@ public class PageST2B_cities implements Handler {
 
         // JDBC object
         JDBCConnection jdbc = new JDBCConnection();
-
+        //Results
+        String year_start = context.formParam("year_start"); //get year start into java
+        String year_end = context.formParam("year_end");
+        String sort_by = context.formParam("sort_by");
+        String countryName = context.formParam("country");
         // Create a simple HTML webpage in a String
         String html = "<html>";
 
@@ -92,6 +96,10 @@ public class PageST2B_cities implements Handler {
                     <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for year here'/>
                     <datalist id ='search_bar_list'>
                 """;
+                ArrayList<Countries> countries = jdbc.getCountries();
+                for (Countries dataCountries : countries) {
+                    html+="<option value="+dataCountries.getName()+"></option>";
+                }
                             
         html += """
                     </datalist>
@@ -111,12 +119,15 @@ public class PageST2B_cities implements Handler {
             <div class='year_option'>
                 <label for='year_end'>Start year: </label>
                 <input list ='year_start_list' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here'/>
+                """;
+          html+= """
+                
                 <datalist id='year_start_list'>
                     """;
                     //Start year options (ADD ME)
                     ArrayList<Integer> startYears = jdbc.getYear();
                     for (int year : startYears) {
-                        html += String.format("<option value = \"%d\">%d</option>", year, year);
+                            html += String.format("<option value = \"%d\">%d</option>", year, year);
                     }
             
         html += """
@@ -126,18 +137,18 @@ public class PageST2B_cities implements Handler {
 
         //search for year end
         html += """
-
             <div class='year_option'>
                 <label for='year_end'>End year: </label>
                 <input list ='year_end_list' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here'/>
+                """;
+          html+= """
                 <datalist id='year_end_list'>
                 """;
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
-                        html += String.format("<option value = \"%d\">%d</option>", year, year);
-                        }
-
+                        html += String.format("<option selected value = \"%d\">%d</option>", year, year);
+                }
 
 
         html += """
@@ -171,9 +182,19 @@ public class PageST2B_cities implements Handler {
                                 <div class='sort_by_options'>
                                     <label for='sort_by'>Sort by: </label>
                                     <select id='sort_by' name='sort_by' form='lvl2B'>
-                                        <option value ="cityAvg" name ='sort_by'> Average temperature difference</option>
-                                        <option value="cityMin" name ='sort_by'>Minimum temperature difference</option>
-                                        <option value="cityMax" name='sort_by'>Maximum temperature difference</option>
+                                    """;
+        String[] optionInner = {"Average temperature difference", "Minimum temperature difference", "Maximum temperature difference"};
+        String[] optionValue = {"cityAvg", "cityMin", "cityMax"};
+        for (int i = 0; i < optionValue.length; i++) {
+            if(sort_by != null && sort_by.equals(optionValue[i])){
+                html+= String.format("<option selected value = \"%s\">%s</option>", optionValue[i], optionInner[i]);
+            }
+            else {
+                html += String.format("<option value = \"%s\">%s</option>", optionValue[i], optionInner[i]);
+            } 
+        }
+                           
+        html+=          """
                                     </select>
                                 </div>
                                 """//sort by options end here
@@ -186,18 +207,15 @@ public class PageST2B_cities implements Handler {
                 </div>
                     """;//end of all divs
 
-        //Results
-        String year_start = context.formParam("year_start"); //get year start into java
-        String year_end = context.formParam("year_end");
-        String sort_by = context.formParam("sort_by");
+        
       //  String search = context.formParam("countrySearch");//TODO
         System.out.println(year_start + year_end + sort_by);
-        if (year_start == ("") || year_end == ("") || year_end == null || year_start == null) { //datalist can return "" new tab will return null values
+        if (year_start == ("") || year_end == ("") || year_end == null || year_start == null || sort_by =="" || sort_by == null) { //datalist can return "" new tab will return null values
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
         }
         else {
-            html += outputCountries(year_start, year_end, sort_by);
+            html += outputCountries(year_start, year_end, sort_by, countryName);
         }
             
         // Close main_bottom
@@ -223,10 +241,14 @@ public class PageST2B_cities implements Handler {
         context.html(html);
     }
 
-    public String outputCountries(String year_start, String year_end, String sort_by) {
+    public String outputCountries(String year_start, String year_end, String sort_by, String countryName) { //ouput countries method
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
-        ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), sort_by);
+        ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), sort_by, countryName);
+        if (results.size() ==0){
+            html+="<h2><i>There is no data for "+ countryName+" for this time period!</i></h2>";
+        }
+        else{
         String sort_option = null;
         switch (sort_by) {
             case "cityAvg": 
@@ -242,7 +264,7 @@ public class PageST2B_cities implements Handler {
         boolean sortPop = (sort_by.toLowerCase().contains("population"));
 
         //Open result display area
-        html += "<div id='results_display'>";
+        html += "<div id='results_display'><h1>"+ "Country: "+ countryName +"</h1>";
 
         //Toggle raw-percentage switch
         html += """
@@ -345,10 +367,11 @@ public class PageST2B_cities implements Handler {
         </div>
                 """;
         }
+    }
         
         //Close result display area
         html += "</div>";
         return html;
     }
-
+    
 }

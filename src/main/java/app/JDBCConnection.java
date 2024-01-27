@@ -275,7 +275,7 @@ public class JDBCConnection {
 
     
     
-    public ArrayList<TempDifference> getData2B (int firstYear, int lastYear, String cmd){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
+    public ArrayList<TempDifference> getData2B (int firstYear, int lastYear, String cmd, String countryName){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
         ArrayList<TempDifference> tempDifferences = new ArrayList<TempDifference>();
         ArrayList<TempDifference> Ranking = new ArrayList<TempDifference>();
         //for city
@@ -289,7 +289,7 @@ public class JDBCConnection {
                 GROUP BY c.id
                 HAVING COUNT(*) = 2
                 ORDER BY c.id)
-            AND YEAR IN(?, ?)
+            AND YEAR IN(?, ?) AND (country_name LIKE ?) 
             ORDER BY ct.cityID;
             """;
         //for state
@@ -305,7 +305,7 @@ public class JDBCConnection {
             HAVING COUNT(*) = 2
             ORDER BY s.id
             )
-            AND YEAR IN(?, ?)
+            AND YEAR IN(?, ?) AND (country_name LIKE ?) 
             ORDER BY s.id;
             """;
         //control here 
@@ -351,6 +351,7 @@ public class JDBCConnection {
             pstmt.setInt(2, lastYear);
             pstmt.setInt(3, firstYear);
             pstmt.setInt(4, lastYear);
+            pstmt.setString(5, countryName);
             
             int count = 0;
             double firstYearTemp = 0;
@@ -377,7 +378,7 @@ public class JDBCConnection {
 
             //done getting data
             //sorting now
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < tempDifferences.size(); i++) {
                     for(int j = i + 1; j < tempDifferences.size(); j++){
                         if(tempDifferences.get(j).getDifference() > tempDifferences.get(i).getDifference()){
                             Collections.swap(tempDifferences, j, i);
@@ -387,9 +388,6 @@ public class JDBCConnection {
                 for (TempDifference difference : tempDifferences) {
                 Ranking.add(difference);                     //test part
                 count++;
-                if (count == 10){
-                    break;
-                } 
             }
         }
         catch (SQLException e){
