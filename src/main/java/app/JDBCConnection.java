@@ -463,7 +463,10 @@ public class JDBCConnection {
 
         String query = String.format("""
             SELECT wtp1.year AS "startYear", wtp1.tempLand AS "startTempLand", wtp1.tempLandOcean AS "startTempLandOcean", wtp1.pop AS "startPop",
-            wtp2.year AS "endYear", wtp2.tempLand AS "endTempLand", wtp2.tempLandOcean AS "endTempLandOcean", wtp2.pop AS "endPop"
+            wtp2.year AS "endYear", wtp2.tempLand AS "endTempLand", wtp2.tempLandOcean AS "endTempLandOcean", wtp2.pop AS "endPop", 
+            (wtp2.tempLand - wtp1.tempLand) AS 'Temperature Land Change', 
+            (wtp2.tempLandOcean - wtp1.tempLandOcean) AS 'Tempearture Land Ocean Change', 
+            (wtp2.pop - wtp1.pop) AS 'Population Change'
             FROM worldTempPop wtp1 FULL JOIN worldTempPop wtp2 ON wtp1.CountryCode = wtp2.CountryCode
             WHERE "startYear" = %s
             AND "endYear" = %s;
@@ -492,8 +495,13 @@ public class JDBCConnection {
                 Double EndTempLand = results.getDouble("endTempLand");
                 Double EndTempLandOcean = results.getDouble("endTempLandOcean");
                 long EndPop = results.getLong("endPop");
+                Double tempDifferenceLand = results.getDouble("Temperature Land Change");
+                Double tempDifferenceLandOcean = results.getDouble("Tempearture Land Ocean Change");
+                long PopDifference = results.getLong("Population Change");
 
-                TemperaturePopDataWorld2A world = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
+               
+
+                TemperaturePopDataWorld2A world = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop, tempDifferenceLand, tempDifferenceLandOcean, PopDifference);
                 worlds.add(world);
             }
             
