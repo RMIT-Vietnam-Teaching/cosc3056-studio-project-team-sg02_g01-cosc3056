@@ -100,7 +100,13 @@ public class PageST2A_country implements Handler {
                                 <label for='year_start'>Start year: </label>
                                 <select id='year_start' name='year_start' form='lvl2A'>
                 """;
-
+                //"Choose" default option
+                html += "<option disabled";
+                //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
+                if (year_start == null){
+                    html += " selected";
+                }
+                html += ">Choose</option>";
                 //Start year options (ADD ME)
                 ArrayList<Integer> startYears = jdbc.getYear();
                 for (int year : startYears) {
@@ -119,6 +125,13 @@ public class PageST2A_country implements Handler {
                 <label for='year_end'>End year: </label>
                 <select id='year_end' name='year_end' form='lvl2A'>
                 """;
+                //"Choose" default option
+                html += "<option disabled";
+                //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
+                if (year_end == null){ 
+                    html += " selected";
+                }
+                html += ">Choose</option>";
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
