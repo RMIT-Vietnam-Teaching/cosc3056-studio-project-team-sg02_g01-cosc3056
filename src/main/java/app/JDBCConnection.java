@@ -6,6 +6,7 @@ import app.Objects.*;
 
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -526,8 +527,27 @@ public class JDBCConnection {
       
         return worlds;
     }
-
-
+    //method to return countries 
+    public ArrayList<Countries> getCountries (){
+        ArrayList<Countries> Countries = new ArrayList<Countries>(); //country the arraylist that have different countries
+        String query = """
+                SELECT * FROM countries;
+                """;
+        try(Connection conn = DriverManager.getConnection(DATABASE)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setQueryTimeout(30);
+            try(ResultSet results = stmt.executeQuery()){
+                while(results.next()){
+                    Countries country = new Countries(results.getString("id"), results.getString("name"));
+                    Countries.add(country);
+                }
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return Countries;
+    }
 
     
 }
