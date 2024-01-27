@@ -22,6 +22,7 @@ public class App {
     public static final int         JAVALIN_PORT    = 7001;
     public static final String      CSS_DIR         = "css/";
     public static final String      IMAGES_DIR      = "images/";
+    public static final String      JAVASCRIPT_DIR  = "javascript/"; // Student add: Added javascript path
 
     public static void main(String[] args) {
         // Create our HTTP server and listen in port 7000
@@ -33,6 +34,9 @@ public class App {
 
             // Uncomment this if you have files in the Images Directory
             config.addStaticFiles(IMAGES_DIR);
+
+            // Student add: Added Javascript folder to Javalin routes
+            config.addStaticFiles(JAVASCRIPT_DIR);
         }).start(JAVALIN_PORT);
 
 
