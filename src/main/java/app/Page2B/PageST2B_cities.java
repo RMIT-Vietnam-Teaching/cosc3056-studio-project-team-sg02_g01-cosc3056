@@ -53,28 +53,7 @@ public class PageST2B_cities implements Handler {
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    var toggle = document.getElementById("percent_toggle");
-                    var dataNum = document.getElementsByClassName('data_num');
-                    var j = dataNum.length;
-                    var dataPercent = document.getElementsByClassName('data_percent');
-                
-                    toggle.addEventListener("change", function (event) {
-                        if (event.target.checked) {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num check";
-                                dataPercent[i].className = "data_percent check";
-                            }
-                        } else {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num uncheck";
-                                dataPercent[i].className = "data_percent uncheck";
-                            }
-                        }
-                    });
-                })
-            </script>
+            <script src='lvl2.js'></script>
                 """;
         html = html + "</head>";
 
