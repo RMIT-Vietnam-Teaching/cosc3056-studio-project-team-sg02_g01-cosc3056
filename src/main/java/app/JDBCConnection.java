@@ -538,7 +538,7 @@ public class JDBCConnection {
             stmt.setQueryTimeout(30);
             try(ResultSet results = stmt.executeQuery()){
                 while(results.next()){
-                    Countries country = new Countries(results.getString("id"), results.getString("name"));
+                    Countries country = new Countries(results.getString("code"), results.getString("name"));
                     Countries.add(country);
                 }
             }

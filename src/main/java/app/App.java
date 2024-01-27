@@ -25,24 +25,29 @@ public class App {
     public static final String      JAVASCRIPT_DIR  = "javascript/"; // Student add: Added javascript path
 
     public static void main(String[] args) {
-        // Create our HTTP server and listen in port 7000
-        Javalin app = Javalin.create(config -> {
-            config.registerPlugin(new RouteOverviewPlugin("/help/routes"));
+        // // Create our HTTP server and listen in port 7000
+        // Javalin app = Javalin.create(config -> {
+        //     config.registerPlugin(new RouteOverviewPlugin("/help/routes"));
             
-            // Uncomment this if you have files in the CSS Directory
-            config.addStaticFiles(CSS_DIR);
+        //     // Uncomment this if you have files in the CSS Directory
+        //     config.addStaticFiles(CSS_DIR);
 
-            // Uncomment this if you have files in the Images Directory
-            config.addStaticFiles(IMAGES_DIR);
+        //     // Uncomment this if you have files in the Images Directory
+        //     config.addStaticFiles(IMAGES_DIR);
 
-            // Student add: Added Javascript folder to Javalin routes
-            config.addStaticFiles(JAVASCRIPT_DIR);
-        }).start(JAVALIN_PORT);
+        //     // Student add: Added Javascript folder to Javalin routes
+        //     config.addStaticFiles(JAVASCRIPT_DIR);
+        // }).start(JAVALIN_PORT);
 
 
-        // Configure Web Routes
-        configureRoutes(app);
-        // JDBCConnection jdbc = new JDBCConnection();
+        // // Configure Web Routes
+        // configureRoutes(app);
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<Countries> countries= jdbc.getCountries();
+        for (Countries dataCountries : countries) {
+            System.out.println (dataCountries.getCode()+" "+dataCountries.getName());
+        }
+        
         
 
     }
