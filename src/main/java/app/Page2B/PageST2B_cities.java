@@ -84,12 +84,25 @@ public class PageST2B_cities implements Handler {
         html += """
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
-                <img src='logo-web.jpg' height='100px'>
-                <div class='options'>
-                    <div style='padding-bottom: 10px;'>
+            """;
+                   //search bar for country
+        html += """                    
+                <div class='search bar'>
+                    <label for='search_bar'> Search country here </label>
+                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for year here'/>
+                    <datalist id ='search_bar_list'>
+                """;
+                            
+        html += """
+                    </datalist>
+                </div>
+                """;
+        html+= """
+            <div class='options'>
+                <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
                     </div>
-                    """;   //search bar for country
+                    """;   
 
         //search for year start
         html += """
@@ -103,14 +116,13 @@ public class PageST2B_cities implements Handler {
                     //Start year options (ADD ME)
                     ArrayList<Integer> startYears = jdbc.getYear();
                     for (int year : startYears) {
-                        html += String.format("<option value = \"%d\"></option>", year);
+                        html += String.format("<option value = \"%d\">%d</option>", year, year);
                     }
             
         html += """
                 </datalist>
             </div>
         """; 
-        String year_start = context.formParam("year_start"); //get year start into java
 
         //search for year end
         html += """
@@ -123,12 +135,10 @@ public class PageST2B_cities implements Handler {
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
-                    if(year_start != null){
-                        if(year > Integer.parseInt(year_start)){
-                        html += String.format("<option value = \"%d\"></option>", year);
+                        html += String.format("<option value = \"%d\">%d</option>", year, year);
                         }
-                    }
-                }
+
+
 
         html += """
                 </datalist>
@@ -177,7 +187,7 @@ public class PageST2B_cities implements Handler {
                     """;//end of all divs
 
         //Results
-        
+        String year_start = context.formParam("year_start"); //get year start into java
         String year_end = context.formParam("year_end");
         String sort_by = context.formParam("sort_by");
       //  String search = context.formParam("countrySearch");//TODO
