@@ -326,7 +326,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTemp +
+                                    + (result.EndTemp == 0 ? "No Data" : result.EndTemp) +
                                 """
                                     °C</div>
                             </div>
@@ -339,7 +339,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTemp +
+                                    + (result.StartTemp == 0 ? "No Data" : result.StartTemp) +
                                 """
                                     °C</div>
                             </div>
@@ -397,7 +397,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.EndPop) +
+                                    + (result.EndPop == 0 ? "No Data" : String.format("%,d", result.EndPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
@@ -411,7 +411,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.StartPop) +
+                                    + (result.StartPop == 0 ? "No Data" : String.format("%,d", result.StartPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
