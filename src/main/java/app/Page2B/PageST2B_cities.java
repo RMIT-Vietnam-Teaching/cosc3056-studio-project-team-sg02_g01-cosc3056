@@ -98,7 +98,7 @@ public class PageST2B_cities implements Handler {
                 """;
                 ArrayList<Countries> countries = jdbc.getCountries();
                 for (Countries dataCountries : countries) {
-                    html+="<option value="+dataCountries.getName()+"></option>";
+                    html+="<option value=\""+dataCountries.getName()+"\"></option>";
                 }
                             
         html += """
