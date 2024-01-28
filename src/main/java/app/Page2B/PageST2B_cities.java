@@ -118,7 +118,7 @@ public class PageST2B_cities implements Handler {
 
             <div class='year_option'>
                 <label for='year_end'>Start year: </label>
-                <input list ='year_start_list' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here' required/>
+                <input list ='year_start_list' type='number' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here' required/>
                 """;
           html+= """
                 
@@ -139,7 +139,7 @@ public class PageST2B_cities implements Handler {
         html += """
             <div class='year_option'>
                 <label for='year_end'>End year: </label>
-                <input list ='year_end_list' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required/>
+                <input list ='year_end_list' type='number' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required/>
                 """;
           html+= """
                 <datalist id='year_end_list'>
