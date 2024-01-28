@@ -144,7 +144,7 @@ public class PageST2B_cities implements Handler {
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
-                    if(year_start != null){
+                    if(year_start != null && year_start != ""){
                         if(year > Integer.parseInt(year_start)){
                         html += String.format("<option value = \"%d\"></option>", year);
                         }
