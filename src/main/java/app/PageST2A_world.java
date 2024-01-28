@@ -99,7 +99,7 @@ public class PageST2A_world implements Handler {
                 """;
 
                 //Start year options
-                ArrayList<Integer> startYears = jdbc.getYear();
+                ArrayList<Integer> startYears = jdbc.getYearWorld();
                 for (int year : startYears) {
                     if (year_start != null && year == Integer.parseInt(year_start)) {
                         //Let the previously chosen option as the default option
@@ -118,7 +118,7 @@ public class PageST2A_world implements Handler {
                 """;
 
                 //End year options
-                ArrayList<Integer> endYears = jdbc.getYear();
+                ArrayList<Integer> endYears = jdbc.getYearWorld();
                 for (int year : endYears) {
                     if (year_end != null && year == Integer.parseInt(year_end)) {
                         //Let the previously chosen option as the default option
