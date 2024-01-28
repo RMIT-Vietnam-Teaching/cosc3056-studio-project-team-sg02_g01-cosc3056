@@ -59,7 +59,6 @@ public class App {
         app.get(PageST2A_world.URL, new PageST2A_world());
         app.get(PageST2A.URL, new PageST2A());
         ///level 2B
-        app.get(PageST2B.URL, new PageST2B());
         app.get(PageST2B_cities.URL, new PageST2B_cities());
         app.get(PageST2B_states.URL, new PageST2B_states());
         //level 3

@@ -93,7 +93,7 @@ public class PageST2B_states implements Handler {
         html += """                    
                 <div class='search bar'>
                     <label for='search_bar'> Search country here </label>
-                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for year here'/>
+                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for year here' required/>
                     <datalist id ='search_bar_list'>
                 """;
                 ArrayList<Countries> countries = jdbc.getCountries();
@@ -118,7 +118,7 @@ public class PageST2B_states implements Handler {
 
             <div class='year_option'>
                 <label for='year_end'>Start year: </label>
-                <input list ='year_start_list' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here'/>
+                <input list ='year_start_list' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here' required/>
                 """;
           html+= """
                 
@@ -139,7 +139,7 @@ public class PageST2B_states implements Handler {
         html += """
             <div class='year_option'>
                 <label for='year_end'>End year: </label>
-                <input list ='year_end_list' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here'/>
+                <input list ='year_end_list' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required/>
                 """;
           html+= """
                 <datalist id='year_end_list'>
