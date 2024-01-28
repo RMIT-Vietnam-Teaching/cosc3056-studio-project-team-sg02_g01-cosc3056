@@ -58,28 +58,7 @@ public class PageST2A_country implements Handler {
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='common.css' rel='stylesheet'>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    var toggle = document.getElementById("percent_toggle");
-                    var dataNum = document.getElementsByClassName('data_num');
-                    var j = dataNum.length;
-                    var dataPercent = document.getElementsByClassName('data_percent');
-                
-                    toggle.addEventListener("change", function (event) {
-                        if (event.target.checked) {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num check";
-                                dataPercent[i].className = "data_percent check";
-                            }
-                        } else {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num uncheck";
-                                dataPercent[i].className = "data_percent uncheck";
-                            }
-                        }
-                    });
-                })
-            </script>
+            <script src='lvl2.js'></script>
                 """;
         html = html + "</head>";
 
@@ -121,7 +100,13 @@ public class PageST2A_country implements Handler {
                                 <label for='year_start'>Start year: </label>
                                 <select id='year_start' name='year_start' form='lvl2A'>
                 """;
-
+                //"Choose" default option
+                html += "<option disabled";
+                //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
+                if (year_start == null){
+                    html += " selected";
+                }
+                html += ">Choose</option>";
                 //Start year options (ADD ME)
                 ArrayList<Integer> startYears = jdbc.getYear();
                 for (int year : startYears) {
@@ -140,6 +125,13 @@ public class PageST2A_country implements Handler {
                 <label for='year_end'>End year: </label>
                 <select id='year_end' name='year_end' form='lvl2A'>
                 """;
+                //"Choose" default option
+                html += "<option disabled";
+                //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
+                if (year_end == null){ 
+                    html += " selected";
+                }
+                html += ">Choose</option>";
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
@@ -334,7 +326,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTemp +
+                                    + (result.EndTemp == 0 ? "No Data" : result.EndTemp) +
                                 """
                                     °C</div>
                             </div>
@@ -347,7 +339,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTemp +
+                                    + (result.StartTemp == 0 ? "No Data" : result.StartTemp) +
                                 """
                                     °C</div>
                             </div>
@@ -405,7 +397,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.EndPop) +
+                                    + (result.EndPop == 0 ? "No Data" : String.format("%,d", result.EndPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
@@ -419,7 +411,7 @@ public class PageST2A_country implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.StartPop) +
+                                    + (result.StartPop == 0 ? "No Data" : String.format("%,d", result.StartPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>

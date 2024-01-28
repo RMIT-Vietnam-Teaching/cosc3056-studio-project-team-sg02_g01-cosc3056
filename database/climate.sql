@@ -90,7 +90,7 @@ CREATE TABLE worldTemp (
     landOceanAvgTemp REAL,
     landOceanMinTemp REAL,
     landOceanMaxTemp REAL
-)
+);
 
 CREATE TABLE "population"(
     "year"          INTEGER,

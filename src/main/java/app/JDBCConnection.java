@@ -6,6 +6,7 @@ import app.Objects.*;
 
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -274,7 +275,7 @@ public class JDBCConnection {
 
     
     
-    public ArrayList<TempDifference> getData2B (int firstYear, int lastYear, String cmd){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
+    public ArrayList<TempDifference> getData2B (int firstYear, int lastYear, String cmd, String countryName){ //cmd eligible input: cityAvg, cityMax, cityMin, stateAvg, stateMin, stateMax
         ArrayList<TempDifference> tempDifferences = new ArrayList<TempDifference>();
         ArrayList<TempDifference> Ranking = new ArrayList<TempDifference>();
         //for city
@@ -288,7 +289,7 @@ public class JDBCConnection {
                 GROUP BY c.id
                 HAVING COUNT(*) = 2
                 ORDER BY c.id)
-            AND YEAR IN(?, ?)
+            AND YEAR IN(?, ?) AND (country_name LIKE ?) 
             ORDER BY ct.cityID;
             """;
         //for state
@@ -304,7 +305,7 @@ public class JDBCConnection {
             HAVING COUNT(*) = 2
             ORDER BY s.id
             )
-            AND YEAR IN(?, ?)
+            AND YEAR IN(?, ?) AND (country_name LIKE ?) 
             ORDER BY s.id;
             """;
         //control here 
@@ -350,6 +351,7 @@ public class JDBCConnection {
             pstmt.setInt(2, lastYear);
             pstmt.setInt(3, firstYear);
             pstmt.setInt(4, lastYear);
+            pstmt.setString(5, countryName);
             
             int count = 0;
             double firstYearTemp = 0;
@@ -376,7 +378,7 @@ public class JDBCConnection {
 
             //done getting data
             //sorting now
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < tempDifferences.size(); i++) {
                     for(int j = i + 1; j < tempDifferences.size(); j++){
                         if(tempDifferences.get(j).getDifference() > tempDifferences.get(i).getDifference()){
                             Collections.swap(tempDifferences, j, i);
@@ -386,9 +388,6 @@ public class JDBCConnection {
                 for (TempDifference difference : tempDifferences) {
                 Ranking.add(difference);                     //test part
                 count++;
-                if (count == 10){
-                    break;
-                } 
             }
         }
         catch (SQLException e){
@@ -449,6 +448,56 @@ public class JDBCConnection {
         return AllYears;
     }
 
+    public ArrayList<Integer> getYearWorld() {
+        // Create the ArrayList of LGA objects to return
+        ArrayList<Integer> AllYears = new ArrayList<Integer>();
+ 
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+ 
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+ 
+            // Prepare a new SQL Query & Set a timeout
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+ 
+            // The Query
+            String query = "SELECT DISTINCT year FROM worldTemp;";
+           
+            // Get Result
+            ResultSet results = statement.executeQuery(query);
+ 
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                int Year = results.getInt("year");
+ 
+               
+                AllYears.add(Year);
+            }
+ 
+            // Close the statement because we are done with it
+            statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+ 
+       
+        return AllYears;
+    }
 
 
 
@@ -463,7 +512,10 @@ public class JDBCConnection {
 
         String query = String.format("""
             SELECT wtp1.year AS "startYear", wtp1.tempLand AS "startTempLand", wtp1.tempLandOcean AS "startTempLandOcean", wtp1.pop AS "startPop",
-            wtp2.year AS "endYear", wtp2.tempLand AS "endTempLand", wtp2.tempLandOcean AS "endTempLandOcean", wtp2.pop AS "endPop"
+            wtp2.year AS "endYear", wtp2.tempLand AS "endTempLand", wtp2.tempLandOcean AS "endTempLandOcean", wtp2.pop AS "endPop", 
+            (wtp2.tempLand - wtp1.tempLand) AS 'Temperature Land Change', 
+            (wtp2.tempLandOcean - wtp1.tempLandOcean) AS 'Tempearture Land Ocean Change', 
+            (wtp2.pop - wtp1.pop) AS 'Population Change'
             FROM worldTempPop wtp1 FULL JOIN worldTempPop wtp2 ON wtp1.CountryCode = wtp2.CountryCode
             WHERE "startYear" = %s
             AND "endYear" = %s;
@@ -492,8 +544,13 @@ public class JDBCConnection {
                 Double EndTempLand = results.getDouble("endTempLand");
                 Double EndTempLandOcean = results.getDouble("endTempLandOcean");
                 long EndPop = results.getLong("endPop");
+                Double tempDifferenceLand = results.getDouble("Temperature Land Change");
+                Double tempDifferenceLandOcean = results.getDouble("Tempearture Land Ocean Change");
+                long PopDifference = results.getLong("Population Change");
 
-                TemperaturePopDataWorld2A world = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop);
+               
+
+                TemperaturePopDataWorld2A world = new TemperaturePopDataWorld2A(startYear, StartTempLand, StartTempLandOcean, StartPop, endYear, EndTempLand, EndTempLandOcean, EndPop, tempDifferenceLand, tempDifferenceLandOcean, PopDifference);
                 worlds.add(world);
             }
             
@@ -518,8 +575,27 @@ public class JDBCConnection {
       
         return worlds;
     }
-
-
+    //method to return countries 
+    public ArrayList<Countries> getCountries (){
+        ArrayList<Countries> Countries = new ArrayList<Countries>(); //country the arraylist that have different countries
+        String query = """
+                SELECT * FROM countries;
+                """;
+        try(Connection conn = DriverManager.getConnection(DATABASE)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setQueryTimeout(30);
+            try(ResultSet results = stmt.executeQuery()){
+                while(results.next()){
+                    Countries country = new Countries(results.getString("code"), results.getString("name"));
+                    Countries.add(country);
+                }
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return Countries;
+    }
 
     
 }

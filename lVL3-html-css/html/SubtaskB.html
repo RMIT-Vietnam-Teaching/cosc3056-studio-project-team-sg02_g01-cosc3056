@@ -41,12 +41,18 @@
             <legend><h3>Region level</h3></legend>
             <!-- radio options -->
             <!-- <div class="radio_option"> -->
-              <input style="margin-left: 150px;" type="radio" name="region_options" id="country" checked />
-              <label class="radio_option" for="country">Country</label>
-              <input type="radio" name="region_options" id="state" />
-              <label class="radio_option" for="state">State</label>
-              <input type="radio" name="region_options" id="city" />
-              <label class="region_options" for="city">City</label>
+            <input
+              style="margin-left: 150px"
+              type="radio"
+              name="region_options"
+              id="country"
+              checked
+            />
+            <label class="radio_option" for="country">Country</label>
+            <input type="radio" name="region_options" id="state" />
+            <label class="radio_option" for="state">State</label>
+            <input type="radio" name="region_options" id="city" />
+            <label class="region_options" for="city">City</label>
             <!-- </div> -->
 
             <!-- drop-down options -->
@@ -55,27 +61,27 @@
               <div class="country_dropdown">
                 <label for="countrySubmit"><h4>Country</h4></label>
                 <select name="countrySubmit" id="countrySubmit" required>
-                  <option value="">-Select country-</option>
-                  <option value="vn">Viet Nam</option>
-                  <option value="aus">Australia</option>
+                  <option value="" disabled hidden>-Select country-</option>
+                  <option value="VN">Viet Nam</option>
+                  <option value="AUT">Australia</option>
                 </select>
               </div>
 
               <!-- state -->
-              <div class="state_dropdown" >
+              <div class="state_dropdown">
                 <label for="stateSubmit"><h4>State</h4></label>
                 <select name="stateSubmit" id="stateSubmit" required>
-                  <option value="">-Select state-</option>
+                  <option value="" disabled hidden>-Select state-</option>
                   <option value="vn">Viet Nam</option>
                   <option value="aus">Australia</option>
                 </select>
               </div>
 
               <!-- city -->
-              <div class="city_dropdown" >
+              <div class="city_dropdown">
                 <label for="citySubmit"><h4>City</h4></label>
                 <select name="citySubmit" id="citySubmit" required>
-                  <option value="">-Select city-</option>
+                  <option value="" disabled hidden>-Select city-</option>
                   <option value="vn">Viet Nam</option>
                   <option value="aus">Australia</option>
                 </select>
@@ -87,11 +93,24 @@
           <div class="select_year">
             <label>
               <h4>Start year:</h4>
-              <input type="number" name="startYear" id="startYear" min="1750" max="2015" required/>
+              <input
+                type="number"
+                name="startYear"
+                id="startYear"
+                min="1750"
+                max="2015"
+                required
+              />
             </label>
             <label>
               <h4>Time period:</h4>
-              <input type="number" name="rangeYear" id="rangeYear" min="0" max="265" required
+              <input
+                type="number"
+                name="rangeYear"
+                id="rangeYear"
+                min="0"
+                max="265"
+                required
             /></label>
           </div>
 
@@ -99,34 +118,71 @@
           <button>START</button>
         </form>
       </div>
-      <hr>
+      <hr />
+
+      <!-- if select country: display 3 options
+         if select state(city) -> city(state) = null: display 1 option: tempurate  -->
 
       <!-- select display -->
-      <p style="display: inline; margin-right: 250px; margin-left: calc(100% - 97.5%);">Display similarity by:</p>
-      <input type="radio" name="select_display" id="temp" checked hidden>
+      <p
+        style="
+          display: inline;
+          margin-right: 250px;
+          margin-left: calc(100% - 97.5%);
+        "
+      >
+        Display similarity by:
+      </p>
+      <input type="radio" name="select_display" id="temp" checked hidden />
       <label class="display" for="temp"><h3>Tempurature</h3></label>
-      <input type="radio" name="select_display" id="pop" hidden>
+      <input type="radio" name="select_display" id="pop" hidden />
       <label class="display" for="pop"><h3>Population</h3></label>
-      <input type="radio" name="select_display" id="both" hidden>
+      <input type="radio" name="select_display" id="both" hidden />
       <label class="display" for="both"><h3>Both</h3></label>
 
-      <!-- result -->
-      <!-- <label class="box" for=""> -->
-        <!-- left -->
-        <!-- <div class="img_area">
+      <div class="box">
+        <p class="title">Average Temperature change</p>
+        <!-- top -->
+        <div class="top">
           <p>Selected region</p>
-          <img src="../img/area.jpg" alt="area">
-        </div> -->
+          <div class="button">
+            <label>
+             <!-- <p>#</p> -->
+              <input hidden type="radio" name="absolute" id="absolute" />
+            </label>
 
-        <!-- right -->
-        <!-- <div class="info">
-          <div class="top">
-
+            <label>
+             <!-- <p>%</p> -->
+              <input hidden type="radio" name="percentage" id="percantage" />
+            </label>
           </div>
         </div>
-      </label> -->
 
+        <!-- contain -->
+        <div class="contain">
+          <img class="region" src="../img/area.jpg" alt="" />
 
+          <!-- middle -->
+          <div class="middle">
+            <div class="middle_left">
+              <p>In 10 years</p>
+              <h2>0.13%</h2>
+            </div>
+            <img src="../img/icon-increase.jpg" alt="" />
+          </div>
+
+          <!-- temp -->
+          <div class="temp">
+            <div class="temp_left">
+              <p>1960</p>
+              <p style="margin-bottom: 15px"><strong>C</strong></p>
+              <p>1960</p>
+              <p><strong>C</strong></p>
+            </div>
+            <img src="../img/icon-temp.jpg" alt="" />
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- footer -->

@@ -21,7 +21,7 @@ public class TemperaturePopDataWorld2A {
     }
 
 
-    public TemperaturePopDataWorld2A(int StartYear, Double StartTempLand, Double StartTempLandOcean, long StartPop, int EndYear, Double EndTempLand, Double EndTempLandOcean, long EndPop ){
+    public TemperaturePopDataWorld2A(int StartYear, Double StartTempLand, Double StartTempLandOcean, long StartPop, int EndYear, Double EndTempLand, Double EndTempLandOcean, long EndPop, Double tempDifferenceLand, Double tempDifferenceLandOcean, long PopDifference){
         this.StartYear = StartYear;
         this.StartTempLand = StartTempLand;
         this.StartTempLandOcean = StartTempLandOcean;
@@ -30,12 +30,12 @@ public class TemperaturePopDataWorld2A {
         this.EndTempLand = EndTempLand;
         this.EndTempLandOcean = EndTempLandOcean;
         this.EndPop = EndPop;
-        this.tempDifferenceLand = this.EndTempLand - this.StartTempLand;
-        this.tempDifferenceLandOcean = this.EndTempLandOcean - this.StartTempLandOcean;
-        this.PopDifference = this.EndPop - this.StartPop;
-        this.tempDifferenceLandPercent = (this.EndTempLand - this.StartTempLand) / this.StartTempLand * 100;
-        this.tempDifferenceLandOceanPercent = (this.EndTempLandOcean - this.StartTempLandOcean) / this.StartTempLandOcean * 100;
-        this.PopDifferencePercent = ((double)this.EndPop - this.StartPop) / this.StartPop * 100;
+        this.tempDifferenceLand = tempDifferenceLand;
+        this.tempDifferenceLandOcean = tempDifferenceLandOcean;
+        this.PopDifference = PopDifference;
+        this.tempDifferenceLandPercent = this.tempDifferenceLand / this.StartTempLand * 100;
+        this.tempDifferenceLandOceanPercent = this.tempDifferenceLandOcean / this.StartTempLandOcean * 100;
+        this.PopDifferencePercent = (double) this.PopDifference / this.StartPop * 100;
     }
 
 }

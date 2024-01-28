@@ -78,8 +78,9 @@ public class PageMission implements Handler {
                     </p>
                 </div>
                 <p class="title">SOURCES</p>
-                <a href="">html:/www.link.com</a>
-                <a href="">html:/www.link.com</a>
+                <a href="https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data" target="_blank">Kaggle - Climate Change: Earth Surface Temperature Data</a>
+                <a href="http://berkeleyearth.org/data/" target="_blank">Berkeley Earth</a>
+                <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" target="_blank">World Development Indicators (WDI) Population Data</a>
             </div>    
         """;
 

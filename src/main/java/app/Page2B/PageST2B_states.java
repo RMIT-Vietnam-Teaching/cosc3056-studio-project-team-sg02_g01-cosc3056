@@ -34,6 +34,10 @@ public class PageST2B_states implements Handler {
 
         // JDBC object
         JDBCConnection jdbc = new JDBCConnection();
+        String year_start = context.formParam("year_start"); //get year start into java
+        String year_end = context.formParam("year_end");
+        String sort_by = context.formParam("sort_by");
+        String countryName = context.formParam("country");
 
         // Create a simple HTML webpage in a String
         String html = "<html>";
@@ -53,28 +57,7 @@ public class PageST2B_states implements Handler {
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    var toggle = document.getElementById("percent_toggle");
-                    var dataNum = document.getElementsByClassName('data_num');
-                    var j = dataNum.length;
-                    var dataPercent = document.getElementsByClassName('data_percent');
-                
-                    toggle.addEventListener("change", function (event) {
-                        if (event.target.checked) {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num check";
-                                dataPercent[i].className = "data_percent check";
-                            }
-                        } else {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num uncheck";
-                                dataPercent[i].className = "data_percent uncheck";
-                            }
-                        }
-                    });
-                })
-            </script>
+            <script src='lvl2.js'></script>
                 """;
         html = html + "</head>";
 
@@ -105,42 +88,74 @@ public class PageST2B_states implements Handler {
         html += """
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
-                <img src='logo-web.jpg' height='100px'>
-                <div class='options'>
-                    <div style='padding-bottom: 10px;'>
+            """;
+                   //search bar for country
+        html += """                    
+                <div class='search bar'>
+                    <label for='search_bar'> Search country here </label>
+                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for year here'/>
+                    <datalist id ='search_bar_list'>
+                """;
+                ArrayList<Countries> countries = jdbc.getCountries();
+                for (Countries dataCountries : countries) {
+                    html+="<option value="+dataCountries.getName()+"></option>";
+                }
+                            
+        html += """
+                    </datalist>
+                </div>
+                """;
+        html+= """
+            <div class='options'>
+                <div style='padding-bottom: 10px;'>
                         <b>Year range:</b>
                     </div>
-                    <form id='lvl2B' action='/page2B_states' method='post'>
-                        <div class='dropdown_container'>
-                            <div class='year_option'>
-                                <label for='year_start'>Start year: </label>
-                                
-                                <select id='year_start' name='year_start' form='lvl2B'>
-                                <option value ="" selected disabled hidden >Choose here </option>
-                """;
+                    """;   
 
-                //Start year options (ADD ME)
-                ArrayList<Integer> startYears = jdbc.getYear();
-                for (int year : startYears) {
-                    html += String.format("<option>%d</option>", year);
-                }
+        //search for year start
         html += """
-            </select>
+            <form id='lvl2B' action='/page2B_states' method='post'>
+
+            <div class='year_option'>
+                <label for='year_end'>Start year: </label>
+                <input list ='year_start_list' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here'/>
+                """;
+          html+= """
+                
+                <datalist id='year_start_list'>
+                    """;
+                    //Start year options (ADD ME)
+                    ArrayList<Integer> startYears = jdbc.getYear();
+                    for (int year : startYears) {
+                            html += String.format("<option value = \"%d\">%d</option>", year, year);
+                    }
+            
+        html += """
+                </datalist>
             </div>
+        """; 
+
+        //search for year end
+        html += """
             <div class='year_option'>
                 <label for='year_end'>End year: </label>
-                <select id='year_end' name='year_end' form='lvl2B'>
-                <option value ="" selected disabled hidden >Choose here </option>
+                <input list ='year_end_list' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here'/>
+                """;
+          html+= """
+                <datalist id='year_end_list'>
                 """;
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
-                    html += String.format("<option>%d</option>", year);
+                        html += String.format("<option selected value = \"%d\">%d</option>", year, year);
                 }
 
+
         html += """
-                        </select>
-                        </div>
+                </datalist>
+            </div>
+        """;    //end div for year option
+        html += """
                     </div>
                 </form>
             </div>
@@ -151,57 +166,56 @@ public class PageST2B_states implements Handler {
                 
         //Open Main_bottom 
         html += "<div class='main_section' id='main_section_bottom'>";
-       //Bottom options select by cities or states 
-
-       html += """
-        <div id='bottom_options'>
-            <div style='display: flex; justify-content: space-between;'>
-                <div id='display_by'>
-                    <span style='visibility: hidden;'>Blank</span>
-                    <span><b>Display results by: </b></span>
-                    <a href='/page2B_cities' class='select1or2'>Cities</a>
-                    <a href='/page2B_states' style='pointer-events: none;' id='selected' class='select1or2'>States</a>
-                    </div>"""//display by end here
-                            +
-                   """
-                    <div id='sort_options'>
-                        <div class='dropdown_container'>
-                            <div class='sort_by_options'>
-                                <label for='sort_by'>Sort by: </label>
-                                <select id='sort_by' name='sort_by' form='lvl2B'>
-                                    <option value="Temperatur">Temperature change</option>
-                                    <option value="Population change">Population change</option>
-                                </select>
-                            </div>
-                            """//sort by options end here
-                            +        
+        html += """
+            <div id='bottom_options'>
+                <div style='display: flex; justify-content: space-between;'>
+                    <div id='display_by'>
+                        <span style='visibility: hidden;'>Blank</span>
+                        <span><b>Display results by: </b></span>
+                        <a href='/page2B_cities' class='select1or2'>Cities</a>
+                        <a href='/page2B_states' style='pointer-events: none;' id = 'selected' class='select1or2'>States</a>
+                        </div>"""//display by end here
+                                +
+                       """
+                        <div id='sort_options'>
+                            <div class='dropdown_container'>
+                                <div class='sort_by_options'>
+                                    <label for='sort_by'>Sort by: </label>
+                                    <select id='sort_by' name='sort_by' form='lvl2B'>
+                                    """;
+        String[] optionInner = {"Average temperature difference", "Minimum temperature difference", "Maximum temperature difference"};
+        String[] optionValue = {"stateAvg", "stateMin", "stateMax"};
+        for (int i = 0; i < optionValue.length; i++) {
+            if(sort_by != null && sort_by.equals(optionValue[i])){
+                html+= String.format("<option selected value = \"%s\">%s</option>", optionValue[i], optionInner[i]);
+            }
+            else {
+                html += String.format("<option value = \"%s\">%s</option>", optionValue[i], optionInner[i]);
+            } 
+        }
+                           
+        html+=          """
+                                    </select>
+                                </div>
+                                """//sort by options end here
+                                +        
                             """
-                            <div class='order_by_options' style='margin-top: 5px;'>
-                                <label for='order_by'>Order by: </label>
-                                <select id='order_by' name='order_by' form='lvl2B'>
-                                    <option value='asc'>Ascending</option>
-                                    <option value='desc'>Descending</option>
-                                </select>
                             </div>
                         </div>
                     </div>
+                    <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
                 </div>
-                <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
-            </div>
-                """;//end of all divs
+                    """;//end of all divs
 
-        //Results
-        String year_start = context.formParam("year_start");
-        String year_end = context.formParam("year_end");
-        String sort_by = context.formParam("sort_by");
-        String order_by = context.formParam("order_by");
-        System.out.println(year_start + year_end + sort_by + order_by);
-        if (year_start == null || year_end == null) {
+        
+      //  String search = context.formParam("countrySearch");//TODO
+        System.out.println(year_start + year_end + sort_by);
+        if (year_start == ("") || year_end == ("") || year_end == null || year_start == null) { //datalist can return "" new tab will return null values
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
         }
         else {
-            html += outputCountries(year_start, year_end, sort_by, order_by);
+            html += outputCountries(year_start, year_end, sort_by, countryName);
         }
             
         // Close main_bottom
@@ -227,15 +241,30 @@ public class PageST2B_states implements Handler {
         context.html(html);
     }
 
-    public String outputCountries(String year_start, String year_end, String sort_by, String order) {
+    public String outputCountries(String year_start, String year_end, String sort_by, String countryName) { //ouput countries method
         String html = "";
         JDBCConnection jdbc = new JDBCConnection();
-        ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), "cityMax");
-        
+        ArrayList<TempDifference> results = jdbc.getData2B(Integer.parseInt(year_start), Integer.parseInt(year_end), sort_by, countryName);
+        if (results.size() ==0){
+            html+="<h2><i>There is no data for "+ countryName+" for this time period!</i></h2>";
+        }
+        else{
+        String sort_option = null;
+        switch (sort_by) {
+            case "cityAvg": 
+                sort_option = "Average";
+                break;
+            case "cityMax":
+                sort_option ="Maximum";
+                break;
+            case "cityMin":
+                sort_option = "Minimum";
+                break;
+        }
         boolean sortPop = (sort_by.toLowerCase().contains("population"));
 
         //Open result display area
-        html += "<div id='results_display'>";
+        html += "<div id='results_display'><h1>"+ "Country: "+ countryName +"</h1>";
 
         //Toggle raw-percentage switch
         html += """
@@ -269,7 +298,11 @@ public class PageST2B_states implements Handler {
                             + result.getName() +
                         """
                             </div>
-                        <div class='topic'>Average <b>Temperature</b> change</div>
+                        <div class='topic'>
+                        """
+                        +  sort_option +      //min or max or avg temperature change
+                                """ 
+                                    <b>Temperature</b> change</div>
                         <div style='visibility: hidden;'>Blank</div>
                     </div>
                     <div class='result_row_2'>
@@ -334,6 +367,7 @@ public class PageST2B_states implements Handler {
         </div>
                 """;
         }
+    }
         
         //Close result display area
         html += "</div>";

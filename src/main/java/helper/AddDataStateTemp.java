@@ -72,7 +72,7 @@ public class AddDataStateTemp {
             String query = "INSERT into stateTemp (year, stateID, landAvgTemp, landMinTemp, landMaxTemp) VALUES ("
                            //+ row + ","
                            + String.format("%s", lineSeparate[headers.indexOf("Year")]) + ","
-                           + String.format("(SELECT id FROM states WHERE name = '%s' AND countryCode = (SELECT code FROM countries WHERE name = '%s'))", lineSeparate[headers.indexOf("State")], lineSeparate[headers.indexOf("Country")]) + ","
+                           + String.format("(SELECT id FROM states WHERE name = \"%s\" AND countryCode = (SELECT code FROM countries WHERE name = \"%s\"))", lineSeparate[headers.indexOf("State")], lineSeparate[headers.indexOf("Country")]) + ","
                            + String.format("%s", lineSeparate[headers.indexOf("AverageTemperature")]) + ","
                            + String.format("%s", lineSeparate[headers.indexOf("MinimumTemperature")]) + ","
                            + String.format("%s", lineSeparate[headers.indexOf("MaximumTemperature")])

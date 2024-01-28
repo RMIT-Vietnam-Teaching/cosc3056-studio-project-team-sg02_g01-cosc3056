@@ -55,28 +55,7 @@ public class PageST2A_world implements Handler {
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous'>
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', function(){
-                    var toggle = document.getElementById("percent_toggle");
-                    var dataNum = document.getElementsByClassName('data_num');
-                    var j = dataNum.length;
-                    var dataPercent = document.getElementsByClassName('data_percent');
-                
-                    toggle.addEventListener("change", function (event) {
-                        if (event.target.checked) {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num check";
-                                dataPercent[i].className = "data_percent check";
-                            }
-                        } else {
-                            for(var i = 0; i < j; i++){
-                                dataNum[i].className = "data_num uncheck";
-                                dataPercent[i].className = "data_percent uncheck";
-                            }
-                        }
-                    });
-                })
-            </script>
+            <script src='lvl2.js'></script>
                 """;
         html = html + "</head>";
 
@@ -120,7 +99,7 @@ public class PageST2A_world implements Handler {
                 """;
 
                 //Start year options
-                ArrayList<Integer> startYears = jdbc.getYear();
+                ArrayList<Integer> startYears = jdbc.getYearWorld();
                 for (int year : startYears) {
                     if (year_start != null && year == Integer.parseInt(year_start)) {
                         //Let the previously chosen option as the default option
@@ -139,7 +118,7 @@ public class PageST2A_world implements Handler {
                 """;
 
                 //End year options
-                ArrayList<Integer> endYears = jdbc.getYear();
+                ArrayList<Integer> endYears = jdbc.getYearWorld();
                 for (int year : endYears) {
                     if (year_end != null && year == Integer.parseInt(year_end)) {
                         //Let the previously chosen option as the default option
@@ -231,8 +210,7 @@ public class PageST2A_world implements Handler {
                 """;
 
         //Display results
-        for (TemperaturePopDataWorld2A result : results) {
-
+        for (TemperaturePopDataWorld2A result : results) {              
         html += """
             <div class='result_container carousel carousel-dark slide' style='border: solid' id=
             """
@@ -296,7 +274,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTempLand +
+                                    + (result.EndTempLand == 0 ? "No data" : result.EndTempLand) +
                                 """
                                     °C</div>
                             </div>
@@ -309,7 +287,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTempLand +
+                                    + (result.StartTempLand == 0 ? "No data" : result.StartTempLand) + 
                                 """
                                     °C</div>
                             </div>
@@ -373,7 +351,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.EndTempLandOcean +
+                                    + (result.EndTempLandOcean == 0 ? "No data" : result.EndTempLandOcean) +
                                 """
                                     °C</div>
                             </div>
@@ -386,7 +364,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + result.StartTempLandOcean +
+                                    + (result.StartTempLandOcean == 0 ? "No data" : result.StartTempLandOcean) +
                                 """
                                     °C</div>
                             </div>
@@ -446,7 +424,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.EndPop) +
+                                    + (result.EndPop == 0 ? "No Data" : String.format("%,d", result.EndPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
@@ -460,7 +438,7 @@ public class PageST2A_world implements Handler {
                                     </div>
                                 <div class='data'>
                                 """
-                                    + String.format("%,d", result.StartPop) +
+                                    + (result.StartPop == 0 ? "No Data" : String.format("%,d", result.StartPop)) +
                                 """
                                     </div>
                                 <div class='unit'>people</div>
