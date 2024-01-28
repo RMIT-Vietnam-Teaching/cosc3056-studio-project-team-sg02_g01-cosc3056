@@ -93,7 +93,7 @@ public class PageST2B_states implements Handler {
         html += """                    
                 <div class='search bar'>
                     <label for='search_bar'> Search country here </label>
-                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for year here' required/>
+                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for country here' required/>
                     <datalist id ='search_bar_list'>
                 """;
                 ArrayList<Countries> countries = jdbc.getCountries();
