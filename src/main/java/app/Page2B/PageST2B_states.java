@@ -98,7 +98,8 @@ public class PageST2B_states implements Handler {
                 """;
                 ArrayList<Countries> countries = jdbc.getCountries();
                 for (Countries dataCountries : countries) {
-                    html+="<option value="+dataCountries.getName()+"></option>";
+                    if(!dataCountries.getName().equals("World"))
+                    html+="<option value=\""+dataCountries.getName()+"\"></option>";
                 }
                             
         html += """
@@ -118,7 +119,7 @@ public class PageST2B_states implements Handler {
 
             <div class='year_option'>
                 <label for='year_end'>Start year: </label>
-                <input list ='year_start_list' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here' required/>
+                <input list ='year_start_list' type='number' id ='year_start' name='year_start' form='lvl2B' placeholder ='Select start year here' required/>
                 """;
           html+= """
                 
@@ -139,7 +140,7 @@ public class PageST2B_states implements Handler {
         html += """
             <div class='year_option'>
                 <label for='year_end'>End year: </label>
-                <input list ='year_end_list' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required/>
+                <input list ='year_end_list' type='number' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required />
                 """;
           html+= """
                 <datalist id='year_end_list'>
@@ -251,13 +252,13 @@ public class PageST2B_states implements Handler {
         else{
         String sort_option = null;
         switch (sort_by) {
-            case "cityAvg": 
+            case "stateAvg": 
                 sort_option = "Average";
                 break;
-            case "cityMax":
+            case "stateMax":
                 sort_option ="Maximum";
                 break;
-            case "cityMin":
+            case "stateMin":
                 sort_option = "Minimum";
                 break;
         }
