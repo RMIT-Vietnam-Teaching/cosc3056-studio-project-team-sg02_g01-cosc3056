@@ -444,13 +444,14 @@ public class PageST2A_country implements Handler {
         
         //Close result display area
         html += "</div>";
+        html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+            """;
 
         // Close main_bottom
         html += "</div>";
 
-        html += """
-                <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
-                """;
+    
         return html;
     }
 
