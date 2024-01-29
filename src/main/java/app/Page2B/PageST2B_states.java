@@ -72,10 +72,8 @@ public class PageST2B_states implements Handler {
                 <div class="nav">
                     <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
                     <p>Website name</p>
-                    <a class="aboutUs visited" href="mission.html">Our Mission</a>
-                    <a class="visited" href="options.html#Basic">Basic options</a>
-                    <a class="visited" href="options.html#Advanced">Advanced options</a>
-                    <a class="getStarted" href="options.html">Get started</a>
+                    <a class="aboutUs visited" href="mission.html">About Us</a>
+                    <a class="getStarted" href="options.html">Options</a>
                 </div>
             </header>
         """;
