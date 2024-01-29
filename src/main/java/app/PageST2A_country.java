@@ -216,13 +216,15 @@ public class PageST2A_country implements Handler {
         if (year_start == null) {
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
+
+            // Close main_bottom
+            html += "</div>";
         }
         else {
             html += outputCountries(year_start, year_end, sort_by, order_by);
         }
             
-        // Close main_bottom
-        html += "</div>";
+        
         // Close main
         html += "</main>";
         // Footer
@@ -439,13 +441,16 @@ public class PageST2A_country implements Handler {
         </div>
                 """;
         }
-        html += """
-            <div class = "BackToTop">
-                <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
-            </div>
-                """;
+        
         //Close result display area
         html += "</div>";
+
+        // Close main_bottom
+        html += "</div>";
+
+        html += """
+                <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+                """;
         return html;
     }
 
