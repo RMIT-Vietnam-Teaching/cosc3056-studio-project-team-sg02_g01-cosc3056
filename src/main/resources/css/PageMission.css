@@ -1,6 +1,6 @@
 /* ========== common ========== */
 .title {
-  font-size: 19px;
+  font-size: 22px;
   margin-left: 30px;
   margin-top: 35px;
 }
@@ -24,11 +24,12 @@ main a:visited {
 /* ========== usInfo/about us ========== */
 .usInfo {
   padding: 45px 0;
-  border-bottom: 1.5px solid black;
+  width: 85%;
+  margin: 0 auto;
 }
 
 .usInfo p {
-  width: 500px;
+  width: 400px;
   margin: 10px 55px;
   text-align: justify;
 }

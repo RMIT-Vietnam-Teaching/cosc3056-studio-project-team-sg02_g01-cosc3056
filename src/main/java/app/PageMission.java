@@ -82,6 +82,8 @@ public class PageMission implements Handler {
             </div>    
         """;
 
+        html = html + "<hr>";
+
         // Open team member
         html = html + """
             <div class="Member">
