@@ -58,6 +58,7 @@ public class PageST2A_country implements Handler {
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous'></script>
             <link href='LVL2-A.css' rel='stylesheet'>
             <link href='common.css' rel='stylesheet'>
+            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>
             <script src='lvl2.js'></script>
                 """;
         html = html + "</head>";
@@ -440,7 +441,7 @@ public class PageST2A_country implements Handler {
         }
         html += """
             <div class = "BackToTop">
-            <a class = "TopButton" href = #>Back to Top ↑</a>
+                <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
             </div>
                 """;
         //Close result display area

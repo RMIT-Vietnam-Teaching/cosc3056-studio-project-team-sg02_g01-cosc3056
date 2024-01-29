@@ -190,19 +190,15 @@ button[type="submit"] {
 
 
 .TopButton{
-    text-decoration: none;
-    padding: 10px;
-    font-family: sans-serif;
-    color: #fff;
-    background: blue;
-    border-radius: 100px;
-    font-size: large
+   
+    font-size: 50px;
     
 }
 
 .BackToTop{
-    position: sticky;
-    bottom: 20px;
-    margin-bottom: 10px;
+    position: fixed;
+    bottom: 200px;
+    right: 300px;
+   
     
 }
