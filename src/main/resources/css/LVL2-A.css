@@ -190,15 +190,11 @@ button[type="submit"] {
 
 
 .TopButton{
-   
     font-size: 50px;
-    
-}
-
-.BackToTop{
-    position: fixed;
-    bottom: 200px;
-    right: 300px;
-   
-    
+    display: block;
+    margin-right: 50px;
+    position: sticky;
+    bottom: 10px;
+    text-align: end;
+    padding-bottom: 10px;
 }
