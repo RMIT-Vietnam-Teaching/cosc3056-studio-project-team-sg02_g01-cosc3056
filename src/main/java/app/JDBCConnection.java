@@ -579,7 +579,7 @@ public class JDBCConnection {
     public ArrayList<Countries> getCountries (){
         ArrayList<Countries> Countries = new ArrayList<Countries>(); //country the arraylist that have different countries
         String query = """
-                SELECT * FROM countries;
+                SELECT * FROM countries WHERE code NOT IN ('WLD', 'SAS') ORDER BY name;
                 """;
         try(Connection conn = DriverManager.getConnection(DATABASE)) {
             PreparedStatement stmt = conn.prepareStatement(query);

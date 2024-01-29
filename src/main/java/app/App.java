@@ -73,7 +73,7 @@ public class App {
         app.post(PageST2B_cities.URL, new PageST2B_cities());
         app.post(PageST2B_states.URL, new PageST2B_states());
         // app.post(PageST3A.URL, new PageST3A());
-        // app.post(PageST3B.URL, new PageST3B());
+        app.post(PageST3B.URL, new PageST3B());
     }
 
 }
