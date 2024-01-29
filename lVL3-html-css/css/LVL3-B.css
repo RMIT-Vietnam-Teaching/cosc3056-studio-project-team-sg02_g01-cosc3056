@@ -94,12 +94,12 @@ legend {
 .area {
   display: grid;
   margin: 30px 0 10px;
-  grid-template-columns: repeat(3, 3fr);
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .area div {
-  width: 100%;
+  margin-left: 50px;
+  width: 80%;
 }
 
 .area select {
@@ -254,13 +254,23 @@ label h3:hover {
 }
 
 /* ============== find_x ============== */
+.find_x{
+  text-align: center;
+}
+
+.find_x h3{
+  font-size: 35px;
+  margin-bottom: 30px;
+}
+
 .find_x form {
   display: inline-block;
 }
 
 .find_x .select_form {
+  font-size: 18px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0;
 }
 
