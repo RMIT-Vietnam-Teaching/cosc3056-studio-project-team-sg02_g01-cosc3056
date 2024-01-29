@@ -438,7 +438,11 @@ public class PageST2A_country implements Handler {
         </div>
                 """;
         }
-        
+        html += """
+            <div class = "BackToTop">
+            <a class = "TopButton" href = #>Back to Top ↑</a>
+            </div>
+                """;
         //Close result display area
         html += "</div>";
         return html;

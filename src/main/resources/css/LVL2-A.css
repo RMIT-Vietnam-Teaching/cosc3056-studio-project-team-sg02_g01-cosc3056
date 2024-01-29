@@ -187,3 +187,22 @@ button[type="submit"] {
     text-decoration:none;
     color: black;
 }
+
+
+.TopButton{
+    text-decoration: none;
+    padding: 10px;
+    font-family: sans-serif;
+    color: #fff;
+    background: blue;
+    border-radius: 100px;
+    font-size: large
+    
+}
+
+.BackToTop{
+    position: sticky;
+    bottom: 20px;
+    margin-bottom: 10px;
+    
+}
