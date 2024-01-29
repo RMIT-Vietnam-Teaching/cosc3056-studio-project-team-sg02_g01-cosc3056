@@ -29,8 +29,40 @@ h2 {
   margin-block-end: 0;
 }
 
+.top .button label {
+  position: relative;
+}
+
+.top .button label span {
+  color: #fff;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #a3a3a3;
+  border-radius: 50%;
+}
+
+.top .button label span::before {
+  content: "#";
+  position: absolute;
+  right: 19px;
+  top: -12px;
+}
+
+.top .button .percen_button span::before {
+  content: "%";
+  position: absolute;
+  right: 7px;
+}
+
+#absolute:checked ~ span,
+#percentage:checked ~ span {
+  background-color: black;
+}
+
 /* ============== select area ============== */
-.select_form {
+.select_form,
+.find_x {
   width: 95%;
   margin: 50px auto 0;
 }
@@ -119,6 +151,7 @@ hr {
 .display {
   margin-right: 150px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 #temp:checked + label h3,
@@ -126,6 +159,7 @@ hr {
 #both:checked + label h3 {
   text-decoration: underline;
   text-shadow: 0.4px 0 0 currentColor;
+  color: rgb(50, 88, 184);
 }
 
 label h3:hover {
@@ -151,20 +185,6 @@ label h3:hover {
   font-size: 25px;
   font-weight: bold;
 }
-
-/* .top label{
-  width: 40px;
-  height: 40px;
-  background-color: #d9d9d9;
-  color: #fff;
-  border-radius: 50%;
-}
-
-.top .button p{
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-} */
 
 .contain {
   display: grid;
@@ -192,7 +212,7 @@ label h3:hover {
   font-size: 30px;
 }
 
-.contain .middle_left p{
+.contain .middle_left p {
   opacity: 0.7;
 }
 
@@ -206,4 +226,48 @@ label h3:hover {
   font-size: 25px;
   align-items: center;
   justify-content: center;
+}
+
+.box_both .contain {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.box_both .info_both {
+  justify-content: center;
+}
+
+.box_both .title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#temp:checked ~ .box_pop,
+#temp:checked ~ .find_x .box_pop,
+#temp:checked ~ .find_x .box_both,
+#pop:checked ~ .box_temp,
+#pop:checked ~ .find_x .box_temp,
+#pop:checked ~ .find_x .box_both,
+#both:checked ~ .find_x .box_temp,
+#both:checked ~ .find_x .box_pop {
+  display: none;
+}
+
+/* ============== find_x ============== */
+.find_x form {
+  display: inline-block;
+}
+
+.find_x .select_form {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+#number_x {
+  width: 50px;
+}
+
+.find_x .box {
+  margin: 30px 0;
 }
