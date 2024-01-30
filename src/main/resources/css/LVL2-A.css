@@ -269,6 +269,7 @@ button[type="submit"] {
     text-align: end;
     padding-bottom: 10px;
 }
+/* css animations for submit button*/
 .region_select {
     padding: 20px;
     position: flex;
@@ -279,7 +280,34 @@ button[type="submit"] {
 }
 #submit_btn {
     width: 100px;
-    background-color:green;
+    background-color:rgb(5, 201, 5);
     align-self: flex-start;
     border-radius: 10px;
+}
+
+#submit_btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+#submit_btn:hover {
+    background-color:rgb(1, 114, 1);
+}
+#submit_btn span:after {
+    content: '\00bb';
+    position: absolute;
+    right: -30px;
+    opacity:0;
+    transition:0.5s;
+}
+#submit_btn:hover span:after {
+    opacity: 1;
+    right:0px;
+}
+#submit_btn:hover span {
+    color:white;
+    padding-right:20px;
+    opacity: 1;
+    right:0px;
 }
