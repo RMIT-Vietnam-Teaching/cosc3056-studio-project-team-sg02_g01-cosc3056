@@ -35,7 +35,7 @@
     }
 
     .input_row .input_area {
-        width: 180px;
+        width: 200px;
         display: flex;
         justify-content: space-between;
     }
