@@ -84,133 +84,250 @@ public class PageST2A_country implements Handler {
         html += "<main>";
 
 
-        //Main_top - Top options
-        html += """
-            <div class='main_section' id='main_section_top'>
-            <div id='top_options'>
-                <img src='logo-web.jpg' height='100px'>
-                <div class='options'>
-                    <div style='padding-bottom: 10px;'>
-                        <b>Year range:</b>
-                    </div>
-                    <form id='lvl2A' action='/page2A_country.html' method='post'>
-                        <div class='dropdown_container'>
-                            <div class='year_option'>
-                                <label for='year_start'>Start year: </label>
-                                <select id='year_start' name='year_start' form='lvl2A'>
-                """;
-                //"Choose" default option
-                html += "<option disabled";
-                //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
-                if (year_start == null){
-                    html += " selected";
-                }
-                html += ">Choose</option>";
-                //Start year options (ADD ME)
-                ArrayList<Integer> startYears = jdbc.getYear();
-                for (int year : startYears) {
-                    if (year_start != null && year == Integer.parseInt(year_start)) {
-                        //Let the previously chosen option as the default selected option
-                        html += String.format("<option selected>%d</option>", year);
-                    }
-                    else {
-                        html += String.format("<option>%d</option>", year);
-                    }
-                }
-        html += """
-            </select>
-            </div>
-            <div class='year_option'>
-                <label for='year_end'>End year: </label>
-                <select id='year_end' name='year_end' form='lvl2A'>
-                """;
-                //"Choose" default option
-                html += "<option disabled";
-                //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
-                if (year_end == null){ 
-                    html += " selected";
-                }
-                html += ">Choose</option>";
-                //End year options (ADD ME)
-                ArrayList<Integer> endYears = jdbc.getYear();
-                for (int year : endYears) {
-                    if (year_end != null && year == Integer.parseInt(year_end)) {
-                        //Let the previously chosen option as the default selected option
-                        html += String.format("<option selected>%d</option>", year);
-                    }
-                    else {
-                        html += String.format("<option>%d</option>", year);
-                    }
-                }
-
-        html += """
-                        </select>
+        //Open Main_top - Top options
+            html += """
+                <div class='main_section' id='main_section_top'>
+                <div id='top_options'>
+        
+                    <!-- Input fields -->
+                    <div id="input_fields">
+                        <!-- Form lvl2A open -->
+                        <form id='lvl2A' action='/page2A_country.html' method='post'>
+                        <div id="page_title" style="padding-bottom: 30px;">
+                            <h6>Basic</h6>
+                            <h1>Countries</h1>
                         </div>
-                    </div>
-                </form>
-            </div>
-            </div>
-            </div>
-
-                """;
-                
-        //Open Main_bottom 
-        html += "<div class='main_section' id='main_section_bottom'>";
-        //Bottom options
+                        """;
+        //Start row 1 - Year range      
         html += """
-            <div id='bottom_options'>
-                <div style='display: flex; justify-content: space-between;'>
-                    <div id='display_by'>
-                        <span style='visibility: hidden;'>Blank</span>
-                        <span><b>Display results by: </b></span>
-                        <a href='page2A_country.html' class='display_current'>Country</a>
-                        <a href='page2A_world.html' class='display_other'>World</a>
-                    </div>
-                    <div id='sort_options'>
-                        <div class='dropdown_container'>
-                            <div class='sort_by_options'>
-                                <label for='sort_by'>Sort by: </label>
-                                <select id='sort_by' name='sort_by' form='lvl2A'>
-                                """;
-        //sort_by options
-        String[] sortOptions = {"Temperature change", "Population change"};
-        for (String option: sortOptions) {
-            html += "<option";
-            //Let the previously chosen option as the default selected option
-            if (sort_by != null && sort_by.equals(option)) {
-                html += " selected";
-            }
-            html += String.format(">%s</option>", option);
-        }
-
-        html += """
-                                </select>
+                        <!-- Row 1: Year range -->
+                        <div class="input_row row_1">
+                            <!-- Label -->
+                            <div class="input_label">
+                                <label for="year_start">Year range: </label>
                             </div>
-                            <div class='order_by_options' style='margin-top: 5px;'>
-                                <label for='order_by'>Order by: </label>
-                                <select id='order_by' name='order_by' form='lvl2A'>
-                                    """;
-
-        //order_by options
-        html += """
-                <option value='asc'>Ascending</option>
-                <option value='desc'
-                """;
-        //Let the previously chosen option as the default selected option
-        if (order_by != null && order_by.equals("desc")) {
-            html += " selected";
-        }                
-        html += ">Descending</option>";
-
-        html += """
-                                </select>
-                            </div>
+                            <!-- Options area -->
+                            <div class="input_area">
+                                <!-- Starting year dropdown -->
+                                <div class="year_range start">
+                                    <select id='year_start' name='year_start' class="dropdown_top" form='lvl2A'>
+                    """;
+                    //"Choose" default option
+                    html += "<option disabled";
+                    //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
+                    if (year_start == null){
+                        html += " selected";
+                    }
+                    html += ">Choose</option>";
+                    //Start year options (ADD ME)
+                    ArrayList<Integer> startYears = jdbc.getYear();
+                    for (int year : startYears) {
+                        if (year_start != null && year == Integer.parseInt(year_start)) {
+                            //Let the previously chosen option as the default selected option
+                            html += String.format("<option selected>%d</option>", year);
+                        }
+                        else {
+                            html += String.format("<option>%d</option>", year);
+                        }
+                    }
+            //Close start year select + Open end year select
+            html += """
+                </select>
+                </div>
+                <span>&ensp;to&ensp;</span>
+                <!-- Starting year dropdown -->
+                <div class="year_range end">
+                    <select id='year_end' name='year_end' class="dropdown_top" form='lvl2A'>
+                    """;
+                    //"Choose" default option
+                    html += "<option disabled";
+                    //Only set this option as "selected" when no previous year was chosen (aka when the user just enter the page)
+                    if (year_end == null){ 
+                        html += " selected";
+                    }
+                    html += ">Choose</option>";
+                    //End year options (ADD ME)
+                    ArrayList<Integer> endYears = jdbc.getYear();
+                    for (int year : endYears) {
+                        if (year_end != null && year == Integer.parseInt(year_end)) {
+                            //Let the previously chosen option as the default selected option
+                            html += String.format("<option selected>%d</option>", year);
+                        }
+                        else {
+                            html += String.format("<option>%d</option>", year);
+                        }
+                    }
+            //Close year end select + Row 1 divs
+            html += """
+                            </select>
                         </div>
                     </div>
                 </div>
+                    """;
+
+        //Start row 2 - Sort by
+            html += """
+                <!-- Row 2: Sort by -->
+                <div class="input_row row_2">
+                    <!-- Label -->
+                    <div class="input_label">
+                        <label for="">Sort by: </label>
+                    </div>
+                    <!-- Options area -->
+                    <div class="input_area">
+                        <!-- Sort by dropdown -->
+                        <select id='sort_by' name='sort_by' class="dropdown_top" form='lvl2A'>
+                    """;
+            //sort_by options
+            String[] sortOptions = {"Temperature change", "Population change"};
+            for (String option: sortOptions) {
+                html += "<option";
+                //Let the previously chosen option as the default selected option
+                if (sort_by != null && sort_by.equals(option)) {
+                    html += " selected";
+                }
+                html += String.format(">%s</option>", option);
+            }     
+            
+            //Close row 2
+            html += """
+                        </select>
+                    </div>
+                </div>
+                    """;
+        
+        //Start row 3 - Order by
+            html += """
+                <div class="input_row row_3">
+                    <!-- Label -->
+                    <div class="input_label">
+                        <label for="">Order by: </label>
+                    </div>
+                    <!-- Option area -->
+                    <div class="input_area">
+                        <select id='order_by' name='order_by' class="dropdown_top" form='lvl2A'>
+                    """;
+            //Order by options
+            html += """
+                    <option value='asc'>Ascending</option>
+                    <option value='desc'
+                    """;
+            //Let the previously chosen option as the default selected option
+            if (order_by != null && order_by.equals("desc")) {
+                html += " selected";
+            }                
+            html += ">Descending</option>";
+
+            //Close row 3
+            html += """
+                        </select>
+                    </div>
+                </div>
+                    """;
+        
+        //Submit button + Close input field
+        html += """
                 <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
+            </form>
+        </div>
+                """;
+
+        //Region selector
+        html += """
+            <!-- Region selector -->
+            <div id="region_select">
+                <div class="region_boxes">
+                    <a href="page2A_world.html">
+                        <div class="box">
+                            <img src="img/logo-web.jpg" alt="world">
+                            <h5>World</h5>
+                        </div>
+                    </a>
+                    <a href="page2A_country.html" class="select">
+                        <div class="box">
+                            <img src="img/logo-web.jpg" alt="countries">
+                            <h5>Countries</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_states">
+                        <div class="box">
+                            <img src="img/logo-web.jpg" alt="states">
+                            <h5>States</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_cities">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="cities">
+                            <h5>Cities</h5>
+                        </div>
+                    </a>
+                </div>
             </div>
                 """;
+        
+        //Close Main_top - Top options
+        html += """
+                </div>
+            </div>
+                """;
+
+        //Open Main_bottom 
+        html += "<div class='main_section' id='main_section_bottom'>";
+        // //Bottom options
+        // html += """
+        //     <div id='bottom_options'>
+        //         <div style='display: flex; justify-content: space-between;'>
+        //             <div id='display_by'>
+        //                 <span style='visibility: hidden;'>Blank</span>
+        //                 <span><b>Display results by: </b></span>
+        //                 <a href='page2A_country.html' class='display_current'>Country</a>
+        //                 <a href='page2A_world.html' class='display_other'>World</a>
+        //             </div>
+        //             <div id='sort_options'>
+        //                 <div class='dropdown_container'>
+        //                     <div class='sort_by_options'>
+        //                         <label for='sort_by'>Sort by: </label>
+        //                         <select id='sort_by' name='sort_by' form='lvl2A'>
+        //                         """;
+        // //sort_by options
+        // String[] sortOptions = {"Temperature change", "Population change"};
+        // for (String option: sortOptions) {
+        //     html += "<option";
+        //     //Let the previously chosen option as the default selected option
+        //     if (sort_by != null && sort_by.equals(option)) {
+        //         html += " selected";
+        //     }
+        //     html += String.format(">%s</option>", option);
+        // }
+
+        // html += """
+        //                         </select>
+        //                     </div>
+        //                     <div class='order_by_options' style='margin-top: 5px;'>
+        //                         <label for='order_by'>Order by: </label>
+        //                         <select id='order_by' name='order_by' form='lvl2A'>
+        //                             """;
+
+        // //order_by options
+        // html += """
+        //         <option value='asc'>Ascending</option>
+        //         <option value='desc'
+        //         """;
+        // //Let the previously chosen option as the default selected option
+        // if (order_by != null && order_by.equals("desc")) {
+        //     html += " selected";
+        // }                
+        // html += ">Descending</option>";
+
+        // html += """
+        //                         </select>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //         <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
+        //     </div>
+        //         """;
 
 
         if (year_start == null) {

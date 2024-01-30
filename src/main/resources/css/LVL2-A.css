@@ -22,6 +22,92 @@
     justify-content: space-between;
 }
 
+/* Top options NEW */
+
+    /* Inputs */
+    #top_options .input_row {
+        display: flex;
+        margin-bottom: 5px;
+    }
+    
+    .input_row .input_label {
+        width: 90px;
+    }
+
+    .input_row .input_area {
+        width: 180px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .input_area .dropdown_top {
+        width: 100%
+    }
+
+    .input_area .year_range .dropdown_top {
+        width: 100%;
+    }
+
+    /* Region select */
+
+    .region_boxes {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 5px;
+    }
+    
+    .region_boxes .box {
+        background-color: #d9d9d9;
+        padding: 10px;
+        width: 100px;
+        height: 100px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        transition: transform .2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .region_boxes .select .box {
+        background-color: #262626;
+        color: white;
+    }
+
+    .region_boxes .select .box img {
+        filter: invert();
+    }
+
+    .region_boxes .select {
+        pointer-events: none;
+    }
+
+    .region_boxes img {
+        width: 50px;
+    }
+    
+    .region_boxes h5 {
+        font-size: 80%;
+        margin: 15px auto;
+    }
+    
+    .region_boxes a {
+    text-decoration: none;
+    }
+    
+    .region_boxes a:link,
+    .region_boxes a:visited {
+    color: currentColor;
+    }
+    
+    .box:hover {
+        box-shadow: 0 18px 36px 0 rgba(0, 0, 0, 0.1);
+        transform: scale(1.2);
+        border: solid;
+    }
+/* Bottom options  */
+
 #bottom_options {
     display: flex;
     flex-direction: column;
@@ -69,8 +155,8 @@
 }
 
 button[type="submit"] {
-    width: 200px;
-    height: 50px;
+    width: 100%;
+    height: 40px;
     font-size: large;
     align-self: center;
 }
