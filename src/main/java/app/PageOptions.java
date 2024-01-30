@@ -67,18 +67,34 @@ public class PageOptions implements Handler {
             <p class="select">Select your preferred region type</p>
             <div class="option">
                 <!-- box 1 -->
-                <a href="page2A_country.html">
+                <a href="page2A_world.html">
                     <div class="box">
                         <img src="logo-web.jpg" alt="" />
-                        <h3>World / Countries</h3>
+                        <h3>World</h3>
                     </div>
                 </a>
 
                 <!-- box 2 -->
+                <a href="page2A_country.html">
+                    <div class="box">
+                        <img src="country-logo2.png" alt="" />
+                        <h3>Countries</h3>
+                    </div>
+                </a>
+
+                <!-- box 3 -->
+                <a href="page2B_states">
+                    <div class="box">
+                        <img src="state-logo.png" alt="logo" />
+                        <h3 id="Advanced">States</h3>
+                    </div>
+                </a>
+
+                <!-- box 4 -->
                 <a href="page2B_cities">
                     <div class="box">
-                        <img src="logo-web.jpg" alt="logo" />
-                        <h3 id="Advanced">Cities / States</h3>
+                        <img src="city-logo.png" alt="logo" />
+                        <h3 id="Advanced">Cities</h3>
                     </div>
                 </a>
             </div>
