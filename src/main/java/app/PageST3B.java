@@ -193,6 +193,7 @@ public class PageST3B implements Handler {
         
         //content
         //Select options
+        if (RegionOption != null){
         html = html + """
             <p
             style="
@@ -205,11 +206,16 @@ public class PageST3B implements Handler {
           </p>
           <input type="radio" name="select_display" id="temp" checked hidden />
           <label class="display" for="temp"><h3>Tempurature</h3></label>
-          <input type="radio" name="select_display" id="pop" hidden />
-          <label class="display" for="pop"><h3>Population</h3></label>
-          <input type="radio" name="select_display" id="both" hidden />
-          <label class="display" for="both"><h3>Both</h3></label>
-                """;
+          """;
+          if (RegionOption.equals("Country")){
+              html = html + """
+                <input type="radio" name="select_display" id="pop" hidden />
+                <label class="display" for="pop"><h3>Population</h3></label>
+                <input type="radio" name="select_display" id="both" hidden />
+                <label class="display" for="both"><h3>Both</h3></label>
+                  """;}
+              
+            
 
         //Result for Temperature
 
@@ -280,7 +286,7 @@ public class PageST3B implements Handler {
     
             <!-- contain -->
             <div class="contain">
-              <img class="region" src="img/area.jpg" alt="" />
+              <img class="region" src="area.jpg" alt="" />
     
               <!-- middle -->
               <div class="middle">
@@ -387,7 +393,7 @@ public class PageST3B implements Handler {
     
               <!-- contain -->
               <div class="contain">
-                <img class="region" src="../img/area.jpg" alt="" />
+                <img class="region" src="area.jpg" alt="" />
     
                 <!-- middle -->
                 <div class="middle">
@@ -406,7 +412,7 @@ public class PageST3B implements Handler {
                     <p>1960</p>
                     <p><strong>C</strong></p>
                   </div>
-                  <img src="img/icon-temp.jpg" alt="" />
+                  <img src="icon-temp.jpg" alt="" />
                 </div>
               </div>
             </div>
@@ -429,7 +435,7 @@ public class PageST3B implements Handler {
     
               <!-- contain -->
               <div class="contain">
-                <img class="region" src="img/area.jpg" alt="" />
+                <img class="region" src="area.jpg" alt="" />
     
                 <!-- middle -->
                 <div class="info_both">
@@ -467,7 +473,7 @@ public class PageST3B implements Handler {
               </div>
             </div>
           </div>
-                """;
+                """;}
         
 
 
