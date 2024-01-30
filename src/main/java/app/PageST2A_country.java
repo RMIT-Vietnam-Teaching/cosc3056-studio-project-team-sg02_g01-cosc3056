@@ -251,7 +251,7 @@ public class PageST2A_country implements Handler {
                     </a>
                     <a href="page2B_states">
                         <div class="box">
-                            <img src="us-state-logo.png" alt="states">
+                            <img src="state-logo.png" alt="states">
                             <h5>States</h5>
                         </div>
                     </a>
