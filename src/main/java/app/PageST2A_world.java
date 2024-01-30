@@ -80,11 +80,47 @@ public class PageST2A_world implements Handler {
         html += "<main>";
 
 
-    //Open Main_top - Top options
-    html += """
-        <div class='main_section' id='main_section_top'>
-        <div id='top_options'>
+        //Open Main_top - Top options
+        html += """
+            <div class='main_section' id='main_section_top'>
+            """;
+            
+        //Region selector
+        html += """
+            <!-- Region selector -->
+            <div id="region_select" style="padding: 20px; border-bottom: 3px solid grey;">
+                <div class="region_boxes">
+                    <a href="page2A_world.html" class="select">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="world">
+                            <h5>World</h5>
+                        </div>
+                    </a>
+                    <a href="page2A_country.html">
+                        <div class="box">
+                            <img src="country-logo2.png" alt="countries">
+                            <h5>Countries</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_states">
+                        <div class="box">
+                            <img src="state-logo.png" alt="states">
+                            <h5>States</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_cities">
+                        <div class="box">
+                            <img src="city-logo.png" alt="cities">
+                            <h5>Cities</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+                """;
 
+        //Open top options
+        html += """
+            <div id='top_options'>
             <!-- Input fields -->
             <div id="input_fields">
                 <!-- Form lvl2A open -->
@@ -165,39 +201,6 @@ public class PageST2A_world implements Handler {
     html += """
         <button type='submit' form='lvl2A' class='btn btn-success'>Submit</button>
     </form>
-    </div>
-        """;
-
-    //Region selector
-    html += """
-    <!-- Region selector -->
-    <div id="region_select">
-        <div class="region_boxes">
-            <a href="page2A_world.html" class="select">
-                <div class="box">
-                    <img src="logo-web.jpg" alt="world">
-                    <h5>World</h5>
-                </div>
-            </a>
-            <a href="page2A_country.html">
-                <div class="box">
-                    <img src="country-logo2.png" alt="countries">
-                    <h5>Countries</h5>
-                </div>
-            </a>
-            <a href="page2B_states">
-                <div class="box">
-                    <img src="state-logo.png" alt="states">
-                    <h5>States</h5>
-                </div>
-            </a>
-            <a href="page2B_cities">
-                <div class="box">
-                    <img src="city-logo.png" alt="cities">
-                    <h5>Cities</h5>
-                </div>
-            </a>
-        </div>
     </div>
         """;
 
