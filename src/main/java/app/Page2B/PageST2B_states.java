@@ -242,7 +242,7 @@ public class PageST2B_states implements Handler {
                             </div>
                         </div>
                     </div>
-                    <button type='submit' form='lvl2B' class='btn_success' id= 'submit_btn'>Submit</button>
+                    <button type='submit' form='lvl2B' class='btn_success' id= 'submit_btn'><span>Submit</span></button>
                 </div>
         </div>
                     """;//end of all divs
