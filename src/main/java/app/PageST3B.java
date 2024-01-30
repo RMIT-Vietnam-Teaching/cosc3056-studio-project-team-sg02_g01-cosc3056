@@ -30,6 +30,7 @@ public class PageST3B implements Handler {
     public void handle(Context context) throws Exception {
         // Create a simple HTML webpage in a String
         String html = "<html>";
+        String RegionOption = context.formParam("region_options");
 
         // Add some Head information
         html = html + "<head>" + 
@@ -74,11 +75,11 @@ public class PageST3B implements Handler {
 
         // Radio options
         html = html + """
-                        <input style="margin-left: 150px" type="radio" name="region_options" id="country" checked />
+                        <input style="margin-left: 150px" type="radio" name="region_options" id="country" value = "Country" checked />
                         <label class="radio_option" for="country">Country</label>
-                        <input type="radio" name="region_options" id="state" />
+                        <input type="radio" name="region_options" id="state" value = "State" />
                         <label class="radio_option" for="state">State</label>
-                        <input type="radio" name="region_options" id="city" />
+                        <input type="radio" name="region_options" id="city" value = "City"/>
                         <label class="region_options" for="city">City</label>
         """;
 
@@ -118,12 +119,360 @@ public class PageST3B implements Handler {
                                 
         """;
 
-        // Thêm options vào đây nè
+        ArrayList<String> States = jdbc.getState();
+        for (String State : States){
+            html = html + String.format("<option> %s </option>", State);
+        }
 
         html = html + """
                                 </select>
                             </div>
                 """;
+
+        // City
+        html = html + """
+                            <div class="city_dropdown">
+                                <label for="citySubmit"><h4>City</h4></label>
+                                <select name="citySubmit" id="citySubmit" required>
+                                     <option value="" disabled hidden>-Select city-</option>
+        """;
+
+        ArrayList<String> Cities = jdbc.getCity();
+        for (String City : Cities) {
+            html = html + String.format("<option> %s </option>", City);
+        }
+
+        html = html + """
+                                </select>
+                            </div>
+                """;
+
+        html = html + """
+                               </div>
+                            </fieldset>
+                """;
+
+        
+        //Select year
+        
+        html = html + """
+            <div class="select_year">
+            <label>
+              <h4>Start year:</h4>
+              <input
+                type="number"
+                name="startYear"
+                id="startYear"
+                min="1750"
+                max="2015"
+                required
+              />
+            </label>
+            <label>
+              <h4>Time period:</h4>
+              <input
+                type="number"
+                name="rangeYear"
+                id="rangeYear"
+                min="0"
+                max="265"
+                required
+            /></label>
+          </div>
+                """;
+
+        
+        //button
+        html = html + """
+            <button>START</button>
+            </form>
+          </div>
+          <hr />
+                """;
+
+        
+        //content
+        //Select options
+        html = html + """
+            <p
+            style="
+              display: inline;
+              margin-right: 250px;
+              margin-left: calc(100% - 97.5%);
+            "
+          >
+            Display similarity by:
+          </p>
+          <input type="radio" name="select_display" id="temp" checked hidden />
+          <label class="display" for="temp"><h3>Tempurature</h3></label>
+          <input type="radio" name="select_display" id="pop" hidden />
+          <label class="display" for="pop"><h3>Population</h3></label>
+          <input type="radio" name="select_display" id="both" hidden />
+          <label class="display" for="both"><h3>Both</h3></label>
+                """;
+
+        //Result for Temperature
+
+        html = html + """
+            <div class="box box_temp">
+            <p class="title">Average Temperature change</p>
+            <!-- top -->
+            <div class="top">
+              <p>Selected region</p>
+              <div class="button">
+                <label>
+                  <input hidden checked type="radio" name="type_value" id="absolute" />
+                  <span></span>
+                </label>
+                <label class="percen_button">
+                  <input hidden type="radio" name="type_value" id="percentage" />
+                  <span></span>
+                </label>
+              </div>
+            </div>
+    
+            <!-- contain -->
+            <div class="contain">
+              <img class="region" src="../img/area.jpg" alt="" />
+    
+              <!-- middle -->
+              <div class="middle">
+                <div class="middle_left">
+                  <p>In 10 years</p>
+                  <h2>0.13%</h2>
+                </div>
+                <img src="../img/icon-increase.jpg" alt="" />
+              </div>
+    
+              <!-- temp -->
+              <div class="temp">
+                <div class="temp_left">
+                  <p>1960</p>
+                  <p style="margin-bottom: 15px"><strong>C</strong></p>
+                  <p>1960</p>
+                  <p><strong>C</strong></p>
+                </div>
+                <img src="../img/icon-temp.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+                """;
+
+
+        //Result for Population
+        html = html + """
+            <div class="box box_pop">
+            <p class="title">Population change</p>
+            <!-- top -->
+            <div class="top">
+              <p>Selected region</p>
+              <div class="button">
+                <label>
+                  <input hidden checked type="radio" name="type_value" id="absolute" />
+                  <span></span>
+                </label>
+                <label class="percen_button">
+                  <input hidden type="radio" name="type_value" id="percentage" />
+                  <span></span>
+                </label>
+              </div>
+            </div>
+    
+            <!-- contain -->
+            <div class="contain">
+              <img class="region" src="../img/area.jpg" alt="" />
+    
+              <!-- middle -->
+              <div class="middle">
+                <div class="middle_left">
+                  <p>In 10 years</p>
+                  <h2>0.13%</h2>
+                </div>
+                <img src="../img/icon-increase.jpg" alt="" />
+              </div>
+    
+              <!-- temp -->
+              <div class="temp">
+                <div class="temp_left">
+                  <p>1960</p>
+                  <p style="margin-bottom: 15px"><strong>C</strong></p>
+                  <p>1960</p>
+                  <p><strong>C</strong></p>
+                </div>
+                <img src="../img/icon-temp.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+                """;
+
+
+        //find x
+        html = html + """
+            <div class="find_x">
+            <h3>X the most similar:</h3>
+            <div class="select_form">
+              <form action="">
+                <label style="margin-left: 100px;" for="">Number of results</label>
+                <input type="number" name="number_x" id="number_x" min="1" />
+              </form>
+              <form action="">
+                <label for="">Sort by:</label>
+                <select name="sort_by" id="sort_by">
+                  <option value="">Absolute values</option>
+                  <option value="">Relative change in values</option>
+                </select>
+              </form>
+            </div>
+    
+            <!-- box -->
+            <div class="box box_temp">
+              <p class="title">Average Temperature change</p>
+              <!-- top -->
+              <div class="top">
+                <p>Similar region #1</p>
+                <div class="button">
+                  <label>
+                    <input hidden checked type="radio" name="type_value" id="absolute" />
+                    <span></span>
+                  </label>
+                  <label class="percen_button">
+                    <input hidden type="radio" name="type_value" id="percentage" />
+                    <span></span>
+                  </label>
+                </div>
+              </div>
+    
+              <!-- contain -->
+              <div class="contain">
+                <img class="region" src="../img/area.jpg" alt="" />
+    
+                <!-- middle -->
+                <div class="middle">
+                  <div class="middle_left">
+                    <p>In 10 years</p>
+                    <h2>0.13%</h2>
+                  </div>
+                  <img src="../img/icon-increase.jpg" alt="" />
+                </div>
+    
+                <!-- temp -->
+                <div class="temp">
+                  <div class="temp_left">
+                    <p>1960</p>
+                    <p style="margin-bottom: 15px"><strong>C</strong></p>
+                    <p>1960</p>
+                    <p><strong>C</strong></p>
+                  </div>
+                  <img src="../img/icon-temp.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+    
+            <div class="box box_pop">
+              <p class="title">Population change</p>
+              <!-- top -->
+              <div class="top">
+                <p>Similar region #1</p>
+                <div class="button">
+                  <label>
+                    <input hidden checked type="radio" name="type_value" id="absolute" />
+                    <span></span>
+                  </label>
+                  <label class="percen_button">
+                    <input hidden type="radio" name="type_value" id="percentage" />
+                    <span></span>
+                  </label>
+                </div>
+              </div>
+    
+              <!-- contain -->
+              <div class="contain">
+                <img class="region" src="../img/area.jpg" alt="" />
+    
+                <!-- middle -->
+                <div class="middle">
+                  <div class="middle_left">
+                    <p>In 10 years</p>
+                    <h2>0.13%</h2>
+                  </div>
+                  <img src="../img/icon-increase.jpg" alt="" />
+                </div>
+    
+                <!-- temp -->
+                <div class="temp">
+                  <div class="temp_left">
+                    <p>1960</p>
+                    <p style="margin-bottom: 15px"><strong>C</strong></p>
+                    <p>1960</p>
+                    <p><strong>C</strong></p>
+                  </div>
+                  <img src="../img/icon-temp.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+    
+            <div class="box box_both">
+              <!-- top -->
+              <div class="top">
+                <p>Similar region #1</p>
+                <div class="button">
+                  <label>
+                    <input hidden checked type="radio" name="type_value" id="absolute" />
+                    <span></span>
+                  </label>
+                  <label class="percen_button">
+                    <input hidden type="radio" name="type_value" id="percentage" />
+                    <span></span>
+                  </label>
+                </div>
+              </div>
+    
+              <!-- contain -->
+              <div class="contain">
+                <img class="region" src="../img/area.jpg" alt="" />
+    
+                <!-- middle -->
+                <div class="info_both">
+                  <p class="title">Average Temperature change</p>
+                  <div class="middle">
+                    <div class="middle_left">
+                      <p>In 10 years</p>
+                      <h2>0.13%</h2>
+                    </div>
+                    <img src="../img/icon-increase.jpg" alt="" />
+                  </div>
+                </div>
+    
+                <div class="infor_both">
+                  <p class="title">Population change</p>
+                  <div class="middle">
+                    <div class="middle_left">
+                      <p>In 10 years</p>
+                      <h2>0.13%</h2>
+                    </div>
+                    <img src="../img/icon-increase.jpg" alt="" />
+                  </div>
+                </div>
+    
+                <!-- temp -->
+                <div class="temp">
+                  <div class="temp_left">
+                    <p>1960</p>
+                    <p style="margin-bottom: 15px"><strong>C</strong></p>
+                    <p>1960</p>
+                    <p><strong>C</strong></p>
+                  </div>
+                  <img src="../img/icon-temp.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+                """;
+        
+
+
+
+        
 
 
         // Close main
