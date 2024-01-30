@@ -43,7 +43,7 @@ public class PageIndex implements Handler {
             <header>
                 <div class="nav">
                     <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
-                    <p>Website name</p>
+                    <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
                 </div>
