@@ -597,6 +597,223 @@ public class JDBCConnection {
         return Countries;
     }
 
+
+    public ArrayList<String> getState() {
+    
+        ArrayList<String> AllStates = new ArrayList<String>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        String query = """
+                SELECT  * FROM states ORDER BY name;
+                """;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
+            
+            // Get Result
+            ResultSet results = pstmt.executeQuery();
+            
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String State = results.getString("name");
+                AllStates.add(State);
+            }
+            
+
+            // Close the statement because we are done with it
+            //statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllStates;
+    }
+
+
+    public ArrayList<String> getCity() {
+    
+        ArrayList<String> AllCities = new ArrayList<String>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        String query = """
+                SELECT  * FROM cities ORDER BY name;
+                """;
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
+            
+            // Get Result
+            ResultSet results = pstmt.executeQuery();
+            
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String City = results.getString("name");
+                AllCities.add(City);
+            }
+            
+
+            // Close the statement because we are done with it
+            //statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllCities;
+    }
+
+
+
+    public ArrayList<String> getCityOfCountry(String CountryCode) {
+    
+        ArrayList<String> AllCitiesFromCountry = new ArrayList<String>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        String query = String.format("""
+            SELECT * FROM cities WHERE countryCode = "%s" ORDER BY name
+                """, CountryCode);
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
+            
+            // Get Result
+            ResultSet results = pstmt.executeQuery();
+            
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String City = results.getString("name");
+                AllCitiesFromCountry.add(City);
+            }
+            
+
+            // Close the statement because we are done with it
+            //statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllCitiesFromCountry;
+    }
+
+
+
+    public ArrayList<String> getStateOfCountry(String CountryCode) {
+    
+        ArrayList<String> AllStatesFromCountry = new ArrayList<String>();
+
+        // Setup the variable for the JDBC connection
+        Connection connection = null;
+
+        String query = String.format("""
+            SELECT * FROM states WHERE countryCode = "%s" ORDER BY name
+                """, CountryCode);
+
+        try {
+            // Connect to JDBC data base
+            connection = DriverManager.getConnection(DATABASE);
+        
+            // The Query
+            
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setQueryTimeout(30);
+            
+            // Get Result
+            ResultSet results = pstmt.executeQuery();
+            
+            // Process all of the results
+            while (results.next()) {
+                // Lookup the columns we need
+                String State = results.getString("name");
+                AllStatesFromCountry.add(State);
+            }
+            
+
+            // Close the statement because we are done with it
+            //statement.close();
+        } catch (SQLException e) {
+            // If there is an error, lets just pring the error
+            System.err.println(e.getMessage());
+        } finally {
+            // Safety code to cleanup
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e.getMessage());
+            }
+        }
+
+      
+        return AllStatesFromCountry;
+    }
+
+
+
+
     
 }
 
