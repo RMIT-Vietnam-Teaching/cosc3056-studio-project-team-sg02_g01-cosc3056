@@ -72,7 +72,7 @@ public class PageST2B_cities implements Handler {
             <header>
                 <div class="nav">
                     <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
-                    <p>Website name</p>
+                    <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
                 </div>
@@ -121,8 +121,11 @@ public class PageST2B_cities implements Handler {
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
             """;
-               
-
+        html+= """
+            <h6> Basic </h6>    
+            <h1> Cities </h1> 
+                """;
+            //name for sectiion
             //search bar for country
         html += """                    
                 <div class='search_bar'>
