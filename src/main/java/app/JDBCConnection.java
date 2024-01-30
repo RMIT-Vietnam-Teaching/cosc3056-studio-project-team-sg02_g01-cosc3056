@@ -598,9 +598,9 @@ public class JDBCConnection {
     }
 
 
-    public ArrayList<String> getState() {
+    public ArrayList<StateWithCountryCode> getState() {
     
-        ArrayList<String> AllStates = new ArrayList<String>();
+        ArrayList<StateWithCountryCode> AllStates = new ArrayList<StateWithCountryCode>();
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -624,7 +624,7 @@ public class JDBCConnection {
             // Process all of the results
             while (results.next()) {
                 // Lookup the columns we need
-                String State = results.getString("name");
+                StateWithCountryCode State = new StateWithCountryCode(results.getString("name"),results.getString("countryCode"));
                 AllStates.add(State);
             }
             
@@ -651,9 +651,9 @@ public class JDBCConnection {
     }
 
 
-    public ArrayList<String> getCity() {
+    public ArrayList<CityWithCountryCode> getCity() {
     
-        ArrayList<String> AllCities = new ArrayList<String>();
+        ArrayList<CityWithCountryCode> AllCities = new ArrayList<CityWithCountryCode>();
 
         // Setup the variable for the JDBC connection
         Connection connection = null;
@@ -677,7 +677,7 @@ public class JDBCConnection {
             // Process all of the results
             while (results.next()) {
                 // Lookup the columns we need
-                String City = results.getString("name");
+                CityWithCountryCode City = new CityWithCountryCode(results.getString("name"), results.getString("countryCode"));
                 AllCities.add(City);
             }
             

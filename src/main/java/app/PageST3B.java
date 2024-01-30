@@ -2,7 +2,9 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.CityWithCountryCode;
 import app.Objects.Countries;
+import app.Objects.StateWithCountryCode;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -39,6 +41,81 @@ public class PageST3B implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
         html = html + "<link rel='stylesheet' type='text/css' href='Page3B.css' />";
+
+        // Add JavaScript to display Cities / States of selected country
+        html += """
+          <script>
+            document.addEventListener('DOMContentLoaded', function(){
+              var radioButtonState = document.querySelector('#state');
+              var radioButtonCity  = document.querySelector('#city');
+              
+              //Check every time a radio button selection is changed
+              var radioButtons = document.querySelectorAll('.region_radio');
+              radioButtons.forEach(function(radio) {
+                radio.onchange = function() {
+                  //console.log(radio.value);
+                  var selectCountryCode = document.querySelector('#countrySubmit').value;
+                  console.log(selectCountryCode);
+                  if (radioButtonState.checked) {
+                    //console.log("State");
+                    document.querySelectorAll('#stateSubmit option').forEach(function(option) {
+                      if (option.className != selectCountryCode) {
+                        option.setAttribute("hidden", '');
+                      }
+                      else {
+                        option.removeAttribute("hidden");
+                      }
+                    });
+                  }
+                  else if (radioButtonCity.checked) {
+                    //console.log("City");
+                    document.querySelectorAll('#citySubmit option').forEach(function(option) {
+                      if (option.className != selectCountryCode) {
+                        option.setAttribute("hidden", '');
+                      }
+                      else {
+                        option.removeAttribute("hidden");
+                      }
+                    });
+                  }
+                }
+              })
+
+              //Check every time a new country is selected
+              var selectCountry = document.querySelector('#countrySubmit')
+              selectCountry.onchange = function() {
+                var selectCountryCode = document.querySelector('#countrySubmit').value;
+                  console.log(selectCountryCode);
+                  if (radioButtonState.checked) {
+                    //console.log("State");
+                    document.querySelectorAll('#stateSubmit option').forEach(function(option) {
+                      if (option.className != selectCountryCode) {
+                        option.setAttribute("hidden", '');
+                      }
+                      else {
+                        option.removeAttribute("hidden");
+                      }
+                    });
+                  }
+                  else if (radioButtonCity.checked) {
+                    //console.log("City");
+                    document.querySelectorAll('#citySubmit option').forEach(function(option) {
+                      if (option.className != selectCountryCode) {
+                        option.setAttribute("hidden", '');
+                      }
+                      else {
+                        option.removeAttribute("hidden");
+                      }
+                    });
+                  }
+              }
+              
+            })
+
+          </script>
+            """;
+
+        // Close head
         html = html + "</head>";
 
         // Add the body
@@ -75,11 +152,11 @@ public class PageST3B implements Handler {
 
         // Radio options
         html = html + """
-                        <input style="margin-left: 150px" type="radio" name="region_options" id="country" value = "Country" checked />
+                        <input style="margin-left: 150px" type="radio" name="region_options" id="country" class="region_radio" value = "Country" checked />
                         <label class="radio_option" for="country">Country</label>
-                        <input type="radio" name="region_options" id="state" value = "State" />
+                        <input type="radio" name="region_options" id="state" class="region_radio" value = "State" />
                         <label class="radio_option" for="state">State</label>
-                        <input type="radio" name="region_options" id="city" value = "City"/>
+                        <input type="radio" name="region_options" id="city" class="region_radio" value = "City"/>
                         <label class="region_options" for="city">City</label>
         """;
 
@@ -119,9 +196,9 @@ public class PageST3B implements Handler {
                                 
         """;
 
-        ArrayList<String> States = jdbc.getState();
-        for (String State : States){
-            html = html + String.format("<option> %s </option>", State);
+        ArrayList<StateWithCountryCode> States = jdbc.getState();
+        for (StateWithCountryCode State : States){
+            html = html + String.format("<option class=\"%s\"> %s </option>", State.countryCode, State.name);
         }
 
         html = html + """
@@ -137,9 +214,9 @@ public class PageST3B implements Handler {
                                      <option value="" disabled hidden>-Select city-</option>
         """;
 
-        ArrayList<String> Cities = jdbc.getCity();
-        for (String City : Cities) {
-            html = html + String.format("<option> %s </option>", City);
+        ArrayList<CityWithCountryCode> Cities = jdbc.getCity();
+        for (CityWithCountryCode City : Cities) {
+            html = html + String.format("<option class=\"%s\"> %s </option>", City.countryCode, City.name);
         }
 
         html = html + """
