@@ -181,7 +181,7 @@ public class PageST2A_world implements Handler {
             </a>
             <a href="page2A_country.html">
                 <div class="box">
-                    <img src="country-logo.png" alt="countries">
+                    <img src="country-logo2.png" alt="countries">
                     <h5>Countries</h5>
                 </div>
             </a>
