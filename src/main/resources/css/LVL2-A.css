@@ -4,12 +4,15 @@
 
 #main_section_top {
     border-bottom: solid #d9d9d9;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
 }
 
 #top_options {
     padding: 30px 0px 5px;
-    display: flex;
-    justify-content: space-between;
+    
 }
 
 #top_options .options {
@@ -283,4 +286,18 @@ button[type="submit"] {
     bottom: 10px;
     text-align: end;
     padding-bottom: 10px;
+}
+.region_select {
+    padding: 20px;
+    position: flex;
+    border-bottom: 3px solid grey;
+}
+#search_bar {
+    width: 230px ;
+}
+#submit_btn {
+    width: 100px;
+    background-color:green;
+    align-self: flex-start;
+    border-radius: 10px;
 }

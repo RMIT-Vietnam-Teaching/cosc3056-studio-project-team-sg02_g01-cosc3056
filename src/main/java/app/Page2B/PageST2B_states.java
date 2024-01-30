@@ -82,6 +82,40 @@ public class PageST2B_states implements Handler {
         //Open main
         html += "<main>";
 
+        
+        //Switch region types
+         //Region selector
+         html += """
+            <!-- Region selector -->
+            <div class="region_select">
+                <div class="region_boxes">
+                    <a href="page2A_world.html">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="world">
+                            <h5>World</h5>
+                        </div>
+                    </a>
+                    <a href="page2A_country.html">
+                        <div class="box">
+                            <img src="country-logo.png" alt="countries">
+                            <h5>Countries</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_states" class ="select">
+                        <div class="box">
+                            <img src="state-logo.png" alt="states">
+                            <h5>States</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_cities">
+                        <div class="box">
+                            <img src="city-logo.png" alt="cities">
+                            <h5>Cities</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+                """; 
 
         //Main_top - Top options
         html += """
