@@ -72,7 +72,7 @@ public class PageST2B_cities implements Handler {
             <header>
                 <div class="nav">
                     <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
-                    <p>Website name</p>
+                    <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
                 </div>
@@ -96,7 +96,7 @@ public class PageST2B_cities implements Handler {
                     </a>
                     <a href="page2A_country.html">
                         <div class="box">
-                            <img src="country-logo.png" alt="countries">
+                            <img src="country-logo2.png" alt="countries">
                             <h5>Countries</h5>
                         </div>
                     </a>
@@ -121,8 +121,11 @@ public class PageST2B_cities implements Handler {
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
             """;
-               
-
+        html+= """
+            <h6> Basic </h6>    
+            <h1> Cities </h1> 
+                """;
+            //name for sectiion
             //search bar for country
         html += """                    
                 <div class='search_bar'>
@@ -236,7 +239,7 @@ public class PageST2B_cities implements Handler {
                             </div>
                         </div>
                     </div>
-                    <button type='submit' form='lvl2B' class='btn_success' id= 'submit_btn'>Submit</button>
+                    <button type='submit' form='lvl2B' class='btn_success' id= 'submit_btn'><span>Submit</span></button>
                 </div>
         </div>
                     """;//end of all divs

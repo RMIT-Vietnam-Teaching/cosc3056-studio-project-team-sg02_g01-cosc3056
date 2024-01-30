@@ -72,7 +72,7 @@ public class PageST2B_states implements Handler {
             <header>
                 <div class="nav">
                     <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
-                    <p>Website name</p>
+                    <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
                 </div>
@@ -97,7 +97,7 @@ public class PageST2B_states implements Handler {
                     </a>
                     <a href="page2A_country.html">
                         <div class="box">
-                            <img src="country-logo.png" alt="countries">
+                            <img src="country-logo2.png" alt="countries">
                             <h5>Countries</h5>
                         </div>
                     </a>
@@ -118,20 +118,26 @@ public class PageST2B_states implements Handler {
                 """; 
 
         //Main_top - Top options
+
         html += """
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
             """;
-                   //search bar for country
+        html+= """
+            <h6> Basic </h6>    
+            <h1> States </h1> 
+                """;
+        //name for sectiion
+
+            //search bar for country
         html += """                    
-                <div class='search bar'>
+                <div class='search_bar'>
                     <label for='search_bar'> Search country here </label>
-                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for country here' required/>
+                    <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for country here' required />
                     <datalist id ='search_bar_list'>
                 """;
                 ArrayList<Countries> countries = jdbc.getCountries();
                 for (Countries dataCountries : countries) {
-                    if(!dataCountries.getName().equals("World"))
                     html+="<option value=\""+dataCountries.getName()+"\"></option>";
                 }
                             
@@ -139,6 +145,7 @@ public class PageST2B_states implements Handler {
                     </datalist>
                 </div>
                 """;
+            //end of search bar for country
         html+= """
             <div class='options'>
                 <div style='padding-bottom: 10px;'>
@@ -173,7 +180,7 @@ public class PageST2B_states implements Handler {
         html += """
             <div class='year_option'>
                 <label for='year_end'>End year: </label>
-                <input list ='year_end_list' type='number' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required />
+                <input list ='year_end_list' type='number' id ='year_end' name='year_end' form='lvl2B' placeholder ='Select end year here' required/>
                 """;
           html+= """
                 <datalist id='year_end_list'>
@@ -181,6 +188,11 @@ public class PageST2B_states implements Handler {
                 //End year options (ADD ME)
                 ArrayList<Integer> endYears = jdbc.getYear();
                 for (int year : endYears) {
+                    if(year_start != null && year_start != ""){
+                        if(year > Integer.parseInt(year_start)){
+                        html += String.format("<option value = \"%d\"></option>", year);
+                        }
+                    }
                         html += String.format("<option selected value = \"%d\">%d</option>", year, year);
                 }
 
@@ -188,27 +200,20 @@ public class PageST2B_states implements Handler {
         html += """
                 </datalist>
             </div>
-        """;    //end div for year option
+        """;    
+        //end div for year option
         html += """
                     </div>
                 </form>
-            </div>
-            </div>
             </div>
 
                 """;
                 
         //Open Main_bottom 
-        html += "<div class='main_section' id='main_section_bottom'>";
         html += """
             <div id='bottom_options'>
                 <div style='display: flex; justify-content: space-between;'>
-                    <div id='display_by'>
-                        <span style='visibility: hidden;'>Blank</span>
-                        <span><b>Display results by: </b></span>
-                        <a href='/page2B_cities' class='select1or2'>Cities</a>
-                        <a href='/page2B_states' style='pointer-events: none;' id = 'selected' class='select1or2'>States</a>
-                        </div>"""//display by end here
+                    """//display by end here
                                 +
                        """
                         <div id='sort_options'>
@@ -228,7 +233,7 @@ public class PageST2B_states implements Handler {
             } 
         }
                            
-        html+=          """
+        html+= """
                                     </select>
                                 </div>
                                 """//sort by options end here
@@ -237,14 +242,15 @@ public class PageST2B_states implements Handler {
                             </div>
                         </div>
                     </div>
-                    <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
+                    <button type='submit' form='lvl2B' class='btn_success' id= 'submit_btn'><span>Submit</span></button>
                 </div>
+        </div>
                     """;//end of all divs
 
         
       //  String search = context.formParam("countrySearch");//TODO
         System.out.println(year_start + year_end + sort_by);
-        if (year_start == ("") || year_end == ("") || year_end == null || year_start == null) { //datalist can return "" new tab will return null values
+        if (year_start == ("") || year_end == ("") || year_end == null || year_start == null || sort_by =="" || sort_by == null) { //datalist can return "" new tab will return null values
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
         }
