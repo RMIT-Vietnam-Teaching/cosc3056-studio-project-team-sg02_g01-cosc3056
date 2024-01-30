@@ -7,8 +7,13 @@ document.addEventListener('DOMContentLoaded', function(){
         var submitBtt = document.querySelector("button[type = 'submit']"); //Submit button
 
         //Validity check
+        //Before choosing a year_start when the page just loaded (just clicked on countries link, or just clicked submit)
         var yearStartSelected = yearStartSelect.options[yearStartSelect.selectedIndex].value;
+
+        //If year_start is a number, the page was just loaded from a submission
         if (!isNaN(yearStartSelected)) {
+
+            //Narrow down year_end options to only ones greater than year_start
             yearEndOptions.forEach(function(option) {
                 //console.log(option.value);
 
@@ -21,12 +26,18 @@ document.addEventListener('DOMContentLoaded', function(){
                     //console.log("Not hidden: " + option.value);
                 }
             });
-
+            //Year_start is a number, not the default "Choose" so user is allowed to choose a year_end
+            //Enable the year_end dropdown menu
             yearEndSelect.disabled = false;
+
+            //Year_start is a number, meaning the page was loaded from a previous submission, meaning the year range is already valid
+            //Enable the submit button
+            submitBtt.disabled = false;
+            submitBtt.innerHTML = "Submit";
         }
 
 
-         //Check when year_start is selected
+        //Check when year_start is selected
         yearStartSelect.addEventListener("change", function() {
             //Selected option of year_start
             var yearStartSelected = yearStartSelect.options[yearStartSelect.selectedIndex].value;
