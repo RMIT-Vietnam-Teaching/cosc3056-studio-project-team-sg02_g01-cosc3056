@@ -239,25 +239,25 @@ public class PageST2A_country implements Handler {
                 <div class="region_boxes">
                     <a href="page2A_world.html">
                         <div class="box">
-                            <img src="img/logo-web.jpg" alt="world">
+                            <img src="logo-web.jpg" alt="world">
                             <h5>World</h5>
                         </div>
                     </a>
                     <a href="page2A_country.html" class="select">
                         <div class="box">
-                            <img src="img/logo-web.jpg" alt="countries">
+                            <img src="country-logo.png" alt="countries">
                             <h5>Countries</h5>
                         </div>
                     </a>
                     <a href="page2B_states">
                         <div class="box">
-                            <img src="img/logo-web.jpg" alt="states">
+                            <img src="us-state-logo.png" alt="states">
                             <h5>States</h5>
                         </div>
                     </a>
                     <a href="page2B_cities">
                         <div class="box">
-                            <img src="logo-web.jpg" alt="cities">
+                            <img src="city-logo.png" alt="cities">
                             <h5>Cities</h5>
                         </div>
                     </a>
