@@ -60,15 +60,6 @@ main {
     background-color: black;
   }
   
-  /* ============== select area ============== */
-  
-  /*
-    .select_form,
-  .find_x {
-    width: 95%;
-    margin: 50px auto 0;
-  }
-*/
   
   fieldset {
     background-color: #d9d9d9;
@@ -188,7 +179,7 @@ main {
   
   .top {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     font-size: 25px;
     font-weight: bold;
   }
@@ -205,6 +196,7 @@ main {
   }
   
   .contain .middle {
+    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,77 +207,10 @@ main {
     height: 170px;
   }
   
-  .contain .middle_left {
-    font-size: 30px;
-  }
-  
-  .contain .middle_left p {
-    opacity: 0.7;
-  }
-  
-  .contain .middle_left h2 {
-    font-size: 5rem;
-    padding-top: 25px;
-  }
-  
+
   .contain .temp {
     display: flex;
     font-size: 25px;
     align-items: center;
     justify-content: center;
   }
-  
-  .box_both .contain {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
-  .box_both .info_both {
-    justify-content: center;
-  }
-  
-  .box_both .title {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  #temp:checked ~ .box_pop,
-  #temp:checked ~ .find_x .box_pop,
-  #temp:checked ~ .find_x .box_both,
-  #pop:checked ~ .box_temp,
-  #pop:checked ~ .find_x .box_temp,
-  #pop:checked ~ .find_x .box_both,
-  #both:checked ~ .find_x .box_temp,
-  #both:checked ~ .find_x .box_pop {
-    display: none;
-  }
-  
-  /* ============== find_x ============== */
-  .find_x{
-    text-align: center;
-  }
-  
-  .find_x h3{
-    font-size: 35px;
-    margin-bottom: 30px;
-  }
-  
-  .find_x form {
-    display: inline-block;
-  }
-  
-  .find_x .select_form {
-    font-size: 18px;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-  }
-  
-  #number_x {
-    width: 50px;
-  }
-  
-  .find_x .box {
-    margin: 30px 0;
-  }
-  
