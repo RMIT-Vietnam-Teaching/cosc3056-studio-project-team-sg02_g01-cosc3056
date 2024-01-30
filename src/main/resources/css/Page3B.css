@@ -1,0 +1,274 @@
+/* ============== common ============== */
+main {
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+  }
+  
+  h4 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    display: inline-block;
+    margin: 0;
+  }
+  
+  input,
+  select {
+    font-size: 16px;
+  }
+  
+  p,
+  h2 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+  
+  .top .button label {
+    position: relative;
+  }
+  
+  .top .button label span {
+    color: #fff;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #a3a3a3;
+    border-radius: 50%;
+  }
+  
+  .top .button label span::before {
+    content: "#";
+    position: absolute;
+    right: 19px;
+    top: -12px;
+  }
+  
+  .top .button .percen_button span::before {
+    content: "%";
+    position: absolute;
+    right: 7px;
+  }
+  
+  #absolute:checked ~ span,
+  #percentage:checked ~ span {
+    background-color: black;
+  }
+  
+  /* ============== select area ============== */
+  .select_form,
+  .find_x {
+    width: 95%;
+    margin: 50px auto 0;
+  }
+  
+  fieldset {
+    background-color: #d9d9d9;
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  legend {
+    text-shadow: 1px 1px #fff;
+    margin-left: 20px;
+    font-size: 21px;
+  }
+  
+  .radio_option {
+    margin-right: 50px;
+    font-size: 19px;
+  }
+  
+  #country:checked ~ .area .state_dropdown,
+  #country:checked ~ .area .city_dropdown,
+  #state:checked ~ .area .city_dropdown,
+  #city:checked ~ .area .state_dropdown {
+    display: none;
+  }
+  
+  .area {
+    display: grid;
+    margin: 30px 0 10px;
+    grid-template-columns: repeat(3, 3fr);
+    gap: 20px;
+  }
+  
+  .area div {
+    width: 100%;
+  }
+  
+  .area select {
+    width: 100%;
+  }
+  
+  .select_year {
+    width: 70%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .select_year h4 {
+    display: inline;
+  }
+  
+  .select_year input {
+    margin-left: 5px;
+    width: 70px;
+  }
+  
+  button {
+    border: none;
+    display: block;
+    margin: 40px auto 30px;
+    color: white;
+    background-color: rgb(50, 88, 184);
+    padding: 8px 40px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  
+  button:hover {
+    background-color: rgb(235, 235, 49);
+    color: black;
+  }
+  
+  /* ============== select display ============== */
+  hr {
+    margin-bottom: 30px;
+  }
+  
+  .display {
+    margin-right: 150px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  #temp:checked + label h3,
+  #pop:checked + label h3,
+  #both:checked + label h3 {
+    text-decoration: underline;
+    text-shadow: 0.4px 0 0 currentColor;
+    color: rgb(50, 88, 184);
+  }
+  
+  label h3:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* ============== box ============== */
+  .box {
+    border: 1px solid black;
+    margin: 30px 30px;
+    padding: 10px 40px;
+    text-align: center;
+  }
+  
+  .box .title {
+    font-size: 30px;
+    opacity: 0.5;
+  }
+  
+  .top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  .contain {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .contain .region {
+    width: 300px;
+  }
+  
+  .contain .middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .contain .middle img,
+  .contain .temp img {
+    height: 170px;
+  }
+  
+  .contain .middle_left {
+    font-size: 30px;
+  }
+  
+  .contain .middle_left p {
+    opacity: 0.7;
+  }
+  
+  .contain .middle_left h2 {
+    font-size: 5rem;
+    padding-top: 25px;
+  }
+  
+  .contain .temp {
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .box_both .contain {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .box_both .info_both {
+    justify-content: center;
+  }
+  
+  .box_both .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  #temp:checked ~ .box_pop,
+  #temp:checked ~ .find_x .box_pop,
+  #temp:checked ~ .find_x .box_both,
+  #pop:checked ~ .box_temp,
+  #pop:checked ~ .find_x .box_temp,
+  #pop:checked ~ .find_x .box_both,
+  #both:checked ~ .find_x .box_temp,
+  #both:checked ~ .find_x .box_pop {
+    display: none;
+  }
+  
+  /* ============== find_x ============== */
+  .find_x form {
+    display: inline-block;
+  }
+  
+  .find_x .select_form {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+  
+  #number_x {
+    width: 50px;
+  }
+  
+  .find_x .box {
+    margin: 30px 0;
+  }
+  

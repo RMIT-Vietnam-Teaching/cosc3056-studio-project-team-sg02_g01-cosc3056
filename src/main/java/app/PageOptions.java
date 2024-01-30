@@ -101,7 +101,7 @@ public class PageOptions implements Handler {
                 </a>
 
                 <!-- box 4 -->
-                <a href="">
+                <a href="page3B.html">
                     <div class="box">
                         <img src="logo-web.jpg" alt="">
                         <h3>See regions with similar trends</h3>

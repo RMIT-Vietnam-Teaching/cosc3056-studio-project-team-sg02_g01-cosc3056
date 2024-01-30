@@ -2,6 +2,7 @@ package app;
 
 import java.util.ArrayList;
 
+import app.Objects.Countries;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -32,10 +33,11 @@ public class PageST3B implements Handler {
 
         // Add some Head information
         html = html + "<head>" + 
-               "<title>Subtask 3.2</title>";
+               "<title>See similar regions</title>";
 
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
+        html = html + "<link rel='stylesheet' type='text/css' href='Page3B.css' />";
         html = html + "</head>";
 
         // Add the body
@@ -44,39 +46,100 @@ public class PageST3B implements Handler {
         // Add the topnav
         // This uses a Java v15+ Text Block
         html = html + """
-            <div class='topnav'>
-                <a href='/'>Homepage</a>
-                <a href='mission.html'>Our Mission</a>
-                <a href='page2A.html'>Sub Task 2.A</a>
-                <a href='page2B.html'>Sub Task 2.B</a>
-                <a href='page3A.html'>Sub Task 3.A</a>
-                <a href='page3B.html'>Sub Task 3.B</a>
-            </div>
+            <header>
+                <div class="nav">
+                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <p>Website name</p>
+                    <a class="aboutUs visited" href="mission.html">About Us</a>
+                    <a class="getStarted" href="options.html">Options</a>
+                </div>
+            </header>
         """;
 
-        // Add header content block
+        // Open main
+        html = html + "<main>";
+
+        // Select area
         html = html + """
-            <div class='header'>
-                <h1>Subtask 3.B</h1>
-            </div>
+            <div class="select_form">
+                <h1>See similar regions</h1>
         """;
 
-        // Add Div for page Content
-        html = html + "<div class='content'>";
-
-        // Add HTML for the page content
+        // Open select region
         html = html + """
-            <p>Subtask 3.B page content</p>
-            """;
+                <form class="form" action="/page3B.html" method="post">
+                    <fieldset>
+                        <legend><h3>Region level</h3></legend>
+        """;
 
-        // Close Content div
-        html = html + "</div>";
+        // Radio options
+        html = html + """
+                        <input style="margin-left: 150px" type="radio" name="region_options" id="country" checked />
+                        <label class="radio_option" for="country">Country</label>
+                        <input type="radio" name="region_options" id="state" />
+                        <label class="radio_option" for="state">State</label>
+                        <input type="radio" name="region_options" id="city" />
+                        <label class="region_options" for="city">City</label>
+        """;
 
+        // Open drop-down options
+        html = html + """
+                        <div class="area">
+        """;
+
+        // Country
+        html = html + """
+                            <div class="country_dropdown">
+                                <label for="countrySubmit"><h4>Country</h4></label>
+                                <select name="countrySubmit" id="countrySubmit" required>
+                                    <option value="" disabled hidden>-Select country-</option>
+                               
+        """;
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<Countries> countries = jdbc.getCountries();
+        for (Countries country : countries){
+            html = html + String.format("<option value=\"%s\">%s</option>", country.getCode(), country.getName());
+        }
+
+        html = html + """
+                                </select>
+                            </div>
+        """;
+
+        // Tui đang suy nghĩ làm sao để khi vừa set cái country là nó sẽ tự chạy 
+        // ArrayList của cái state thuộc country đó luôn
+        // Nhưng mà tui không biết, cíu!!
+        // State
+        html = html + """
+                            <div class="state_dropdown">
+                                <label for="stateSubmit"><h4>State</h4></label>
+                                <select name="stateSubmit" id="stateSubmit" required>
+                                    <option value="" disabled hidden>-Select state-</option>
+                                
+        """;
+
+        // Thêm options vào đây nè
+
+        html = html + """
+                                </select>
+                            </div>
+                """;
+
+
+        // Close main
+        html = html + "</main>";
+    
         // Footer
         html = html + """
-            <div class='footer'>
-                <p>COSC3056 - Studio Project Starter Code</p>
-            </div>
+            <footer>
+                <a href="/"><img src="logo-web.jpg" alt="logo"/></a>
+                <div class="link">
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                    <a href="">Link</a>
+                </div>
+            </footer>        
         """;
 
         // Finish the HTML webpage
