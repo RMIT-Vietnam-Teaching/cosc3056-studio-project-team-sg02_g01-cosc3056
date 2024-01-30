@@ -233,7 +233,7 @@ public class PageST3B implements Handler {
     
             <!-- contain -->
             <div class="contain">
-              <img class="region" src="../img/area.jpg" alt="" />
+              <img class="region" src="area.jpg" alt="" />
     
               <!-- middle -->
               <div class="middle">
@@ -241,7 +241,7 @@ public class PageST3B implements Handler {
                   <p>In 10 years</p>
                   <h2>0.13%</h2>
                 </div>
-                <img src="../img/icon-increase.jpg" alt="" />
+                <img src="icon-increase.jpg" alt="" />
               </div>
     
               <!-- temp -->
@@ -252,7 +252,7 @@ public class PageST3B implements Handler {
                   <p>1960</p>
                   <p><strong>C</strong></p>
                 </div>
-                <img src="../img/icon-temp.jpg" alt="" />
+                <img src="icon-temp.jpg" alt="" />
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ public class PageST3B implements Handler {
     
             <!-- contain -->
             <div class="contain">
-              <img class="region" src="../img/area.jpg" alt="" />
+              <img class="region" src="img/area.jpg" alt="" />
     
               <!-- middle -->
               <div class="middle">
@@ -288,7 +288,7 @@ public class PageST3B implements Handler {
                   <p>In 10 years</p>
                   <h2>0.13%</h2>
                 </div>
-                <img src="../img/icon-increase.jpg" alt="" />
+                <img src="icon-increase.jpg" alt="" />
               </div>
     
               <!-- temp -->
@@ -299,7 +299,7 @@ public class PageST3B implements Handler {
                   <p>1960</p>
                   <p><strong>C</strong></p>
                 </div>
-                <img src="../img/icon-temp.jpg" alt="" />
+                <img src="icon-temp.jpg" alt="" />
               </div>
             </div>
           </div>
@@ -344,7 +344,7 @@ public class PageST3B implements Handler {
     
               <!-- contain -->
               <div class="contain">
-                <img class="region" src="../img/area.jpg" alt="" />
+                <img class="region" src="area.jpg" alt="" />
     
                 <!-- middle -->
                 <div class="middle">
@@ -352,7 +352,7 @@ public class PageST3B implements Handler {
                     <p>In 10 years</p>
                     <h2>0.13%</h2>
                   </div>
-                  <img src="../img/icon-increase.jpg" alt="" />
+                  <img src="icon-increase.jpg" alt="" />
                 </div>
     
                 <!-- temp -->
@@ -363,7 +363,7 @@ public class PageST3B implements Handler {
                     <p>1960</p>
                     <p><strong>C</strong></p>
                   </div>
-                  <img src="../img/icon-temp.jpg" alt="" />
+                  <img src="icon-temp.jpg" alt="" />
                 </div>
               </div>
             </div>
@@ -395,7 +395,7 @@ public class PageST3B implements Handler {
                     <p>In 10 years</p>
                     <h2>0.13%</h2>
                   </div>
-                  <img src="../img/icon-increase.jpg" alt="" />
+                  <img src="icon-increase.jpg" alt="" />
                 </div>
     
                 <!-- temp -->
@@ -406,7 +406,7 @@ public class PageST3B implements Handler {
                     <p>1960</p>
                     <p><strong>C</strong></p>
                   </div>
-                  <img src="../img/icon-temp.jpg" alt="" />
+                  <img src="img/icon-temp.jpg" alt="" />
                 </div>
               </div>
             </div>
@@ -429,7 +429,7 @@ public class PageST3B implements Handler {
     
               <!-- contain -->
               <div class="contain">
-                <img class="region" src="../img/area.jpg" alt="" />
+                <img class="region" src="img/area.jpg" alt="" />
     
                 <!-- middle -->
                 <div class="info_both">
@@ -439,7 +439,7 @@ public class PageST3B implements Handler {
                       <p>In 10 years</p>
                       <h2>0.13%</h2>
                     </div>
-                    <img src="../img/icon-increase.jpg" alt="" />
+                    <img src="icon-increase.jpg" alt="" />
                   </div>
                 </div>
     
@@ -450,7 +450,7 @@ public class PageST3B implements Handler {
                       <p>In 10 years</p>
                       <h2>0.13%</h2>
                     </div>
-                    <img src="../img/icon-increase.jpg" alt="" />
+                    <img src="icon-increase.jpg" alt="" />
                   </div>
                 </div>
     
@@ -462,7 +462,7 @@ public class PageST3B implements Handler {
                     <p>1960</p>
                     <p><strong>C</strong></p>
                   </div>
-                  <img src="../img/icon-temp.jpg" alt="" />
+                  <img src="icon-temp.jpg" alt="" />
                 </div>
               </div>
             </div>
