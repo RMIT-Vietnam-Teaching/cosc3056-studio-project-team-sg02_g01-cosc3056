@@ -713,7 +713,7 @@ public class JDBCConnection {
         Connection connection = null;
 
         String query = String.format("""
-            SELECT * FROM cities WHERE countryCode = %s ORDER BY name
+            SELECT * FROM cities WHERE countryCode = "%s" ORDER BY name
                 """, CountryCode);
 
         try {
@@ -767,7 +767,7 @@ public class JDBCConnection {
         Connection connection = null;
 
         String query = String.format("""
-            SELECT * FROM states WHERE countryCode = %s ORDER BY name
+            SELECT * FROM states WHERE countryCode = "%s" ORDER BY name
                 """, CountryCode);
 
         try {
