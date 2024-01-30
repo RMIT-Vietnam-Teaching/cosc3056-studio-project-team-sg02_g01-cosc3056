@@ -82,16 +82,50 @@ public class PageST2B_cities implements Handler {
         //Open main
         html += "<main>";
 
-
+//Switch region types
+         //Region selector
+         html += """
+            <!-- Region selector -->
+            <div class="region_select">
+                <div class="region_boxes">
+                    <a href="page2A_world.html">
+                        <div class="box">
+                            <img src="logo-web.jpg" alt="world">
+                            <h5>World</h5>
+                        </div>
+                    </a>
+                    <a href="page2A_country.html">
+                        <div class="box">
+                            <img src="country-logo.png" alt="countries">
+                            <h5>Countries</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_states">
+                        <div class="box">
+                            <img src="state-logo.png" alt="states">
+                            <h5>States</h5>
+                        </div>
+                    </a>
+                    <a href="page2B_cities" class ="select">
+                        <div class="box">
+                            <img src="city-logo.png" alt="cities">
+                            <h5>Cities</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+                """;   
         //Main_top - Top options
-        
+
         html += """
             <div class='main_section' id='main_section_top'>
             <div id='top_options'>
             """;
-                   //search bar for country
+               
+
+            //search bar for country
         html += """                    
-                <div class='search bar'>
+                <div class='search_bar'>
                     <label for='search_bar'> Search country here </label>
                     <input list='search_bar_list', id='search_bar', name='country', form='lvl2B', placeholder='Search for country here' required />
                     <datalist id ='search_bar_list'>
@@ -105,6 +139,7 @@ public class PageST2B_cities implements Handler {
                     </datalist>
                 </div>
                 """;
+            //end of search bar for country
         html+= """
             <div class='options'>
                 <div style='padding-bottom: 10px;'>
@@ -159,27 +194,20 @@ public class PageST2B_cities implements Handler {
         html += """
                 </datalist>
             </div>
-        """;    //end div for year option
+        """;    
+        //end div for year option
         html += """
                     </div>
                 </form>
-            </div>
-            </div>
             </div>
 
                 """;
                 
         //Open Main_bottom 
-        html += "<div class='main_section' id='main_section_bottom'>";
         html += """
             <div id='bottom_options'>
                 <div style='display: flex; justify-content: space-between;'>
-                    <div id='display_by'>
-                        <span style='visibility: hidden;'>Blank</span>
-                        <span><b>Display results by: </b></span>
-                        <a href='/page2B_cities' style='pointer-events: none;' id = 'selected' class='select1or2'>Cities</a>
-                        <a href='/page2B_states' class='select1or2'>States</a>
-                        </div>"""//display by end here
+                    """//display by end here
                                 +
                        """
                         <div id='sort_options'>
@@ -199,7 +227,7 @@ public class PageST2B_cities implements Handler {
             } 
         }
                            
-        html+=          """
+        html+= """
                                     </select>
                                 </div>
                                 """//sort by options end here
@@ -208,8 +236,9 @@ public class PageST2B_cities implements Handler {
                             </div>
                         </div>
                     </div>
-                    <button type='submit' form='lvl2B' class='btn btn-success'>Submit</button>
+                    <button type='submit' form='lvl2B' class='btn_success' id= 'submit_btn'>Submit</button>
                 </div>
+        </div>
                     """;//end of all divs
 
         
