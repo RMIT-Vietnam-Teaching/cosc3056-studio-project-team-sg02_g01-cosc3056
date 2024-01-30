@@ -140,6 +140,29 @@ main {
     background-color: rgb(235, 235, 49);
     color: black;
   }
+
+  /* ============== ranking box ============== */
+  .ranking 
+  {
+    border: 1px solid black;
+    margin: 30px 30px;
+    padding: 20px 40px;
+    text-align: center;
+  }
+  
+  .ranking .ranking_title
+  {
+    font-size: 30px;
+  }
+
+  .ranking .elements
+  {
+    display: grid;
+    align-items: center;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
   
   /* ============== select display ============== */
   hr {
@@ -189,10 +212,6 @@ main {
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 30px;
-  }
-  
-  .contain .region {
-    width: 300px;
   }
   
   .contain .middle {
