@@ -73,7 +73,7 @@ public class PageST2A_country implements Handler {
             <header>
                 <div class="nav">
                     <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
-                    <p>Website name</p>
+                    <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
                 </div>
@@ -251,7 +251,7 @@ public class PageST2A_country implements Handler {
                     </a>
                     <a href="page2B_states">
                         <div class="box">
-                            <img src="us-state-logo.png" alt="states">
+                            <img src="state-logo.png" alt="states">
                             <h5>States</h5>
                         </div>
                     </a>
