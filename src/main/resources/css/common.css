@@ -112,6 +112,7 @@ header {
    font-size: 16px;
    text-decoration: none;
    font-weight: bold;
+   transition:0.25s;
  }
  
  .getStarted:hover {
