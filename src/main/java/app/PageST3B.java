@@ -214,7 +214,7 @@ public class PageST3B implements Handler {
             Display similarity by:
           </p>
           <input type="radio" name="select_display" id="temp" checked hidden />
-          <label class="display" for="temp"><h3>Tempurature</h3></label>
+          <label class="display" for="temp"><h3>Temperature</h3></label>
           """;
           if (RegionOption.equals("Country")){
               html = html + """
@@ -482,13 +482,8 @@ public class PageST3B implements Handler {
               </div>
             </div>
           </div>
-                """;}
-        
-
-
-
-        
-
+        """;
+        }
 
         // Close main
         html = html + "</main>";
