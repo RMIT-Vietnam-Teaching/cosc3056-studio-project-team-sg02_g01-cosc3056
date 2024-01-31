@@ -468,6 +468,16 @@ public class PageST2A_country implements Handler {
                         </div>
                         <img src='icon-temp.jpg' height='100px'>
                     </div>
+                    <div class='result_row_3' style="display: flex; justify-content: center;">
+                        """;
+                
+                html += String.format("""
+                        In %d years here, on average, every %.2e people %s corresponds to 1°C %s.
+                        """, result.EndYear - result.StartYear, Math.abs(result.PopDifference / result.TempDifference),
+                        (result.PopDifference > 0?"increase":"decrease"), (result.TempDifference > 0?"increase":"decrease"));        
+                        
+                html += """
+                    </div>
                 </div>
                 <div class='pop_slide carousel-item
                 """
@@ -541,6 +551,16 @@ public class PageST2A_country implements Handler {
                         </div>
                         <img src='icon-population.jpg' height='100px'>
                     </div>
+                    <div class='result_row_3' style="display: flex; justify-content: center;">
+                    """;
+            
+            html += String.format("""
+                    In %d years here, on average, every %.2e people %s corresponds to 1°C %s.
+                    """, result.EndYear - result.StartYear, Math.abs(result.PopDifference / result.TempDifference),
+                    (result.PopDifference > 0?"increase":"decrease"), (result.TempDifference > 0?"increase":"decrease"));        
+                    
+            html += """
+                </div>
                 </div>
                 <button class='carousel-control-prev' type='button' data-bs-target=
                 """
