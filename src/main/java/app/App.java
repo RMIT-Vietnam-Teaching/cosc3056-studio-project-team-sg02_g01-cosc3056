@@ -1,8 +1,6 @@
 package app;
 
-import java.util.ArrayList;
 
-import app.Objects.*;
 import app.Page2B.*;
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
