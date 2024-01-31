@@ -85,8 +85,6 @@ main {
   #world:checked ~ .area .country_dropdown,
   #world:checked ~ .area .city_dropdown,
   #world:checked ~ .area .state_dropdown,
-
-  #one:checked ~ .area2 .year_input_field,
   #one:checked ~ .area2 .year_input_field2
   {
     display: none;
