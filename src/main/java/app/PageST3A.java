@@ -44,15 +44,15 @@ public class PageST3A implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/LVL1-html-css/html/SubtaskA.html"
+                    <a class="logo" href="/"
                     ><img src="new-logo.png" alt="logo"
                     /></a>
                     <p>Temperature Time Machine</p>
-                    <a class="aboutUs visited" href="/LVL1-html-css/html/SubtaskB.html"
+                    <a class="aboutUs visited" href="mission.html"
                     >About us</a
                     >
-                    <a class="getStarted" href="/LVL1-html-css/html/OptionsPage.html"
-                    >Get started</a
+                    <a class="getStarted" href="options.html"
+                    >Options</a
                     >
                 </div>
             </header>
@@ -162,23 +162,23 @@ public class PageST3A implements Handler {
         html = html + """
             <label>Start year: </label>
 
-            <div class="field1">
+            <div class="field field1">
               <input type="number" name="startYear" id="startYear" min="1750" max="2015"required />
             </div>
             
-            <div class="field2">
+            <div class="field field2">
               <input type="number" name="startYear2" id="startYear2" min="1750" max="2015"required  />
             </div>
 
-            <div class="field3">
+            <div class="field field3">
               <input type="number" name="startYear3" id="startYear3" min="1750" max="2015"required  />
             </div>
 
-            <div class="field4">
+            <div class="field field4">
               <input type="number" name="startYear4" id="startYear4" min="1750" max="2015"required  />
             </div>
 
-            <div class="field5">
+            <div class="field field5">
               <input type="number" name="startYear5" id="startYear5" min="1750" max="2015"required  />
             </div>
                 """;
