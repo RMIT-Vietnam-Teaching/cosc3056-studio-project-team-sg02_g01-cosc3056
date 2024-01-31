@@ -85,7 +85,21 @@ main {
   #world:checked ~ .area .country_dropdown,
   #world:checked ~ .area .city_dropdown,
   #world:checked ~ .area .state_dropdown,
-  #one:checked ~ .area2 .year_input_field2
+  
+  #one:checked ~  .field5,
+  #one:checked ~  .field4,
+  #one:checked ~  .field3,
+  #one:checked ~  .field2,
+  
+  #two:checked ~  .field5,
+  #two:checked ~  .field4,
+  #two:checked ~  .field3,
+  
+  #three:checked ~  .field5,
+  #three:checked ~  .field4,
+  
+  #four:checked ~  .field5
+
   {
     display: none;
   }
@@ -105,12 +119,6 @@ main {
     width: 100%;
   }
 
-  .area2
-  {
-    display: flex;
-    margin: 30px 0 10px;
-    grid-template-columns: auto;
-  }
   
   .select_year {
     width: 70%;

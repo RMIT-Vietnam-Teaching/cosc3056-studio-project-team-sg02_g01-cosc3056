@@ -91,8 +91,6 @@
           <!-- select year period -->
           <fieldset>
               <legend><h3>Number of starting years to compare</h3></legend>
-              
-              <div class="select_year">
                 <input type="radio"name="quantity_options"id="one" checked/>
                 <label class="radio_option" for="one">1</label>
                 
@@ -107,26 +105,29 @@
 
                 <input type="radio" name="quantity_options" id="five" />
                 <label class="radio_option" for="five">5</label>
-              </div>
             
-            <div class="area2">
               <label>Start year: </label>
-              <div class="year_input_field">
-                  <input type="number" name="startYear" id="startYear" min="1750" max="2015"required disabled/>
-              </div>
-              <div class="year_input_field2">
-                  <input type="number" name="startYear2" id="startYear2" min="1750" max="2015"required disabled/>
-              </div>
-              <div class="year_input_field3">
-                  <input type="number" name="startYear3" id="startYear3" min="1750" max="2015"required disabled/>
-              </div>
-              <div class="year_input_field4">
-                  <input type="number" name="startYear4" id="startYear4" min="1750" max="2015"required disabled/>
-              </div>
-              <div class="year_input_field5">
-                  <input type="number" name="startYear5" id="startYear5" min="1750" max="2015"required disabled/>
-              </div>
-            </div>
+
+                  <div class="field1">
+                    <input type="number" name="startYear" id="startYear" min="1750" max="2015"required />
+                  </div>
+                  
+                  <div class="field2">
+                    <input type="number" name="startYear2" id="startYear2" min="1750" max="2015"required  />
+                  </div>
+
+                  <div class="field3">
+                    <input type="number" name="startYear3" id="startYear3" min="1750" max="2015"required  />
+                  </div>
+
+                  <div class="field4">
+                    <input type="number" name="startYear4" id="startYear4" min="1750" max="2015"required  />
+                  </div>
+
+                  <div class="field5">
+                    <input type="number" name="startYear5" id="startYear5" min="1750" max="2015"required  />
+                  </div>
+            
 
               <label>
                 <h4>Time period:</h4>
