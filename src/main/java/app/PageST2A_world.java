@@ -248,7 +248,7 @@ public class PageST2A_world implements Handler {
                     <li><a href="page2B_cities">City</a></li>
                   </ul>
                   <ul><p>Similarity trends of Temperature - Population</p>
-                    <li><a href="">Different time periods</a></li>
+                    <li><a href="page3A.html">Different time periods</a></li>
                     <li><a href="page3B.html">Region with similar trends</a></li>
                   </ul>
                 </div>
