@@ -130,7 +130,7 @@ header {
  
  /* ================ footer ================ */
  footer {
-   background-color: rgb(113, 126, 240);
+   background-color: #CFE1F4;
    padding: 40px;
    display: flex;
    justify-content: space-around;
