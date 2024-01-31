@@ -125,7 +125,7 @@ public class PageOptions implements Handler {
                 </a>
             </div>
         """;
-
+        
         // Close main
         html = html + "</main>";
 
