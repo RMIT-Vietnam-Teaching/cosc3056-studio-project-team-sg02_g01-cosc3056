@@ -131,14 +131,15 @@ header {
  /* ================ footer ================ */
  footer {
    background-color: #CFE1F4;
-   padding: 40px;
+   padding: 10px;
    display: flex;
    justify-content: space-around;
    align-items: center;
  }
  
  footer img {
-   width: 150px;
+   width: 250px;
+
  }
  
  footer .link {

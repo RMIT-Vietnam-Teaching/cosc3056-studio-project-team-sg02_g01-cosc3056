@@ -243,7 +243,7 @@ public class PageMission implements Handler {
         // Footer
         html = html + """
             <footer>
-                <a href="/"><img src="logo-web.jpg" alt="logo"/></a>
+                <a href="/"><img src="new-logo.png" alt="logo"/></a>
                 <div class="link">
                   <ul><p>Temperature - Population change</p>
                     <li><a href="page2A_world.html">World</a></li>

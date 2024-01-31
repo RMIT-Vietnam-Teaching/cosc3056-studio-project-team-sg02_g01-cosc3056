@@ -42,7 +42,7 @@ public class PageIndex implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
@@ -226,7 +226,7 @@ public class PageIndex implements Handler {
         // Footer
         html = html + """
             <footer>
-                <a href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                <a href="/"><img src="new-logo.png" alt="logo" /></a>
                 <div class="link">
                   <ul><p>Temperature - Population change</p>
                     <li><a href="page2A_world.html">World</a></li>
