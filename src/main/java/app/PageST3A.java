@@ -31,7 +31,7 @@ public class PageST3A implements Handler {
 
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
-        html = html + "<link rel='stylesheet' href='../css/LVL3-A.css' />";
+        html = html + "<link rel='stylesheet' href='src/main/resources/css/Page3A.css' />";
 
         // Close head
         html = html + "</head>";
