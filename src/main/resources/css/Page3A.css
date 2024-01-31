@@ -60,12 +60,6 @@ main {
     background-color: black;
   }
   
-  /* ============== select area ============== */
-  .select_form,
-  .find_x {
-    width: 95%;
-    margin: 50px auto 0;
-  }
   
   fieldset {
     background-color: #d9d9d9;
@@ -74,11 +68,11 @@ main {
   }
   
   legend {
-    text-shadow: 1px 1px #fff;
+    text-shadow: 1px 1px #ffffff;
     margin-left: 20px;
     font-size: 21px;
   }
-  
+
   .radio_option {
     margin-right: 50px;
     font-size: 19px;
@@ -87,7 +81,26 @@ main {
   #country:checked ~ .area .state_dropdown,
   #country:checked ~ .area .city_dropdown,
   #state:checked ~ .area .city_dropdown,
-  #city:checked ~ .area .state_dropdown {
+  #city:checked ~ .area .state_dropdown,
+  #world:checked ~ .area .country_dropdown,
+  #world:checked ~ .area .city_dropdown,
+  #world:checked ~ .area .state_dropdown,
+  
+  #one:checked ~  .field5,
+  #one:checked ~  .field4,
+  #one:checked ~  .field3,
+  #one:checked ~  .field2,
+  
+  #two:checked ~  .field5,
+  #two:checked ~  .field4,
+  #two:checked ~  .field3,
+  
+  #three:checked ~  .field5,
+  #three:checked ~  .field4,
+  
+  #four:checked ~  .field5
+
+  {
     display: none;
   }
   
@@ -105,6 +118,7 @@ main {
   .area select {
     width: 100%;
   }
+
   
   .select_year {
     width: 70%;
@@ -143,27 +157,37 @@ main {
     color: black;
   }
   
-  /* ============== select display ============== */
-  hr {
-    margin-bottom: 30px;
+  .fbutton
+  {
+    background-color: rgb(23, 251, 6);
+  }
+
+  /* ============== ranking box ============== */
+  .ranking 
+  {
+    border: 1px solid black;
+    margin: 30px 200px;
+    padding: 20px 30px;
+    text-align: center;
   }
   
-  .display {
-    margin-right: 150px;
-    cursor: pointer;
-    font-size: 20px;
+  .ranking .ranking_maintitle
+  {
+    font-size: 30px;
+    align-self: center;
+  }
+
+  .ranking .elements
+  {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 100px auto auto auto auto;
+    align-items: center;
   }
   
-  #temp:checked + label h3,
-  #pop:checked + label h3,
-  #both:checked + label h3 {
-    text-decoration: underline;
-    text-shadow: 0.4px 0 0 currentColor;
-    color: rgb(50, 88, 184);
-  }
-  
-  label h3:hover {
-    transform: translateY(-3px);
+  .ranking .elements .col_title
+  {
+    text-align: top;
   }
   
   /* ============== box ============== */
@@ -181,26 +205,34 @@ main {
   
   .top {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     font-size: 25px;
     font-weight: bold;
   }
   
   .contain {
+    padding: 0  100px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 30px;
   }
-  
-  .contain .region {
-    width: 300px;
+
+  .contain__left{
+    text-align: start;
+  }
+
+  .contain__left p{
+    font-weight: bold;
+    font-size: 25px;
   }
   
   .contain .middle {
+    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 35px;
   }
   
   .contain .middle img,
@@ -208,77 +240,10 @@ main {
     height: 170px;
   }
   
-  .contain .middle_left {
-    font-size: 30px;
-  }
-  
-  .contain .middle_left p {
-    opacity: 0.7;
-  }
-  
-  .contain .middle_left h2 {
-    font-size: 5rem;
-    padding-top: 25px;
-  }
-  
+
   .contain .temp {
     display: flex;
     font-size: 25px;
     align-items: center;
     justify-content: center;
   }
-  
-  .box_both .contain {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
-  .box_both .info_both {
-    justify-content: center;
-  }
-  
-  .box_both .title {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  #temp:checked ~ .box_pop,
-  #temp:checked ~ .find_x .box_pop,
-  #temp:checked ~ .find_x .box_both,
-  #pop:checked ~ .box_temp,
-  #pop:checked ~ .find_x .box_temp,
-  #pop:checked ~ .find_x .box_both,
-  #both:checked ~ .find_x .box_temp,
-  #both:checked ~ .find_x .box_pop {
-    display: none;
-  }
-  
-  /* ============== find_x ============== */
-  .find_x{
-    text-align: center;
-  }
-  
-  .find_x h3{
-    font-size: 35px;
-    margin-bottom: 30px;
-  }
-  
-  .find_x form {
-    display: inline-block;
-  }
-  
-  .find_x .select_form {
-    font-size: 18px;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-  }
-  
-  #number_x {
-    width: 50px;
-  }
-  
-  .find_x .box {
-    margin: 30px 0;
-  }
-  
