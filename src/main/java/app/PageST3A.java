@@ -45,7 +45,7 @@ public class PageST3A implements Handler {
             <header>
                 <div class="nav">
                     <a class="logo" href="/LVL1-html-css/html/SubtaskA.html"
-                    ><img src="../img/logo.jpg" alt="logo"
+                    ><img src="new-logo.png" alt="logo"
                     /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="/LVL1-html-css/html/SubtaskB.html"
@@ -304,12 +304,12 @@ public class PageST3A implements Handler {
             <div class="contain__left">
                 <p>1750 - 1850 </p>
                 <p>USA</p>
-                <!-- <img style="width: 220px;" src="../img/area.jpg" alt=""> -->
+                <!-- <img style="width: 220px;" src="area.jpg" alt=""> -->
             </div>
             <!-- middle -->
             <div class="middle">
                 <h2>+0.5c</h2>
-                <img src="../img/icon-increase.jpg" alt="" />
+                <img src="icon-increase.jpg" alt="" />
             </div>
           <div class="temp">
             <div class="temp_left">
@@ -318,7 +318,7 @@ public class PageST3A implements Handler {
               <p>1750</p>
               <p><strong>10 C</strong></p>
             </div>
-            <img src="../img/icon-temp.jpg" alt="" />
+            <img src="icon-temp.jpg" alt="" />
           </div>
         </div>
     </div>
@@ -329,7 +329,7 @@ public class PageST3A implements Handler {
         // Footer
         html = html + """
             <footer>
-                <a href="/"><img src="logo-web.jpg" alt="logo"/></a>
+                <a href="/"><img src="new-logo.png" alt="logo"/></a>
                 <div class="link">
                   <ul><p>Temperature - Population change</p>
                     <li><a href="page2A_world.html">World</a></li>
