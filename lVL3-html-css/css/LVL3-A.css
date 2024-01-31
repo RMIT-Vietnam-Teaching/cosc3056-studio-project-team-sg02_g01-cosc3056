@@ -216,6 +216,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 35px;
   }
   
   .contain .middle img,
