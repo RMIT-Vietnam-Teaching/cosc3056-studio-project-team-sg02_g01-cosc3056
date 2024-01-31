@@ -364,6 +364,16 @@ public class PageST2A_world implements Handler {
                         </div>
                         <img src='icon-temp.jpg' height='100px'>
                     </div>
+                    <div class='result_row_3' style="display: flex; justify-content: center;">
+                    """;
+            
+            html += String.format("""
+                    In %d years, every %.2e people %s corresponds to 1°C %s on land.
+                    """, result.EndYear - result.StartYear, Math.abs(result.PopDifference / result.tempDifferenceLand),
+                    (result.PopDifference > 0?"increase":"decrease"), (result.tempDifferenceLand > 0?"increase":"decrease"));        
+                    
+            html += """
+                </div>
                 </div>
 
             <!-- ----Slide 2---- -->
@@ -440,6 +450,16 @@ public class PageST2A_world implements Handler {
                             </div>
                         </div>
                         <img src='icon-temp.jpg' height='100px'>
+                    </div>
+                    <div class='result_row_3' style="display: flex; justify-content: center;">
+                    """;
+            
+            html += String.format("""
+                    In %d years, every %.2e people %s corresponds to 1°C %s of land & ocean.
+                    """, result.EndYear - result.StartYear, Math.abs(result.PopDifference / result.tempDifferenceLandOcean),
+                    (result.PopDifference > 0?"increase":"decrease"), (result.tempDifferenceLandOcean > 0?"increase":"decrease"));        
+                    
+            html += """
                     </div>
                 </div>
 
