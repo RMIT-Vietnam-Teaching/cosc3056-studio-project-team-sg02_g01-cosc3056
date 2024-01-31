@@ -245,10 +245,16 @@ public class PageST2A_world implements Handler {
             <footer>
                 <a href="/"><img src="logo-web.jpg" alt="logo" /></a>
                 <div class="link">
-                    <a href="">Link</a>
-                    <a href="">Link</a>
-                    <a href="">Link</a>
-                    <a href="">Link</a>
+                  <ul><p>Temperature - Population change</p>
+                    <li><a href="page2A_world.html">World</a></li>
+                    <li><a href="page2A_country.html">Country</a></li>
+                    <li><a href="page2B_states">State</a></li>
+                    <li><a href="page2B_cities">City</a></li>
+                  </ul>
+                  <ul><p>Similarity trends of Temperature - Population</p>
+                    <li><a href="">Different time periods</a></li>
+                    <li><a href="page3B.html">Region with similar trends</a></li>
+                  </ul>
                 </div>
             </footer>
             """;
