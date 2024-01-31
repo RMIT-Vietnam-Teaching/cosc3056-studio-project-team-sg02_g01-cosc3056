@@ -145,7 +145,7 @@ public class PageOptions implements Handler {
                   </ul>
                 </div>
             </footer>
-        """;
+         """;
 
         // Finish the HTML webpage
         html = html + "</body>" + "</html>";
