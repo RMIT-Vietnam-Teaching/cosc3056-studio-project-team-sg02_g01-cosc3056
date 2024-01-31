@@ -41,7 +41,7 @@ public class PageST2A_world implements Handler {
                """
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Lvl2A</title>
+                <title>lvl2A World</title>
                        """;
 
         // Add some CSS (external file)
@@ -65,7 +65,7 @@ public class PageST2A_world implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
@@ -228,13 +228,19 @@ public class PageST2A_world implements Handler {
         if (year_start == null) {
             //No inputs, no result list
             html += "<h2><i>(Please select your options from above and click Submit)</i></h2>";
+            // Close main_bottom
+            html += "</div>";
         }
         else {
             html += outputWorld(year_start, year_end);
+            // Close main_bottom
+            html += "</div>";
+            
+            html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+            """;
         }
             
-        // Close main_bottom
-        html += "</div>";
         // Close main
         html += "</main>";
         // Footer

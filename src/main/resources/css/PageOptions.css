@@ -9,8 +9,7 @@ h1 {
 }
 
 p {
-  width: 565px;
-  margin: 40px auto 20px;
+    margin: 40px auto 20px;
 }
 
 .title {
@@ -24,6 +23,7 @@ p {
   padding: 15px;
   border-radius: 10px;
   margin-top: 20px;
+  width: 565px;
 }
 
 main a:visited {

@@ -44,7 +44,7 @@ public class PageMission implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
@@ -203,31 +203,49 @@ public class PageMission implements Handler {
             <div class="whatnow">
                 <h1>WHAT NOW?</h1>
                 <div class="option">
-                    <!-- box 1 -->
-                    <a href="page2A_country.html">
-                        <div class="box">
-                            <img src="logo-web.jpg" alt="" />
-                            <h3>World / Countries</h3>
-                        </div>
-                    </a>
+                <!-- box 1 -->
+                <a href="page2A_world.html">
+                    <div class="box">
+                        <img src="logo-web.jpg" alt="" />
+                        <h3>World</h3>
+                    </div>
+                </a>
 
-                    <!-- box 2 -->
-                    <a href="">
-                        <div class="box">
-                            <img src="logo-web.jpg" alt="" />
-                            <h3>Cities / States</h3>
-                        </div>
-                    </a>
+                <!-- box 2 -->
+                <a href="page2A_country.html">
+                    <div class="box">
+                        <img src="country-logo2.png" alt="" />
+                        <h3>Countries</h3>
+                    </div>
+                </a>
 
-                    <!-- box 3 -->
-                    <a href="">
+                <!-- box 3 -->
+                <a href="page2B_states">
+                    <div class="box">
+                        <img src="state-logo.png" alt="logo" />
+                        <h3 >States</h3>
+                    </div>
+                </a>
+
+                <!-- box 4 -->
+                <a href="page2B_cities">
+                    <div class="box">
+                        <img src="city-logo.png" alt="logo" />
+                        <h3>Cities</h3>
+                    </div>
+                </a>
+                </div>
+
+                <div class="option" style="margin-top: 50px;">
+                    <!-- box 5 -->
+                    <a href="page3A.html">
                         <div class="box">
                             <img src="logo-web.jpg" alt="" />
                             <h3>Compare changes of different time periods</h3>
                         </div>
                     </a>
 
-                    <!-- box 4 -->
+                    <!-- box 6 -->
                     <a href="page3B.html">
                         <div class="box">
                             <img src="logo-web.jpg" alt="" />
@@ -237,6 +255,9 @@ public class PageMission implements Handler {
                 </div>
             </div>        
         """;
+        html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+            """;
 
         // Close main
         html = html + "</main>";
@@ -253,7 +274,7 @@ public class PageMission implements Handler {
                     <li><a href="page2B_cities">City</a></li>
                   </ul>
                   <ul><p>Similarity trends of Temperature - Population</p>
-                    <li><a href="">Different time periods</a></li>
+                    <li><a href="page3A.html">Different time periods</a></li>
                     <li><a href="page3B.html">Region with similar trends</a></li>
                   </ul>
                 </div>

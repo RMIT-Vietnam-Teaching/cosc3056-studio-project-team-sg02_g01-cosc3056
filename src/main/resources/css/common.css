@@ -65,6 +65,10 @@
 
 /* =================== OUR CSS =================== */
 
+/* ================ root ================ */
+*{
+  font-family: 'Jomolhari', serif;
+}
 /* ================ header/nav ================ */
 header {
    position: sticky;
@@ -186,4 +190,13 @@ footer .link li{
   bottom: 10px;
   text-align: end;
   padding-bottom: 10px;
+  color: rgb(64, 108, 220);
+}
+
+.TopButton:visited{
+  color: rgb(64, 108, 220);
+}
+
+.TopButton:hover{
+  color: #0a58ca;
 }

@@ -220,6 +220,10 @@ public class PageIndex implements Handler {
                 </div>
             </div>
         """;
+
+        html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+            """;
         
         // Close main
         html = html + "</main>";

@@ -27,7 +27,7 @@ public class PageOptions implements Handler {
 
         // Head information
         html = html + "<head>" + 
-               "<title>Get started</title>";
+               "<title>Options</title>";
 
         // CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
@@ -42,7 +42,7 @@ public class PageOptions implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
@@ -55,7 +55,7 @@ public class PageOptions implements Handler {
 
         html = html + """
             <p class="title">Options</p>
-            <h1 id="Basic">Temperature Time Machine</h1>
+            <h1>Temperature Time Machine</h1>
 
             <!-- Basic -->
             <p class="title after">Basic</p>
@@ -86,7 +86,7 @@ public class PageOptions implements Handler {
                 <a href="page2B_states">
                     <div class="box">
                         <img src="state-logo.png" alt="logo" />
-                        <h3 id="Advanced">States</h3>
+                        <h3 >States</h3>
                     </div>
                 </a>
 
@@ -94,7 +94,7 @@ public class PageOptions implements Handler {
                 <a href="page2B_cities">
                     <div class="box">
                         <img src="city-logo.png" alt="logo" />
-                        <h3 id="Advanced">Cities</h3>
+                        <h3>Cities</h3>
                     </div>
                 </a>
             </div>
@@ -107,8 +107,8 @@ public class PageOptions implements Handler {
               periods or regions that shares trends in varying degrees of similarity
             </p>
             <p class="select">Select your preferred feature</p>
-            <div class="option">
-                <!-- box 3 -->
+            <div class="option" style="margin-bottom: 0;">
+                <!-- box 5 -->
                 <a href="page3A.html">
                     <div class="box">
                         <img src="logo-web.jpg" alt="">
@@ -116,7 +116,7 @@ public class PageOptions implements Handler {
                     </div>
                 </a>
 
-                <!-- box 4 -->
+                <!-- box 6 -->
                 <a href="page3B.html">
                     <div class="box">
                         <img src="logo-web.jpg" alt="">
@@ -125,6 +125,9 @@ public class PageOptions implements Handler {
                 </a>
             </div>
         """;
+        html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+            """;
         
         // Close main
         html = html + "</main>";

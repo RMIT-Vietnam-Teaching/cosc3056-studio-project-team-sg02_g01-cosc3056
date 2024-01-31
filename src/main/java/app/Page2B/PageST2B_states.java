@@ -67,7 +67,7 @@ public class PageST2B_states implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>

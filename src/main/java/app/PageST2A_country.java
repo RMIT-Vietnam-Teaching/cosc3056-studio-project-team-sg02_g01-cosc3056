@@ -43,7 +43,7 @@ public class PageST2A_country implements Handler {
                """
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Lvl2A</title>
+                <title>lvl2A Countries</title>
                        """;
 
         // Add some CSS (external file)
@@ -68,7 +68,7 @@ public class PageST2A_country implements Handler {
         html = html + """
             <header>
                 <div class="nav">
-                    <a class="logo" href="/"><img src="logo-web.jpg" alt="logo" /></a>
+                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
                     <p>Temperature Time Machine</p>
                     <a class="aboutUs visited" href="mission.html">About Us</a>
                     <a class="getStarted" href="options.html">Options</a>
@@ -335,6 +335,7 @@ public class PageST2A_country implements Handler {
 
             // Close main_bottom
             html += "</div>";
+
         }
         else {
             html += outputCountries(year_start, year_end, sort_by, order_by);
@@ -586,13 +587,13 @@ public class PageST2A_country implements Handler {
         
         //Close result display area
         html += "</div>";
+        
+        // Close main_bottom
+        html += "</div>";
+        
         html += """
             <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
             """;
-
-        // Close main_bottom
-        html += "</div>";
-
     
         return html;
     }

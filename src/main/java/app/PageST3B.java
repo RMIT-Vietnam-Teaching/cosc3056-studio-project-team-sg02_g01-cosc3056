@@ -53,14 +53,14 @@ public class PageST3B implements Handler {
         // Add the topnav
         // This uses a Java v15+ Text Block
         html = html + """
-            <header>
-                <div class="nav">
-                    <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
-                    <p>Temperature Time Machine</p>
-                    <a class="aboutUs visited" href="mission.html">About Us</a>
-                    <a class="getStarted" href="options.html">Options</a>
-                </div>
-            </header>
+          <header>
+            <div class="nav">
+              <a class="logo" href="/"><img src="new-logo.png" alt="logo" /></a>
+              <p>Temperature Time Machine</p>
+              <a class="aboutUs visited" href="mission.html">About Us</a>
+              <a class="getStarted" href="options.html">Options</a>
+            </div>
+          </header>
         """;
 
         // Open main
@@ -480,6 +480,9 @@ public class PageST3B implements Handler {
             </div>
           </div>
         """;
+        html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
+            """;
         }
 
         // Close main
