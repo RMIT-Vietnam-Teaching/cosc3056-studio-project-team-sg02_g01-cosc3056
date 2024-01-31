@@ -84,36 +84,65 @@
                 </select>
               </div>
             </div>
-          </fieldset>
-
-          <!-- select year -->
-          <div class="select_year">
-            <label>
-              <br>
-              <input type="radio" id="num" name="starting_years_amount" value="num_starting_years">
-              <label for="num">Select number of starting years</label>
-              <h4>Start year:</h4>
-              <input
-                type="number"
-                name="startYear"
-                id="startYear"
-                min="1750"
-                max="2015"
-                required
-              />
-            </label>
-            <label>
-              <h4>Time period:</h4>
-              <input
-                type="number"
-                name="rangeYear"
-                id="rangeYear"
-                min="0"
-                max="265"
-                required
-            /></label>
           </div>
+          </fieldset>
+          <br>
 
+          <!-- select year period -->
+          <fieldset>
+              <legend><h3>Number of starting years to compare</h3></legend>
+              
+              <div class="select_year">
+                <input type="radio"name="quantity_options"id="quantity" checked/>
+                <label class="radio_option" for="one">1</label>
+                
+                <input type="radio" name="quantity_options" id="two" />
+                <label class="radio_option" for="two">2</label>
+                
+                <input type="radio" name="quantity_options" id="three" />
+                <label class="radio_option" for="three">3</label>
+                
+                <input type="radio" name="quantity_options" id="four" />
+                <label class="radio_option" for="four">4</label>
+
+                <input type="radio" name="quantity_options" id="five" />
+                <label class="radio_option" for="five">5</label>
+              </div>
+            
+            <div class="area2">
+              <div class="year_input_field">
+                <label>
+                  <h4>Start year:</h4>
+                  <input type="number" name="startYear" id="startYear" min="1750" max="2015"required/>
+                </label>
+              </div>
+              <div class="year_input_field2">
+                <label>
+                  <input type="number" name="startYear2" id="startYear2" min="1750" max="2015"required disabled hidden/>
+                </label>
+              </div>
+              <div class="year_input_field3">
+                <label>
+                  <input type="number" name="startYear3" id="startYear3" min="1750" max="2015"required disabled hidden/>
+                </label>
+              </div>
+              <div class="year_input_field4">
+                <label>
+                  <input type="number" name="startYear4" id="startYear4" min="1750" max="2015"required disabled hidden/>
+                </label>
+              </div>
+              <div class="year_input_field5">
+                <label>
+                  <input type="number" name="startYear5" id="startYear5" min="1750" max="2015"required disabled hidden/>
+                </label>
+              </div>
+            </div>
+
+              <label>
+                <h4>Time period:</h4>
+                <input type="number"name="rangeYear"id="rangeYear"min="0"max="265"required/></label>
+            </div>
+          </fieldset>
 
           <!-- submit -->
           <button>START</button>
@@ -122,7 +151,6 @@
       <hr />
 
       <!-- ranking box-->
-      <P>MAYBE MAKE THE FILTER ONLY SHOW IF CITY IS ADDED</P>
       <button class="button fbutton">FILTER</button>
 
     <div class="ranking">
@@ -219,7 +247,7 @@
           <div class="contain__left">
             <p>1750 - 1850 </p>
             <p>USA</p>
-            <img style="width: 220px;" src="../img/area.jpg" alt="">
+            <!-- <img style="width: 220px;" src="../img/area.jpg" alt=""> -->
           </div>
           <!-- middle -->
           <div class="middle">
