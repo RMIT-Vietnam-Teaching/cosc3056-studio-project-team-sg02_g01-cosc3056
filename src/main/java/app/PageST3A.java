@@ -39,8 +39,14 @@ public class PageST3A implements Handler {
         html = html + "<link rel='stylesheet' type='text/css' href='Page3A.css' />";
         html = html + "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>";
 
+        // Add JavaScript to display Cities / States of selected country
+        html += """
+          <script src='lvl3B_relevantCityState.js'></script>
+            """;
+
         // Close head
         html = html + "</head>";
+
 
         // Add the body
         html = html + "<body>";
@@ -83,17 +89,18 @@ public class PageST3A implements Handler {
                   type="radio"
                   name="region_options"
                   id="country"
+                  class="region_radio"
                   checked
                 />
                 <label class="radio_option" for="country">Country</label>
                 
-                <input type="radio" name="region_options" id="state" />
+                <input type="radio" name="region_options" id="state" class="region_radio"/>
                 <label class="radio_option" for="state">State</label>
                 
-                <input type="radio" name="region_options" id="city" />
+                <input type="radio" name="region_options" id="city" class="region_radio"/>
                 <label class="radio_option" for="city">City</label>
                 
-                <input type="radio" name="region_options" id="world" />
+                <input type="radio" name="region_options" id="world" class="region_radio"/>
                 <label class="radio_option" for="world">World</label>
                 """;
     
