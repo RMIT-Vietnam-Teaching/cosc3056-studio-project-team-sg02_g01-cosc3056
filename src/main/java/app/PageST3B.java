@@ -498,10 +498,16 @@ public class PageST3B implements Handler {
             <footer>
                 <a href="/"><img src="logo-web.jpg" alt="logo"/></a>
                 <div class="link">
-                    <a href="">Link</a>
-                    <a href="">Link</a>
-                    <a href="">Link</a>
-                    <a href="">Link</a>
+                  <ul><p>Temperature - Population change</p>
+                    <li><a href="">World</a></li>
+                    <li><a href="">Country</a></li>
+                    <li><a href="">State</a></li>
+                    <li><a href="">City</a></li>
+                  </ul>
+                  <ul><p>Similarity trends of Temperature - Population</p>
+                    <li><a href="">Different time periods</a></li>
+                    <li><a href="">Region with similar trends</a></li>
+                  </ul>
                 </div>
             </footer>        
         """;

@@ -146,15 +146,31 @@ header {
    align-content: space-around;
  }
  
- .link a {
-   width: 40%;
- }
- 
- .link a:visited, .link a:link {
-   color: currentColor;
- }
- 
- .link a:hover {
-   text-shadow: 0.4px 0 0 currentColor;
- }
- 
+ footer .link ul{
+  width: 300px;
+}
+
+footer .link p{
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-shadow: 0px 0px 1px white;
+}
+
+footer .link li{
+  margin-left: 5%;
+  padding: 5px;
+}
+
+.link a {
+  width: 40%;
+}
+
+.link a:visited, .link a:link {
+  color: currentColor;
+}
+
+.link a:hover {
+  text-shadow: 0.4px 0 0 currentColor;
+  color: #fff;
+}
