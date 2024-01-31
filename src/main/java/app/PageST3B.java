@@ -37,6 +37,7 @@ public class PageST3B implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
         html = html + "<link rel='stylesheet' type='text/css' href='Page3B.css' />";
+        html = html + "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>";
 
         // Add JavaScript to display Cities / States of selected country
         html += """

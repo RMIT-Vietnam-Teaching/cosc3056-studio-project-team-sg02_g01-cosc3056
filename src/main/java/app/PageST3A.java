@@ -1,6 +1,11 @@
 package app;
 
 
+import java.util.ArrayList;
+
+import app.Objects.CityWithCountryCode;
+import app.Objects.Countries;
+import app.Objects.StateWithCountryCode;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
@@ -32,6 +37,7 @@ public class PageST3A implements Handler {
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
         html = html + "<link rel='stylesheet' type='text/css' href='Page3A.css' />";
+        html = html + "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>";
 
         // Close head
         html = html + "</head>";
@@ -102,37 +108,58 @@ public class PageST3A implements Handler {
                 <label for="countrySubmit"><h4>Country</h4></label>
                 <select name="countrySubmit" id="countrySubmit" required>
                     <option value="" disabled hidden>-Select country-</option>
-                    <option value="VN">Viet Nam</option>
-                    <option value="AUT">Australia</option>
+                """;
+        JDBCConnection jdbc = new JDBCConnection();
+        ArrayList<Countries> countries = jdbc.getCountries();
+        for (Countries country : countries){
+          html = html + String.format("<option value=\"%s\">%s</option>", country.getCode(), country.getName());
+        }
+        
+        html = html + """
                 </select>
                 </div>
-                """;
-        // State
+            """;
+        
+        
+                // State
         html = html + """
                 <div class="state_dropdown">
                 <label for="stateSubmit"><h4>State</h4></label>
                 <select name="stateSubmit" id="stateSubmit" required>
                     <option value="" disabled hidden>-Select state-</option>
-                    <option value="vn">Viet Nam</option>
-                    <option value="aus">Australia</option>
+                """;
+
+        ArrayList<StateWithCountryCode> States = jdbc.getState();
+        for (StateWithCountryCode State : States){
+            html = html + String.format("<option class=\"%s\"> %s </option>", State.countryCode, State.name);
+        }
+
+        html = html + """
                 </select>
                 </div>
-                """;
+            """;
+        
         // City
         html = html + """
                   <div class="city_dropdown">
                     <label for="citySubmit"><h4>City</h4></label>
                     <select name="citySubmit" id="citySubmit" required>
                       <option value="" disabled hidden>-Select city-</option>
-                      <option value="vn">Viet Nam</option>
-                      <option value="aus">Australia</option>
+                """;
+        
+        ArrayList<CityWithCountryCode> Cities = jdbc.getCity();
+        for (CityWithCountryCode City : Cities) {
+            html = html + String.format("<option class=\"%s\"> %s </option>", City.countryCode, City.name);
+        }
+
+        html = html + """
                     </select>
                   </div>
                 </div>
               </div>
-              </fieldset>
-              <br>
-                """;
+            </fieldset>
+            <br>
+            """;
 
         // Select Year
         html = html + """
@@ -160,7 +187,7 @@ public class PageST3A implements Handler {
         
         //input field
         html = html + """
-            <label>Start year: </label>
+            <label style="display: block; margin-top: 10px; font-weight: bold;">Start year: </label>
 
             <div class="field field1">
               <input type="number" name="startYear" id="startYear" min="1750" max="2015"required />
@@ -185,7 +212,7 @@ public class PageST3A implements Handler {
         //year period
         html = html + """
               <label>
-                <h4>Time period:</h4>
+                <h4 style="margin:10px 0 0;">Time period:</h4>
                 <input type="number"name="rangeYear"id="rangeYear"min="0"max="265"required/></label>
             </div>
           </fieldset>
@@ -322,6 +349,10 @@ public class PageST3A implements Handler {
           </div>
         </div>
     </div>
+            """;
+
+            html += """
+            <a class = "TopButton" href = #><i class="fa-solid fa-circle-up"></i></a>
             """;
         // Close main
         html = html + "</main>";

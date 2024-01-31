@@ -247,3 +247,8 @@ main {
     align-items: center;
     justify-content: center;
   }
+
+  /* field */
+  .field{
+    margin-bottom: 5px;
+  }
