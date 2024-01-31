@@ -310,3 +310,7 @@ button[type="submit"] {
     opacity: 1;
     right:0px;
 }
+#submit_btn:active span:after {
+    opacity: 0;
+    right: -100px;
+}
