@@ -108,7 +108,7 @@ public class PageOptions implements Handler {
             <p class="select">Select your preferred feature</p>
             <div class="option">
                 <!-- box 3 -->
-                <a href="">
+                <a href="page3A.html">
                     <div class="box">
                         <img src="logo-web.jpg" alt="">
                         <h3>Compare changes of different time periods</h3>
