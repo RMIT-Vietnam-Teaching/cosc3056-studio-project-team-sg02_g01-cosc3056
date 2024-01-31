@@ -195,10 +195,20 @@ main {
   }
   
   .contain {
+    padding: 0  100px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     gap: 30px;
+  }
+
+  .contain__left{
+    text-align: start;
+  }
+
+  .contain__left p{
+    font-weight: bold;
+    font-size: 25px;
   }
   
   .contain .middle {
