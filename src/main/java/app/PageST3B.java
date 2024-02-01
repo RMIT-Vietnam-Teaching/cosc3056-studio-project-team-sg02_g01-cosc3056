@@ -33,6 +33,8 @@ public class PageST3B implements Handler {
         // Add some Head information
         html = html + "<head>" + 
                "<title>See similar regions</title>";
+        
+        html += "<meta charset=\"UTF-8\">";
 
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";

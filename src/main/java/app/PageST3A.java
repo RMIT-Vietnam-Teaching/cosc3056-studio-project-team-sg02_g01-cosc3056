@@ -34,6 +34,8 @@ public class PageST3A implements Handler {
         html = html + "<head>" + 
                "<title>Compare changes of different time periods</title>";
 
+        html += "<meta charset=\"UTF-8\">";
+
         // Add some CSS (external file)
         html = html + "<link rel='stylesheet' type='text/css' href='common.css' />";
         html = html + "<link rel='stylesheet' type='text/css' href='Page3A.css' />";

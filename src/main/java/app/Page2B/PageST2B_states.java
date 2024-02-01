@@ -215,7 +215,7 @@ public class PageST2B_states implements Handler {
                         <div id='sort_options'>
                             <div class='dropdown_container'>
                                 <div class='sort_by_options'>
-                                    <label for='sort_by'>Sort by: </label>
+                                    <label for='sort_by'>View by: </label>
                                     <select id='sort_by' name='sort_by' form='lvl2B'>
                                     """;
         String[] optionInner = {"Average temperature difference", "Minimum temperature difference", "Maximum temperature difference"};
